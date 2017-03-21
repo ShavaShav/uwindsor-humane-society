@@ -1,0 +1,47 @@
+:root {
+	box-sizing: border-box;
+}
+
+*,
+::before,
+::after {
+	box-sizing: inherit;
+}
+
+body {
+	background-color: #FFF;
+	font-family: sans-serif;
+	margin: 0;
+	padding: 0;
+} 
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  padding-left: 5em;
+  padding-right: 1em;
+  padding-top: 3em;
+  padding-bottom: 2em;
+ 
+}
+
+.buttons > div {
+  display: flex; 
+  justify-content: center;
+  flex-direction: column;
+  height: 250px;
+  border-radius: 0.5em;
+  font-size: 30px;
+}
+.buttons > div > div {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+
+#About { background-color: red; margin-bottom: 1em;}
+#Animals { background-color: orange; margin-left: 1em;}
+#Surrender { background-color: purple; margin-right: 1em;}
+#Cruelty { background-color: grey; }
