@@ -1,10 +1,11 @@
 <?php
-require_once('lib/config.php');
-require_once('lib/common.php');
+require_once('../resources/config.php'); 
+require_once(TEMPLATES_PATH . '/common.php');
+session_start();
 
 html5_navigation(
 	'Adopt Animals',
-	array('nav.css'),
+	array('css/nav.css'),
 	array(),
 	"is logged in: ".is_logged_in()
 );
@@ -49,5 +50,5 @@ html5_navigation(
           <input type="submit" value="Submit" class="submitButton">
         </form> 
 <?php
-html5_epilog();
+html5_footer();
 ?>

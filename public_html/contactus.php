@@ -1,10 +1,11 @@
 <?php
-require_once('lib/config.php');
-require_once('lib/common.php');
+require_once('../resources/config.php'); 
+require_once(TEMPLATES_PATH . '/common.php');
+session_start();
 
 html5_navigation(
 	'Contact Us',
-	array('nav.css'),
+	array('css/nav.css'),
 	array(),
 	"is logged in: ".is_logged_in()
 );
@@ -40,5 +41,5 @@ You may also contact us at 1800-519-5119 or visit us at 33 LULZ Street, Windsor,
 </p>
 
 <?php
-html5_epilog();
+html5_footer();
 ?>

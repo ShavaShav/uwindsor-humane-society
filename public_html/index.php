@@ -1,11 +1,11 @@
 <?php
-require_once('lib/config.php');
+require_once('../resources/config.php'); 
+require_once(TEMPLATES_PATH . '/common.php');
 session_start();
-require_once('lib/common.php');
 
 html5_index(
 	'University of Windsor Humane Society',
-	array('buttons.css', 'background.css'),
+	array('css/index.css'),
 	array(),
 	"is logged in: ".is_logged_in()
 );
@@ -40,5 +40,5 @@ html5_index(
 </div>
 
 <?php
-html5_epilog();
+html5_footer();
 ?>

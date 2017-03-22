@@ -1,10 +1,11 @@
 <?php
-require_once('lib/config.php');
-require_once('lib/common.php');
+require_once('../resources/config.php'); 
+require_once(TEMPLATES_PATH . '/common.php');
+session_start();
 
 html5_navigation(
 	'Adopt Animals',
-	array('nav.css', 'adopt.css', 'background.css'),
+	array('css/nav.css', 'css/adopt.css', 'css/background.css'),
 	array(),
 	"is logged in: ".is_logged_in()
 );
@@ -86,6 +87,6 @@ html5_navigation(
 	</div>
 	
 <?php
-html5_epilog();
+html5_footer();
 ?>
 	

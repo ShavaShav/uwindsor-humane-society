@@ -1,5 +1,6 @@
 <?php
-require_once('lib/common.php');
+require_once('../resources/config.php'); 
+require_once(TEMPLATES_PATH . '/common.php');
 
 function get_post_var($name)
 {

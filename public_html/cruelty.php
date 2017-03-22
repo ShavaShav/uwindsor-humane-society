@@ -1,11 +1,11 @@
 <?php
-require_once('lib/config.php');
-start_session();
-require_once('lib/common.php');
+require_once('../resources/config.php'); 
+require_once(TEMPLATES_PATH . '/common.php');
+session_start();
 
 html5_navigation(
 	'Report Cruelty',
-	array('nav.css'),
+	array('css/nav.css'),
 	array(),
 	"is logged in: ".is_logged_in()
 );
@@ -34,5 +34,5 @@ class="submitButton">
         </form> 
 		
 <?php
-html5_epilog();
+html5_footer();
 ?>
