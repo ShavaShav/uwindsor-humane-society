@@ -1,6 +1,6 @@
 <?php
-require_once('../resources/config.php'); 
-require_once(TEMPLATES_PATH . '/common.php');
+require_once('./resources/config.php'); 
+require_once('./resources/templates/common.php');
 session_start();
 
 html5_index(
