@@ -1,9 +1,14 @@
-<!DOCTYPE html>
-<html>
-    <head>
-    <!-- import php -->
-    </head>
-    <body>
+<?php
+require_once('lib/config.php');
+require_once('lib/common.php');
+
+html5_navigation(
+	'Adopt Animals',
+	array('nav.css'),
+	array(),
+	"is logged in: ".is_logged_in()
+);
+?>
         <p class="titleText">Surrender Animal</p>
          <form action="/surrender_handler.php" method="post">
              
@@ -43,5 +48,6 @@
           <input type="file" name="pic" accept="image/*"><br><br>
           <input type="submit" value="Submit" class="submitButton">
         </form> 
-    </body>
-</html>
+<?php
+html5_epilog();
+?>

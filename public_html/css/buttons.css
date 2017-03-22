@@ -13,7 +13,17 @@ body {
 	font-family: sans-serif;
 	margin: 0;
 	padding: 0;
-} 
+}
+
+#buttonborder{
+	z-index: 0;
+	boder-style: solid:
+	border-width: 0.5em;
+	color: #000;
+	border-radius: 0.5em;
+	z-index:0;
+	positon: absolute;
+}
 
 .buttons {
   display: flex;
@@ -25,9 +35,9 @@ body {
   padding-bottom: 2em;
  
 }
-
 .buttons > div {
   display: flex; 
+  flex-basis: calc(50% - 40px);  
   justify-content: center;
   flex-direction: column;
   height: 250px;
@@ -39,7 +49,6 @@ body {
   justify-content: center;
   flex-direction: row;
 }
-
 
 #About { background-color: red; margin-bottom: 1em;}
 #Animals { background-color: orange; margin-left: 1em;}
