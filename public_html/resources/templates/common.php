@@ -1,7 +1,7 @@
 <?php
-require_once(dirname(__FILE__).'/../config.php');
+require_once(dirname(__FILE__) . '/../config.php');
 //session_start();
-require_once(dirname(__FILE__).'/../lib/login-tools.php');
+require_once($LIB_PATH . '/login-tools.php');
 
 function html5_header($title, $css_files = array(), $js_files = array())
 {

@@ -1,6 +1,6 @@
 <?php
-require_once('./resources/config.php'); 
-require_once('./resources/templates/common.php');
+require_once(dirname(__FILE__) . '/resources/config.php');
+require_once($TEMPLATES_PATH . '/common.php');
 session_start();
 
 html5_index(
@@ -11,8 +11,6 @@ html5_index(
 );
 
 ?>
-
-<div id="background"> </div>
 
 <div id="buttonborder">
 	<div class="buttons">

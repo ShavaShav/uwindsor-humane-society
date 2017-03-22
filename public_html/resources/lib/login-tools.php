@@ -33,5 +33,4 @@ function log_out_user()
   unset($_SESSION['logged_in'], $_SESSION['logged_in_user']);
 }
 
-
 ?>

@@ -1,6 +1,6 @@
 <?php
-require_once('../resources/config.php'); 
-require_once(TEMPLATES_PATH . '/common.php');
+require_once(dirname(__FILE__) . '/resources/config.php');
+require_once($TEMPLATES_PATH . '/common.php');
 session_start();
 
 html5_navigation(
@@ -9,9 +9,7 @@ html5_navigation(
 	array(),
 	"is logged in: ".is_logged_in()
 );
-?>
-	<background> </background>
-	
+?>	
 	<div id="formspace">
 		<form id="ourForm">
 			<label>Animal:</label>
