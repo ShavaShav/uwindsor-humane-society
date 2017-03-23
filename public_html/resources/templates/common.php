@@ -41,12 +41,12 @@ echo <<<ZZEOF
             <p>Logo</p>
         </div>
         <ul class="page-nav">
-            <li><a href="/">Home</a></li>
+            <li><a href="index.php">Home</a></li>
             <li><a href="contactus.php">Contact Us</a></li>
-            <li><a href="/adopt.php">Adopt Animals</a></li>
-            <li><a href="/surrender.php">Surrender Animals</a></li>
-            <li><a href="/cruelty.php">Report Cruelty</a></li>
-            <li class="nav-right"><a href="/login.php">Sign In</a></li>
+            <li><a href="adopt.php">Adopt Animals</a></li>
+            <li><a href="surrender.php">Surrender Animals</a></li>
+            <li><a href="cruelty.php">Report Cruelty</a></li>
+            <li class="nav-right"><a href="login.php">Sign In</a></li>
         </ul>
     </nav>"
 ZZEOF;

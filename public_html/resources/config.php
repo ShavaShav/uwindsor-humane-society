@@ -22,18 +22,10 @@ $PATHS = array(
 
 // database credentials (to be updated)
 $DB = array(
-    "db1" => array(
-        "dbname" => "database1",
-        "username" => "dbUser",
-        "password" => "pa$$",
-        "host" => "localhost"
-    ),
-    "db2" => array(
-        "dbname" => "database2",
-        "username" => "dbUser",
-        "password" => "pa$$",
-        "host" => "localhost"
-    )
+    "dbname" => "shaverz_hs",
+    "username" => "shaverz_hs",
+    "password" => "ejr6GdqWK",
+    "host" => "localhost"
 );
  
 // report errors on the page, should make debugging easier

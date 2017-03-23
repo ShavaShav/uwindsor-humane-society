@@ -3,12 +3,20 @@ require_once(dirname(__FILE__) . '/resources/config.php');
 require_once($TEMPLATES_PATH . '/common.php');
 session_start();
 
-html5_index(
-	'University of Windsor Humane Society',
+html5_header('University of Windsor Humane Society',
 	array('css/index.css'),
-	array(),
-	"is logged in: ".is_logged_in()
+	array()
 );
+
+// planned
+html5_loginstatus("is logged in: ".is_logged_in());
+
+//html5_index(
+//	'University of Windsor Humane Society',
+//	array('css/index.css'),
+//	array(),
+//	"is logged in: ".is_logged_in()
+//);
 
 ?>
 
