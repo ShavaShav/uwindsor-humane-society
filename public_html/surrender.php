@@ -3,13 +3,14 @@ require_once(dirname(__FILE__) . '/resources/config.php');
 require_once($TEMPLATES_PATH . '/common.php');
 session_start();
 
-html5_navigation(
+html5_header(
 	'Adopt Animals',
 	array('css/nav.css'),
-	array(),
-	"is logged in: ".is_logged_in()
-);
+	array());
+
+html5_nav();
 ?>
+<div class="contentborder">
         <p class="titleText">Surrender Animal</p>
          <form action="/surrender_handler.php" method="post">
              
@@ -49,6 +50,7 @@ html5_navigation(
           <input type="file" name="pic" accept="image/*"><br><br>
           <input type="submit" value="Submit" class="submitButton">
         </form> 
+</div>
 <?php
 html5_footer();
 ?>

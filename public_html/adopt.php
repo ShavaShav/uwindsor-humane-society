@@ -3,13 +3,14 @@ require_once(dirname(__FILE__) . '/resources/config.php');
 require_once($TEMPLATES_PATH . '/common.php');
 session_start();
 
-html5_navigation(
+html5_header(
 	'Adopt Animals',
-	array('css/nav.css', 'css/adopt.css', 'css/background.css'),
-	array(),
-	"is logged in: ".is_logged_in()
-);
+	array('css/nav.css', 'css/adopt.css'),
+	array());
+	
+html5_nav();
 ?>	
+<div class="contentborder">
 	<div id="formspace">
 		<form id="ourForm">
 			<label>Animal:</label>
@@ -80,9 +81,12 @@ html5_navigation(
 				
 		</form>
 	</div>
-	
+</div>
+
+<div class="contentborder">
 	<div id="resultspace">
 	</div>
+</div>
 	
 <?php
 html5_footer();

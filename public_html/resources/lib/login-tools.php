@@ -1,19 +1,6 @@
 <?php
 require_once(dirname(__FILE__).'/../config.php');
 
-function generate_html5_login_form()
-{
-  return <<<ZZEOF
-    <div id='login'>
-      <form action='check-login.php' method='POST'>
-        Login: <input type='text' name='login' /><br />
-        Password: <input type='password' name='passwd' /><br />
-        <input type='submit' />
-      </form>
-    </div>
-ZZEOF;
-}
-
 function is_logged_in()
 {
   if (array_key_exists('logged_in', $_SESSION))

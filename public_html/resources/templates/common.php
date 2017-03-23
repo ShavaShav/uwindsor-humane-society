@@ -20,13 +20,6 @@ function html5_header($title, $css_files = array(), $js_files = array())
     echo "</head><body>\n";
 }
 
-function html5_loginstatus($content)
-{
-  echo '<div id="content">';
-  echo $content;
-  echo '</div>';
-}
-
 function html5_footer()
 {
 	echo "</body></html>";
@@ -36,7 +29,7 @@ function html5_nav()
 {
 // can be NO whitespace after <<<ZZEOF
 echo <<<ZZEOF
-    "<nav>
+    <nav>
         <div id="logo">
             <p>Logo</p>
         </div>
@@ -48,21 +41,8 @@ echo <<<ZZEOF
             <li><a href="cruelty.php">Report Cruelty</a></li>
             <li class="nav-right"><a href="login.php">Sign In</a></li>
         </ul>
-    </nav>"
+    </nav>
 ZZEOF;
-
-}
-
-function html5_index($title, $css=array(), $js=array(), $content="")
-{
-	html5_header($title, $css, $js);
-}
-
-function html5_navigation($title, $css=array(), $js=array(), $content="")	
-{
-  html5_header($title, $css, $js);
-  html5_nav();
-  html5_loginstatus($content);
 }
 
 ?>

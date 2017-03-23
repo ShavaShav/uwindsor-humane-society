@@ -3,25 +3,14 @@ require_once(dirname(__FILE__) . '/resources/config.php');
 require_once($TEMPLATES_PATH . '/common.php');
 session_start();
 
-// TODO sperate out template functions for every page!
-html5_header( // html header
-    'Report Cruelty',
+html5_header(
+	'Report Cruelty',
 	array('css/nav.css'),
-	array()
-);
-    
-html5_nav(); // navbar
+	array());
 
-html5_loginstatus("is logged in: ".is_logged_in());
-
-
-//html5_navigation(
-//	'Report Cruelty',
-//	array('css/nav.css'),
-//	array(),
-//	"is logged in: ".is_logged_in()
-//);
+html5_nav();
 ?>
+<div class="contentborder">
         <p class="titleText">Cruelty Form</p>
         <form action="/cruelty_handler.php" method="post">
         <p class="formLabel">Your name</p>
@@ -44,7 +33,8 @@ id="incidentText" class="formLabel">  </textarea>
 class="submitButton">
             
         </form> 
+</div>
 		
 <?php
-    html5_footer();
+html5_footer();
 ?>

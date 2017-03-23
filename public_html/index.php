@@ -3,30 +3,22 @@ require_once(dirname(__FILE__) . '/resources/config.php');
 require_once($TEMPLATES_PATH . '/common.php');
 session_start();
 
-html5_header('University of Windsor Humane Society',
+html5_header(
+	'University of Windsor Humane Society',
 	array('css/index.css'),
-	array()
-);
-
-// planned
-html5_loginstatus("is logged in: ".is_logged_in());
-
-//html5_index(
-//	'University of Windsor Humane Society',
-//	array('css/index.css'),
-//	array(),
-//	"is logged in: ".is_logged_in()
-//);
-
+	array());
 ?>
-
-<div id="buttonborder">
+<div id="signin" style="cursor:pointer;" 
+	onclick="document.location='login.php'">
+<p>Sign In</p>
+</div>
+<div class="buttonborder">
 	<div class="buttons">
+		
 		<div id="About" style="cursor:pointer;" 
 		onclick="document.location='contactus.php'"> 
 			<div><p>Contact Us</p></div>
 		</div>
-				
 				
 		<div id="Animals" style="cursor:pointer;" 
 		onclick="document.location='adopt.php'">
@@ -44,7 +36,6 @@ html5_loginstatus("is logged in: ".is_logged_in());
 		</div>
 	</div>
 </div>
-
 <?php
 html5_footer();
 ?>

@@ -3,14 +3,14 @@ require_once(dirname(__FILE__) . '/resources/config.php');
 require_once($TEMPLATES_PATH . '/common.php');
 session_start();
 
-html5_navigation(
+html5_header(
 	'Contact Us',
 	array('css/nav.css'),
-	array(),
-	"is logged in: ".is_logged_in()
-);
-
+	array());
+	
+html5_nav();
 ?>
+<div class="contentborder">
 
 <form action="/contact_us.php" method="post">
 
@@ -39,6 +39,7 @@ html5_navigation(
 <p>
 You may also contact us at 1800-519-5119 or visit us at 33 LULZ Street, Windsor, Ontario.
 </p>
+</div>
 
 <?php
 html5_footer();

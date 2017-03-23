@@ -1,6 +1,0 @@
-/* We should probably make this root.css, so bg and other common css can be shared, and then index we can get rid of background */
-
-:root {
-    background-image: url("../img/layout/background.jpg"); /* I put the bg up here so body could be the white square */
-	background-repeat: repeat;
-}
