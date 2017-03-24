@@ -6,89 +6,179 @@ session_start();
 html5_header(
 	'Adopt Animals',
 	array('css/nav.css', 'css/adopt.css'),
-	array());
+	array('js/wishlist.js'));
 	
 html5_nav();
-?>	
-<div class="contentborder">
-	<div id="formspace">
-		<form id="ourForm">
-			<label>Animal:</label>
-				<select>
-					<option>Dog</option>
-					<option>Cat</option>
-					<option>Rabbit</option>
-					<option>Hamster</option>
-				</select>
-			<label>Age:</label>
-				<select>
-					<option>0</option>
-					<option>1</option>
-					<option>2</option>
-					<option>3</option>
-					<option>4</option>
-					<option>5</option>
-					<option>6</option>
-					<option>7</option>
-					<option>8</option>
-					<option>9</option>
-					<option>10</option>
-					<option>11</option>
-					<option>12</option>
-					<option>13</option>
-					<option>14</option>
-					<option>15</option>
-					<option>16</option>
-					<option>17</option>
-					<option>18</option>
-					<option>19</option>
-					<option>20+</option>
-				</select>
-			<label>Gender:</lavel>
-				<select>
-					<option>Male</option>
-					<option>Female</option>
-				</select>
-			<label>Spayed/Neutered?</label>
-				<select>
-					<option>Yes</option>
-					<option>No</option>
-				</select>
-			<label>Size:</label>
-				<select>
-					<option>Very Small</option>
-					<option>Small</option>
-					<option>Medium</option>
-					<option>Large</option>
-					<option>Very Large</option>
-				</select>
-			<label>Primary Color</label>
-				<select>
-					<option>Black</option>
-					<option>Grey</option>
-					<option>Yellow</option>
-					<option>White</option>
-					<option>Brown</option>
-				</select>
-			<label>Secondary Color</label>
-				<select>
-					<option>Black</option>
-					<option>Grey</option>
-					<option>Yellow</option>
-					<option>White</option>
-					<option>Brown</option>
-				</select>
-				
-		</form>
-	</div>
-</div>
 
-<div class="contentborder">
-	<div id="resultspace">
-	</div>
+// setting session variables
+if (!isset($_SESSION['wishlist'])){
+    $_SESSION['wishlist'] = []; // set to null array if not set yet
+}
+
+?>	
+
+<div id="contentWrapper">
+    
+    <div id="filterSearchWishlistBox">
+        
+        <div class="whiteBox">
+                <div id="searchBox">
+                <h2 class="title">Search Animals</h2>
+                <!-- ajax here for the autosuggest -->
+                <form>
+                    By Name:
+                    <input type="text" name="name" id="name"> 
+                    <input type="submit" value="Search">
+                </form>
+                <!-- use ajax to change this "autoSuggestion".innerHTML to an animal name, unless we can come up with a way to drop down multiple selections? -->
+                <p id="autoSuggestion">Type for suggestion!</p>
+            </div>
+        </div>
+        <!-- end of search box -->
+        
+        <div class="whiteBox">
+            <div id="filterBox">
+                <h2 class="title">Filters</h2>
+            <!-- AJAX idea: autosuggest pet names when they search!
+                will use the same form handler as the filter, but get specific animals -->
+                <form>
+                    <div class="filterOption">
+                        Species:
+                        <select name="species" id="species">
+                          <option value="all" selected>All</option>
+                          <option value="dog">Dog</option>
+                          <option value="cat">Cat</option>
+                          <option value="rabbit">Rabbit</option>
+                          <option value="smallMammal">Small Mammal</option>
+                          <option value="reptile">Reptile</option>
+                          <option value="bird">Bird</option>
+                        </select>
+                    </div>
+                    <div class="filterOption">
+                        Min Age: <input type="text" name="minAge" id="minAge" value="0" size="3">
+                        Max Age: <input type="text" name="maxAge" id="maxAge" value="100" size="3">
+                    </div>
+                    <div class="filterOption">
+                        <!-- can select one, or both genders. (not a group) -->
+                        Gender: <br>
+                            <input type="checkbox" name="male" id="male" value="male" selected> Male <br>
+                            <input type="checkbox" name="female" id="female" value="female" selected> Female
+                    </div>
+                    <div class="filterOption">
+                        Altered: <br>
+                            <input type="checkbox" name="altered" id="altered" value="altered" selected> Yes <br>
+                            <input type="checkbox" name="unaltered" id="unaltered" value="unaltered" selected> No
+                    </div>
+                    <div class="filterOption">
+                        Size:
+                        <select name="size" id="size">
+                          <option value="all" selected>All</option>
+                          <option value="small">Small</option>
+                          <option value="meedium">Medium</option>
+                          <option value="large">Large</option>
+                        </select>
+                    </div>
+                    <div class="filterOption">
+                        Primary Color: 
+                        <select name="primaryColor" id="primaryColor">
+                            <option value="all" selected>All</option> 
+                            <option value="tan">Tan</option>
+                            <option value="brown">Brown</option>
+                            <option value="black">Black</option>
+                            <option value="grey">Grey</option>
+                            <option value="white">White</option>
+                            <option value="green">Green</option>
+                            <option value="blue">Blue</option>
+                            <option value="yellow">Yellow</option>
+                            <option value="red">Red</option>
+                        </select>
+                    </div>
+                    <div class="filterOption">
+                        Secondary Color: 
+                        <select name="secondaryColor" id="secondaryColor">
+                            <option value="all" selected>All</option> 
+                            <option value="tan">Tan</option>
+                            <option value="brown">Brown</option>
+                            <option value="black">Black</option>
+                            <option value="grey">Grey</option>
+                            <option value="white">White</option>
+                            <option value="green">Green</option>
+                            <option value="blue">Blue</option>
+                            <option value="yellow">Yellow</option>
+                            <option value="red">Red</option>
+                        </select>
+                    </div>
+                    <br>
+                    <input type="submit" value="Filter">
+                </form>
+            </div>
+        </div> 
+        <!-- end of filters -->
+        
+        <div class="whiteBox" style="height:100%"> <!-- must override white box to stretch wishlist -->
+            <div id="wishlistBox">
+                <h2 class="title">Wish List</h2>
+                <!-- check cookie, show the count of animals -->
+                <div id="wishlistCount">
+                    <p id="wishListCount" onclick="showWishlist();"><?php echo count($_SESSION['wishlist']);?> Animal on your Wishlist</p>
+                </div>
+                <div id="wishlistPopulation">
+                    <?php
+                        // check cookie to see if user already has animals, display count
+                        if($_SESSION['wishlist']) {
+                            for($i = 0; $i < count($_SESSION['wishlist']); $i++) {
+                                $animal_val = explode("+",$_SESSION['wishlist'][$i]);
+                    ?>
+                            <div class='wishlistAnimals'>
+                            <img src='<?php echo $animal_val[2];?>'>
+                            <p><?php echo $animal_val[0];?></p>
+                            <p><?php echo $animal_val[1];?></p>
+                            <input type='button' value='Remove Animal' onclick='removeAnimal("<?php echo $_SESSION['wishlist'][$i];?>");'>
+                           </div>
+                    <?php
+                            } // end for loop
+                        } else { 
+                            // no session history
+                            echo "<p>Drop Animals Here!</p>";
+                        }
+                    ?>
+                </div>
+            </div>
+        </div> 
+         <!-- end of wishlist -->
+    </div>
+    <!-- end of search/filter/wishlist column -->
+
+    <!-- Animals go here -->
+    <div class="whiteBox">
+        <h1 class="title">Animals Available for Adoption</h1> <br>
+        <div id="animalBox">
+            <!-- these are just test animals! will pull from DB later -->
+            <?php
+                // show first 15 animals
+                for ($i = 1; $i <= 15; $i++){
+                    echo <<<ZZEOF
+                    <div class="animal" id="$i">
+                        <img src="img/animals/$i.JPG">
+                        <p>Name: <span id="animalName_$i">Unknown</span></p>
+                        <p>Species: <span id="animalSpecies_$i">Unknown</span></p>
+                        <p>Age: <span id="animalAge_$i">Unknown</span></p>
+                        <p>Gender: <span id="animalGender_$i">Unknown</span></p>
+                        <p>Species: <span id="animalSpecies_$i">Unknown</span></p>
+                        <p>Altered: <span id="animalAltered_$i">Unknown</span></p>
+                        <p>Size: <span id="animalSize_$i">Unknown</span></p>
+                        <p>Primary Color: <span id="animalPrimaryColor_$i">Unknown</span></p>
+                        <p>Secondary Color: <span id="animalSecondaryColor_$i">Unknown</span></p>
+                    </div>
+ZZEOF;
+                }
+            ?>
+        </div>
+    </div>
+    <!-- end of animalBox -->
 </div>
+<!-- end of contentWrapper -->
 	
 <?php
 html5_footer();
 ?>
-	
