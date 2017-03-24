@@ -9,6 +9,12 @@ html5_header(
 	array('js/wishlist.js'));
 	
 html5_nav();
+
+// setting session variables
+if (!isset($_SESSION['wishlist'])){
+    $_SESSION['wishlist'] = []; // set to null array if not set yet
+}
+
 ?>	
 
 <div id="contentWrapper">

@@ -18,6 +18,9 @@ function makeAnimalsDraggable(){
 }
 
 var currentAnimalID; // to store the current dragging animal's id
+var store_wishlist_URL = "resources/lib/store_wishlist.php";
+
+console.log(store_wishlist_URL);
 
 // implementation of the drag and drop to wishlist
 function animalDragstart(evt){
@@ -55,13 +58,14 @@ function wishlist(id)
         // if request finished, and everything OK
         if (this.readyState == 4 && this.status == 200){
             // show count
-            document.getElementById("wishlistCount").innerHTML=response;
+            document.getElementById("wishlistCount").innerHTML=this.responseText;
+            console.log("Response: " + this.responseText);
             // show wishlist
             showWishlist();
         }
     }
     
-    xhttp.open("POST", "store_wishlist.php", true);
+    xhttp.open("POST", store_wishlist_URL, true);
     xhttp.send(params); // send request to store_wishlist
 }
 
@@ -76,13 +80,14 @@ function removeAnimal(animal_val){
         // if request finished, and everything OK
         if (this.readyState == 4 && this.status == 200){
             // show count
-            document.getElementById("wishlistCount").innerHTML=response;
+            document.getElementById("wishlistCount").innerHTML=this.responseText;
+            console.log("Response: " + this.responseText);
             // show wishlist
             showWishlist();
         }
     }
     
-    xhttp.open("POST", "store_wishlist.php", true);
+    xhttp.open("POST", store_wishlist_URL, true);
     xhttp.send(params); // send request to store_wishlist
 }
 
@@ -97,12 +102,12 @@ function showWishlist(){
         // if request finished, and everything OK
         if (this.readyState == 4 && this.status == 200){
             // show count
-            document.getElementById("wishlistCount").innerHTML=response;
-            // show wishlist
-            showWishlist();
+            document.getElementById("wishlistPopulation").innerHTML=this.responseText;
+            console.log("Response: " + this.responseText);
+
         }
     }
     
-    xhttp.open("POST", "store_wishlist.php", true);
+    xhttp.open("POST", store_wishlist_URL, true);
     xhttp.send(params); // send request to store_wishlist
 }
