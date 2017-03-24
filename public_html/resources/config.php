@@ -7,16 +7,16 @@ $LIB_PATH = dirname(__FILE__).'/lib';
 
 // might need to change this once deployed?
 $URLS = array(
-    "base" =>'/'
+    "base" => '../public_html'
 );
 
 // common paths
 $PATHS = array(
-    "resources" => "/resources",
+    "resources" => $URLS["base"]."/resources",
     "images" => array(
-        "animals" => "/images/animals",
-        "content" => "/images/content",
-        "layout" => "/images/layout"
+        "animals" => $URLS["base"]."/img/animals",
+        "content" => $URLS["base"]."/img/content",
+        "layout" => $URLS["base"]."/img/layout"
     )
 );
 

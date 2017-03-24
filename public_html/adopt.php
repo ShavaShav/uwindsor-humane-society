@@ -155,11 +155,12 @@ if (!isset($_SESSION['wishlist'])){
         <div id="animalBox">
             <!-- these are just test animals! will pull from DB later -->
             <?php
+                $imagePath = $PATHS["images"]["animals"];
                 // show first 15 animals
                 for ($i = 1; $i <= 15; $i++){
                     echo <<<ZZEOF
                     <div class="animal" id="$i">
-                        <img src="img/animals/$i.JPG">
+                        <img src="$imagePath/$i.jpg">
                         <p>Name: <span id="animalName_$i">Unknown</span></p>
                         <p>Species: <span id="animalSpecies_$i">Unknown</span></p>
                         <p>Age: <span id="animalAge_$i">Unknown</span></p>
