@@ -5,21 +5,6 @@
 $TEMPLATES_PATH = dirname(__FILE__).'/templates';
 $LIB_PATH = dirname(__FILE__).'/lib';
 
-// might need to change this once deployed?
-$URLS = array(
-    "base" => '../public_html'
-);
-
-// common paths
-$PATHS = array(
-    "resources" => $URLS["base"]."/resources",
-    "images" => array(
-        "animals" => $URLS["base"]."/img/animals",
-        "content" => $URLS["base"]."/img/content",
-        "layout" => $URLS["base"]."/img/layout"
-    )
-);
-
 // database credentials (to be updated)
 $DB = array(
     "dbname" => "shaverz_hs",
