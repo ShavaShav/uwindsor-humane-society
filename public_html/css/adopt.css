@@ -1,38 +1,82 @@
-#formspace {
-	margin-left: auto;
-	margin-right: auto;
-	margin-bottom: 1em;
-	border-style: solid;
+/* every element that needs a white box around it uses this class */
+.whiteBox {
+    font-family: sans-serif;
+    border: solid 2px black;
 	border-radius: 0.5em;
 	color: #000;
 	background-color: #FFF;
+    margin: 25px;
 }
 
-.resultborder {
-	background-color: #FFF;
-    border-radius: 25px;
-	font-family: sans-serif;
-	margin: 30px;
-	padding: 1em;
+/* flex container, holds animalWrapper and filterSearchWishlistBox */
+#contentWrapper {
+    display: flex;
+    flex-direction: row; /* left to right */
+    margin: 25px;
 }
 
-#ourForm {
-	padding: 0.5em;
+/* flex containt for side menu (filter, search, wishlist) options */
+#filterSearchWishlistBox {
+    display:flex;
+    flex-direction: column;
+    height: inherit;
+    flex-grow: 1;
 }
 
-label {
-	font-weight: bold;
+/* wishlist will also be a flex-container -> holding animals in user's wishlist on db */
+#wishlistBox {
+    display:flex;
+    flex-direction:column;
+    padding: 10px;
+    height: 100%; /* fill the rest of the page */
+    background-color:beige;
+    border-radius: 0.5em;
 }
 
-#resultspace {
-	display: flex;
-	margin-top: 1em;
-	margin-left: auto;
-	margin-right: auto;
-	border-style: solid;
-	border-radius: 0.5em;
-	color: #000;
-	background-color: #FFF;
-	line-height: 1em;
-	overflow: scroll;
+#filterBox {
+    background-color:aliceblue;
+    padding:10px;
+    border-radius: 0.5em;
+}
+
+#searchBox {
+    background-color:antiquewhite;
+    border-radius: 0.5em;
+    padding:10px;
+}
+
+/* each filter form option shares this style */
+.filterOption {
+    padding:10px;
+    font-weight: bold;
+}
+
+.searchOption {
+    padding:10px;
+    height: 1em;
+    border-radius: 0.5em;
+    background-color:antiquewhite;
+    font-weight: bold;
+    flex-grow: 1;
+}
+
+/* flex container, holds animals */
+#animalBox {
+    display: flex;
+    flex-direction: row; /* animals appear left to right , wrapping */
+    flex-wrap: wrap;
+}
+
+/* the actual animal divs in the animalBox */
+.animal {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 0.5em;
+    border-width: 1px;
+    border-color: cornflowerblue;
+    background-color: blanchedalmond; 
+}
+
+.title {
+    text-align: center;
 }
