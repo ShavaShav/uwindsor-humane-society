@@ -1,37 +1,17 @@
-// <?php 
-//     require_once(dirname(__FILE__).'/../config.php');
-//     
-//     // testing the cruelty form
-//     //print_r($_POST);
-//     
-//     
-// foreach ($_POST as $key=>$value){
-// 
-// 	echo $key.": ".$value."<br><br>";
-// 	
-// 
-// }
+<?php
 
+$name = $_POST['name'];
+$email = $_POST['e-mail'];
+$number = $_POST['phoneNumber'];
+$personName = $_POST['personName'];
+$personAddress = $_POST['personAddress'];
+$incident = $_POST['incidentText'];
 
-//?>
+$message = "Message from: \n\n" . $name . "\n" . $number . "\n" . $email . "\n\n\n Message concerning: \n\n" .
+$personName . "\n" . $personAddress . "\n" . $incident;
 
-<?php 
-if(isset($_POST['submit'])){}
+mail('kim.ficara@gmail.com', 'Cruelty Form Submission', $message);
 
-	//require_once(dirname(__FILE__).'/../config.php');
+header('Location: http://hs.myweb.cs.uwindsor.ca/confirmation.php');
 
-    $to = "ficara@uwindsor.ca"; // this is your Email address
-    $from = "kim.ficara@gmail.com"; // this is the sender's Email address
-    $name = $_POST['name'];
-    $phone_number = $_POST['phoneNumber'];
-    $personName = $_POST['personName'];
-    $personAddress = $_POST['personAddress']; 
-    $subject = "Cruelty Form Submission";
-    $message = $_POST['incidentText'];
-
-    $headers = "From:" . $from;
-    mail($to,$subject,$message,$headers);
-    
-    echo "Mail Sent. Thank you, we will contact you shortly.";
-    }
 ?>
