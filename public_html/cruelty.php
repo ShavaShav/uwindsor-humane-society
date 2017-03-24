@@ -12,7 +12,7 @@ html5_nav();
 ?>
 <div class="contentborder">
         <p class="titleText">Cruelty Form</p>
-        <form action="/cruelty_handler.php" method="post">
+        <form action="/resources/lib/cruelty_handler.php" method="post">
         <p class="formLabel">Your name</p>
         <input type="text" name="name" id="name" class="textInput">
         <p class="formLabel">Your phone number</p>
