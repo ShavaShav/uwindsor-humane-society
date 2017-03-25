@@ -5,7 +5,7 @@ session_start();
 
 html5_header(
 	'University of Windsor Humane Society',
-	array('css/index.css'),
+	array('css/root.css', 'css/index.css'),
 	array());
 ?>
 <div id="signin" style="cursor:pointer;" 

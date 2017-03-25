@@ -5,7 +5,7 @@ session_start();
 
 html5_header(
 	'Adopt Animals',
-	array('css/nav.css', 'css/adopt.css'),
+	array('css/root.css', 'css/adopt.css'),
 	array('js/wishlist.js'));
 	
 html5_nav();

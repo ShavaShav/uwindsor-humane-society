@@ -1,21 +1,7 @@
-:root {
-	box-sizing: border-box;
-	background-image: url("../img/layout/background.jpg");
-	background-repeat: repeat;
-}
-
 *,
 ::before,
 ::after {
 	box-sizing: inherit;
-}
-
-.buttonborder{
-	background-color: #FFF;
-    border-radius: 25px;
-	font-family: sans-serif;
-	margin: 100px;
-	padding: 0;
 }
 
 #signin {
