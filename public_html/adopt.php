@@ -28,10 +28,10 @@ if (!isset($_SESSION['wishlist'])){
                 <form>
                     By Name:
                     <input type="text" name="name" id="name"> 
+                    <p id="autoSuggestion">Type for suggestion!</p><br>
                     <input type="submit" value="Search">
                 </form>
                 <!-- use ajax to change this "autoSuggestion".innerHTML to an animal name, unless we can come up with a way to drop down multiple selections? -->
-                <p id="autoSuggestion">Type for suggestion!</p>
             </div>
         </div>
         <!-- end of search box -->

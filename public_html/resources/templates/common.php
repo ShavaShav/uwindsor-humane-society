@@ -9,12 +9,12 @@ function html5_header($title, $css_files = array(), $js_files = array())
         "<html><head><title>".
         htmlspecialchars($title).
         "</title>".
-        "<script
+        "<!-- Latest compiled and minified JQuery --><script
 			  src='https://code.jquery.com/jquery-3.2.1.min.js'
 			  integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4='
 			  crossorigin='anonymous''></script><link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u' crossorigin='anonymous'>
 
-        <!-- Latest compiled and minified JavaScript -->
+        <!-- Latest compiled and minified Bootstrap JS -->
         <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa' crossorigin='anonymous'></script>";
   
     foreach ($css_files as $css_file)

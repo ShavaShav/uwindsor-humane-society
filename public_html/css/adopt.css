@@ -1,7 +1,6 @@
 /* every element that needs a white box around it uses this class */
 .whiteBox {
-    font-family: sans-serif;
-    border: solid 2px black;
+    border: 2px solid #008CBA;
 	border-radius: 0.5em;
 	color: #000;
 	background-color: #FFF;
@@ -10,7 +9,8 @@
 
 body {
     margin: 0; /* override root.css */
-    margin-top: 50px;
+    border: 0;
+    margin-top: 75px;
     padding: 0;
     background: transparent;
 }
@@ -83,6 +83,7 @@ body {
     border-radius: 0.5em;
     border-width: 1px;
     border-color: cornflowerblue;
+    border-style: dotted;
     background-color: blanchedalmond; 
 }
 

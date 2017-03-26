@@ -1,19 +1,42 @@
+/* include on every page, site wide css! */
+
 :root {
 	box-sizing: border-box;
 	background-image: url("../img/layout/background.jpg"); /* I put the bg up here so body could be the white square */
 	background-repeat: repeat;
-}
 
-*,
-::before,
-::after {
-	box-sizing: inherit;
 }
 
 body {
+    font-family: Verdana, Geneva, sans-serif;
 	background-color: #FFF;
-	font-family: sans-serif;
     border-radius: 25px;
+    border: 2px solid #008CBA;
 	margin: 100px;
 	padding: 10px;
+}
+
+/* all buttons use this css */
+input[type=submit], button, input[type=button] {
+    background-color: #008CBA; /* blue */ 
+    border: 2px solid #008CBA;
+    border-radius: 0.5em;
+    color: white; 
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s;  /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+    /* this part centers button, so must override if you dont want your buttons centered! */
+    display:block; 
+    margin:auto;
+}
+
+input[type=submit]:hover, button:hover, input[type=button]:hover {
+    background-color: #FFF; /* white */
+    color: #008CBA; /* blue */
 }

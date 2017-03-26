@@ -52,8 +52,8 @@ html5_nav();
           </form>
       <!-- Shole form be of class dropzone, instead of 2 forms? and submit button will call surrender_handler.php to insert animal into db (surrender_handler.php should also call upload.php to store image I'm thinking.) -->
         <form action="upload.php" class="dropzone"></form>
-
-        <center><input type="submit" value="Submit" class="submitButton"></center>
+        <br>
+        <input type="submit" value="Submit" class="submitButton">
   
 </div>
 <?php

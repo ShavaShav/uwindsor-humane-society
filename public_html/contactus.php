@@ -44,7 +44,7 @@ html5_nav();
 <p class = "formLabel"><b><u> Please Clarify</u></b> </p>
 <textarea name="elaborate" id="elaborate"></textarea>
 
-<input type = "submit" value = "Submit" class = "submitButton">
+<input type="submit" value="Submit" id="submitButton">
 
 </form>
 
