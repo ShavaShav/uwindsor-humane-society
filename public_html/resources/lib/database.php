@@ -16,22 +16,11 @@ class UserDB
             echo "Error: " . $e->getMessage();
         }
     }
-    
-    // run any SQL query and get any result
-    public function runQuery($sql) {
-        // execute the query
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute();
-
-        // set the resulting array to associative
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
-    }
 
     // returns a filtered list of animals (filters MUST use the ids here)
     public function filteredAnimals($filters) {
         $sql = "SELECT * FROM Animals";
-        $whereClauses = [];
+        $whereClauses = []; // build an array of WHERE clauses
         
         // translate filters to where clauses, if they exist (.e.g species="cat")
         if (isset($filters["species"])){
@@ -65,7 +54,7 @@ class UserDB
             }
         }  
         
-        $sql = $sql.';'; //
+        $sql = $sql.';'; // end statement
         
         // execute the query
         $stmt = $this->conn->prepare($sql);
@@ -99,34 +88,39 @@ class UserDB
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+    
+    // close the connection
+    public function close(){
+        $this->conn = null;
+    }
 }
 
 // TODO:  Admin connection should offer full access
-//class dbAdmin extends dbUser
-//{
-//
-//    public function __construct() {
-//        global $DB; // capture global variable from config.php
-//        // attempt to connect to the database
-//        try {
-//            $this->conn = new PDO("mysql:host=".$DB["host"].";dbname=".$DB["dbname"], $DB["username"], $DB["password"]);
-//            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-//        } catch(PDOException $e) {
-//            echo "Error: " . $e->getMessage();
-//        }
-//    }
-//
-//    // run any SQL query and get any result
-//    public function runQuery($sql) {
-//        // execute the query
-//        $stmt = $this->conn->prepare($sql);
-//        $stmt->execute();
-//
-//        // set the resulting array to associative
-//        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-//        return $result;
-//    }
-//
-//}
+class AdminDB extends UserDB
+{
+
+    public function __construct() {
+        global $DB; // capture global variable from config.php
+        // attempt to connect to the database
+        try {
+            $this->conn = new PDO("mysql:host=".$DB["host"].";dbname=".$DB["dbname"], $DB["username"], $DB["password"]);
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch(PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    // run any SQL query and get any result
+    public function runQuery($sql) {
+        // execute the query
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+
+        // set the resulting array to associative
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+}
 
 ?>

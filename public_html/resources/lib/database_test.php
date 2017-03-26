@@ -3,12 +3,17 @@ require_once('../config.php');
 require_once('database.php'); // must include, relative to current location, to get UserDB class
 
 // create a user database connection, pages must be hosted be on myWeb or it won't work!
-$userDB = new UserDB;
+$adminDB = new AdminDB;
 
-echo "<h2>Gettings entire Animals table...</h2><br>";
+echo "<h2>Getting the entire Animals table with AdminDB...</h2><br>";
     
 // running a query from raw SQL statement. (*check logs, print results of query if you are getting errors!)
-$results = $userDB->runQuery("SELECT * FROM Animals");
+$results = $adminDB->runQuery("SELECT * FROM Animals");
+
+$adminDB->close(); // closing connection so we dont have two running simultenously
+
+// Im thinking two different classes of connection - Admin runs anway queries and user is limited
+$userDB = new UserDB;
 
 // print the results of array (array of arrays)
 foreach($results as $row){
@@ -23,16 +28,12 @@ if (sizeof($results) > 0){
 
 // example of adding filters to query for animals
 $filters = array();
-$filters["species"] = "dog";
+$filters["species"] = "cat";
 $filters["min_age"] = "0";
 $filters["max_age"] = "10";
-$filters["size"] = "medium";
-$filters["altered"] = "no";
-$filters["gender"] = "male";
 $filters["primary_color"] = "black";
-$filters["secondary_color"] = "tan";
 
-echo "<h2>Setting some filters and getting Animals...</h2><br>";
+echo "<h2>Setting some filters to get only black cats with a max age of 10... with UserDB</h2><br>";
 
 // get the filtered animals
 $results = $userDB->filteredAnimals($filters);

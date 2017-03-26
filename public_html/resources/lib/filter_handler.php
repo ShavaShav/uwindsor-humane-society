@@ -1,7 +1,7 @@
 <?php 
 require_once('database.php');
 
-// form designed to map to database names/filternames
+// form ids designed to map to database names/php args
 
 // go through POST fields(filters), building array to make query
 $filters = array();
