@@ -76,12 +76,28 @@ class UserDB
         return $result;
     }
     
-    public function getAnimalNamesStartingWith($partialName){
+    // gets animals names or usernames, given a partial string and table
+    public function getNamesStartingWith($partialName, $tableName){
         // search db for names starting with $partialName, return results
-    }
-    
-    public function getUserNamesStartingWith($partialName){
-        // search db for names starting with $partialName, return results
+        // can find usernames and pet names, depending on tablename given
+        $sql = "SELECT ";
+        
+        if (!strcmp($tableName, 'Animals')){
+            $sql = $sql . "name FROM Animals WHERE name "; // attribute of name in Animals
+        } else if (!strcmp($tableName, 'Users')) {
+            $sql = $sql . "username FROM Users WHERE username "; // attribute of username in Users
+        } else {
+            return array(); // invalid, return empty results
+        }
+        $sql = $sql . "LIKE '" . $partialName . "%';"; // matches names starting with partialName
+        
+        // execute the query
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+
+        // set the resulting array to associative
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
     }
 }
 

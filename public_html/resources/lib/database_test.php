@@ -43,4 +43,33 @@ foreach($results as $row){
    echo "<br>";
 }
 
+// testing getNamesStartingWith (takes a partial name and the table)
+// For Animals it gets animal name, for Users it gets the username
+$results = $userDB->getNamesStartingWith("B", "Animals");
+
+echo "<h2>Result of search for animal names starting with B: </h2><h3>";
+foreach($results as $row){
+   echo $row['name'];
+   echo "<br>";
+}
+echo "</h3>";
+
+$results = $userDB->getNamesStartingWith("Ch", "Animals");
+
+echo "<h2>Result of search for animal names starting with Ch: </h2><h3>";
+foreach($results as $row){
+   echo $row['name'];
+   echo "<br>";
+}
+echo "</h3>";
+
+$results = $userDB->getNamesStartingWith("Sha", "Users");
+
+echo "<h2>Result of search for usernames starting with Sha: </h2><h3>";
+foreach($results as $row){
+   echo $row['username'];
+   echo "<br>";
+}
+echo "</h3>";
+
 ?>
