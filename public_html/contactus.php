@@ -10,9 +10,7 @@ html5_header(
 	
 html5_nav();
 ?>
-<div class="contentborder">
-
-<form action="/resources/lib/contact_handler.php" method="post">
+<form action='resources/lib/contact_handler.php', method="post">
 
 <p class = "formLabel"><b><u> Name</u></b> </p>
 <input type="text" name="customer_name" required></br>
@@ -39,7 +37,6 @@ html5_nav();
 <p>
 You may also contact us at 1800-519-5119 or visit us at 33 LULZ Street, Windsor, Ontario.
 </p>
-</div>
 
 <?php
 html5_footer();

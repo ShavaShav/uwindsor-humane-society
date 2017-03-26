@@ -12,7 +12,7 @@ html5_nav();
 ?>
 <div class="contentborder">
         <p class="titleText">Surrender Animal</p>
-         <form action="/surrender_handler.php" method="post">
+         <form action='resources/lib/surrender_handler.php', method="post">
              
           <p class="formLabel">Name:</p>
           <input type="text" name="name" id="name" class="textInput"><br>

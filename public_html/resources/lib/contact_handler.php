@@ -10,6 +10,6 @@ $reason . "\n\n" . $elaborate;
 
 mail('kim.ficara@gmail.com', 'Contact Us Form Submission', $message);
 
-header('Location: http://hs.myweb.cs.uwindsor.ca/confirmation.php');
+header('Location: ../../confirmation.php');
 
 ?>

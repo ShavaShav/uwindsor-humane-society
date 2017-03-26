@@ -2,8 +2,8 @@
 // An array of globals variables (other arrays that contain constants), just require config.php and use them
 // If we use these variables, then we only have to keep them up to date here
 
-$TEMPLATES_PATH = dirname(__FILE__).'/templates';
-$LIB_PATH = dirname(__FILE__).'/lib';
+$TEMPLATES_PATH = 'resources/templates';
+$LIB_PATH = 'resources/lib';
 
 // database credentials (to be updated)
 $DB = array(

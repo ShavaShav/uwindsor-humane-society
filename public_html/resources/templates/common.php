@@ -60,7 +60,8 @@ echo <<<ZZEOF
             <li><a href="contactus.php">Email us</a></li>
           </ul>
         </li>
-        <li class="active"><a href="adopt.php">Adopt Animals</a></li>
+        <!-- <li class="active"><a href="adopt.php">Adopt Animals</a></li> -->
+        <li><a href="adopt.php">Adopt Animals</a></li>
         <li><a href="surrender.php">Surrender Animals</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right" id="loginAreaID">
