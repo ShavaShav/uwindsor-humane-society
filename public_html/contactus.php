@@ -13,7 +13,7 @@ html5_nav();
 <script src="http://tinymce.cachefly.net/4.0/tinymce.min.js"></script>
     <script>
     tinymce.init({
-        selector: '#myTextarea',
+        selector: '#elaborate',
         height: 200,
         width: 400,
 
@@ -42,7 +42,7 @@ html5_nav();
 </select>
 
 <p class = "formLabel"><b><u> Please Clarify</u></b> </p>
-<textarea name="myTextarea" id="myTextarea"></textarea>
+<textarea name="elaborate" id="elaborate"></textarea>
 
 <input type = "submit" value = "Submit" class = "submitButton">
 

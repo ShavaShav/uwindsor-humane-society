@@ -4,7 +4,7 @@ require_once('../config.php');
 // Users should have limited set of functions
 class UserDB
 {
-    protected $conn; // userDB and adminDB can access the connection
+    protected $conn; // UserDB and AdminDB can access the connection
 
     public function __construct() {
         global $DB; // capture global variable from config.php
@@ -95,7 +95,7 @@ class UserDB
     }
 }
 
-// TODO:  Admin connection should offer full access
+// Admin connection should offer full access through runQuery() and some easy modification querying functions (deleting users, animals, etc)
 class AdminDB extends UserDB
 {
 

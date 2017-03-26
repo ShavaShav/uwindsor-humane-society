@@ -4,8 +4,8 @@ require_once($TEMPLATES_PATH . '/common.php');
 session_start();
 
 html5_header(
-  'Adopt Animals',
-  array('css/nav.css'),
+  'Surrender Animal',
+  array('css/root.css'),
   array());
 
 html5_nav();
@@ -14,7 +14,7 @@ html5_nav();
     <link rel="stylesheet" href="dropzone.css">
 <div class="contentborder">
         <p class="titleText">Surrender Animal</p>
-         <form action="/surrender_handler.php" method="post">
+         <form action="resources/lib/surrender_handler.php" method="post">
              
           <p class="formLabel">Name:</p>
           <input type="text" name="name" id="name" class="textInput"><br>
@@ -50,7 +50,7 @@ html5_nav();
              
           <p class="formLabel">Picture:</p>
           </form>
-      
+      <!-- Shole form be of class dropzone, instead of 2 forms? and submit button will call surrender_handler.php to insert animal into db (surrender_handler.php should also call upload.php to store image I'm thinking.) -->
         <form action="upload.php" class="dropzone"></form>
 
         <center><input type="submit" value="Submit" class="submitButton"></center>

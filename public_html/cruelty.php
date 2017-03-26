@@ -13,7 +13,7 @@ html5_nav();
 <script src="http://tinymce.cachefly.net/4.0/tinymce.min.js"></script>
     <script>
     tinymce.init({
-        selector: '#myTextarea',
+        selector: '#incidentText',
         height: 200,
         width: 400,
 
@@ -41,7 +41,7 @@ class="textInput">
         <input type="text" name="personAddress" id="personAddress" 
 class="textInput">
         <p class="formLabel">Please describe what you saw (required)</p> 
-        <textarea name="myTextarea" id="myTextarea"></textarea>      
+        <textarea name="incidentText" id="incidentText"></textarea>      
         <input type="submit" name="submit" id="submit" 
 class="submitButton">
             
