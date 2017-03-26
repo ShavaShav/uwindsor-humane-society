@@ -46,7 +46,7 @@ function animalDragover(evt){
 function wishlist(id)
 {
     var img_src = document.getElementsByTagName("img")[0].src; // get image
-    var name = document.getElementById("animalName_"+id).innerHTML; // get name
+    var name = document.getElementById("animalName_"+id); // get name
     console.log(name + " dropped in wishlist.");
     var params = "animal_img=img_src&animal_name=name"; // for POST request 
     
@@ -66,6 +66,7 @@ function wishlist(id)
     }
     
     xhttp.open("POST", store_wishlist_URL, true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(params); // send request to store_wishlist
 }
 
@@ -88,6 +89,7 @@ function removeAnimal(animal_val){
     }
     
     xhttp.open("POST", store_wishlist_URL, true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(params); // send request to store_wishlist
 }
 
@@ -109,5 +111,6 @@ function showWishlist(){
     }
     
     xhttp.open("POST", store_wishlist_URL, true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(params); // send request to store_wishlist
 }

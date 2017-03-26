@@ -2,7 +2,7 @@
 require_once('../config.php');
 require_once('database.php'); // must include, relative to current location, to get UserDB class
 
-// create a user database connection
+// create a user database connection, pages must be hosted be on myWeb or it won't work!
 $userDB = new UserDB;
 
 echo "<h2>Gettings entire Animals table...</h2><br>";
@@ -16,7 +16,7 @@ foreach($results as $row){
    echo "<br>";
 }
 
-// example of getting variables for an animal from the results (which is an array (rows/ of resultant table) of arrays (columns/attributes of resultant table))
+// example of getting variables for an animal from the results (which is an array (rows/tuples of resultant table) of arrays (columns/attributes of resultant table))
 if (sizeof($results) > 0){
     echo '<br><h1>'.$results[0]['name'].' is a '.$results[0]['species'].' who is '.$results[0]['age'].' years old.</h1>'; 
 }

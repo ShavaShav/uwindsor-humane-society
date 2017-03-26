@@ -6,7 +6,7 @@ session_start();
 html5_header(
 	'Adopt Animals',
 	array('css/root.css', 'css/adopt.css'),
-	array('js/wishlist.js'));
+	array('js/wishlist.js', 'js/filter.js'));
 	
 html5_nav();
 
@@ -19,7 +19,7 @@ if (!isset($_SESSION['wishlist'])){
 
 <div id="contentWrapper">
     
-    <div id="filterSearchWishlistBox">
+    <div id="filterSearchBox" class="sidePanel">
         
         <div class="whiteBox">
                 <div id="searchBox">
@@ -41,7 +41,7 @@ if (!isset($_SESSION['wishlist'])){
                 <h2 class="title">Filters</h2>
             <!-- AJAX idea: autosuggest pet names when they search!
                 will use the same form handler as the filter, but get specific animals -->
-                <form id="filter" action="resources/lib/filter_handler.php" method="post">
+                <form id="filter">
                     <div class="filterOption">
                         Species:
                         <select name="species" id="species">
@@ -116,73 +116,55 @@ if (!isset($_SESSION['wishlist'])){
                         </select>
                     </div>
                     <br>
-                    <input type="submit" value="Filter">
+                    <input type="button" value="Filter" id="filterButton">
                 </form>
             </div>
         </div> 
         <!-- end of filters -->
         
-        <div class="whiteBox" style="height:100%"> <!-- must override white box to stretch wishlist -->
-            <div id="wishlistBox">
-                <h2 class="title">Wish List</h2>
-                <!-- check cookie, show the count of animals -->
-                <div id="wishlistCount">
-                    <p id="wishListCount" onclick="showWishlist();"><?php echo count($_SESSION['wishlist']);?> Animal on your Wishlist</p>
-                </div>
-                <div id="wishlistPopulation">
-                    <?php
-                        // check cookie to see if user already has animals, display count
-                        if($_SESSION['wishlist']) {
-                            for($i = 0; $i < count($_SESSION['wishlist']); $i++) {
-                                $animal_val = explode("+",$_SESSION['wishlist'][$i]);
-                    ?>
-                            <div class='wishlistAnimals'>
-                            <img src='<?php echo $animal_val[2];?>'>
-                            <p><?php echo $animal_val[0];?></p>
-                            <p><?php echo $animal_val[1];?></p>
-                            <input type='button' value='Remove Animal' onclick='removeAnimal("<?php echo $_SESSION['wishlist'][$i];?>");'>
-                           </div>
-                    <?php
-                            } // end for loop
-                        } else { 
-                            // no session history
-                            echo "<p>Drop Animals Here!</p>";
-                        }
-                    ?>
-                </div>
-            </div>
-        </div> 
-         <!-- end of wishlist -->
     </div>
-    <!-- end of search/filter/wishlist column -->
+    <!-- end of search/filter column -->
 
     <!-- Animals go here -->
     <div class="whiteBox">
         <h1 class="title">Animals Available for Adoption</h1> <br>
         <div id="animalBox">
-            <!-- these are just test animals! will pull from DB later -->
-            <?php
-                // show first 15 animals
-                for ($i = 1; $i <= 15; $i++){
-                    echo <<<ZZEOF
-                    <div class="animal" id="$i">
-                        <img src="img/animals/$i.jpg">
-                        <p>Name: <span id="animalName_$i">Unknown</span></p>
-                        <p>Species: <span id="animalSpecies_$i">Unknown</span></p>
-                        <p>Age: <span id="animalAge_$i">Unknown</span></p>
-                        <p>Gender: <span id="animalGender_$i">Unknown</span></p>
-                        <p>Species: <span id="animalSpecies_$i">Unknown</span></p>
-                        <p>Altered: <span id="animalAltered_$i">Unknown</span></p>
-                        <p>Size: <span id="animalSize_$i">Unknown</span></p>
-                        <p>Primary Color: <span id="animalPrimaryColor_$i">Unknown</span></p>
-                        <p>Secondary Color: <span id="animalSecondaryColor_$i">Unknown</span></p>
-                    </div>
-ZZEOF;
-                }
-            ?>
+            <!-- to be populated by AJAX request to database on page load! -->
         </div>
     </div>
     <!-- end of animalBox -->
+    
+    <div class="whiteBox"> <!-- must override white box to stretch wishlist -->
+        <div class="sidePanel" id="wishlistBox">
+            <h2 class="title">Wish List</h2>
+            <!-- check cookie, show the count of animals -->
+            <div id="wishlistCount">
+                <p id="wishListCount" onclick="showWishlist();"><?php echo count($_SESSION['wishlist']);?> Animal on your Wishlist</p>
+            </div>
+            <div id="wishlistPopulation">
+                <?php
+                    // check cookie to see if user already has animals, display count
+                    if($_SESSION['wishlist']) {
+                        for($i = 0; $i < count($_SESSION['wishlist']); $i++) {
+                            $animal_val = explode("+",$_SESSION['wishlist'][$i]);
+                ?>
+                        <div class='wishlistAnimals'>
+                        <img src='<?php echo $animal_val[2];?>'>
+                        <p><?php echo $animal_val[0];?></p>
+                        <p><?php echo $animal_val[1];?></p>
+                        <input type='button' value='Remove Animal' onclick='removeAnimal("<?php echo $_SESSION['wishlist'][$i];?>");'>
+                       </div>
+                <?php
+                        } // end for loop
+                    } else { 
+                        // no session history
+                        echo "<p>Drop Animals Here!</p>";
+                    }
+                ?>
+            </div>
+        </div>
+    </div> 
+     <!-- end of wishlist -->
 </div>
 <!-- end of contentWrapper -->
 	

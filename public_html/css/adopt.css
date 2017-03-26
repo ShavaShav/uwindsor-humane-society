@@ -22,12 +22,15 @@ body {
     margin: 25px;
 }
 
-/* flex containt for side menu (filter, search, wishlist) options */
-#filterSearchWishlistBox {
+.sidePanel {
+    width: 250px;
+}
+
+/* flex containt for left side menu (filter, search) options */
+#filterSearchBox {
     display:flex;
     flex-direction: column;
     height: inherit;
-    flex-grow: 1;
 }
 
 /* wishlist will also be a flex-container -> holding animals in user's wishlist on db */
@@ -64,7 +67,6 @@ body {
     border-radius: 0.5em;
     background-color:antiquewhite;
     font-weight: bold;
-    flex-grow: 1;
 }
 
 /* flex container, holds animals */
