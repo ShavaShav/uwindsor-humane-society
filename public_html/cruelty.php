@@ -4,12 +4,26 @@ require_once($TEMPLATES_PATH . '/common.php');
 session_start();
 
 html5_header(
-	'Report Cruelty',
-	array('css/root.css'),
-	array());
+        'Report Cruelty',
+        array('css/root.css'),
+        array());
 
 html5_nav();
 ?>
+<script src="http://tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+    <script>
+    tinymce.init({
+        selector: '#myTextarea',
+        height: 200,
+        width: 400,
+
+        plugins: [
+           ' wordcount  ',
+         ],
+
+        image_advtab: true
+    });
+    </script>
 <div class="contentborder">
         <p class="titleText">Cruelty Form</p>
         <form action="/resources/lib/cruelty_handler.php" method="post">
@@ -27,14 +41,13 @@ class="textInput">
         <input type="text" name="personAddress" id="personAddress" 
 class="textInput">
         <p class="formLabel">Please describe what you saw (required)</p> 
-        <textarea rows="15" cols="100" name="incidentText" 
-id="incidentText" class="formLabel">  </textarea>            
+        <textarea name="myTextarea" id="myTextarea"></textarea>      
         <input type="submit" name="submit" id="submit" 
 class="submitButton">
             
         </form> 
 </div>
-		
+                
 <?php
 html5_footer();
 ?>

@@ -4,15 +4,17 @@ require_once($TEMPLATES_PATH . '/common.php');
 session_start();
 
 html5_header(
-	'Adopt Animals',
-	array('css/root.css'),
-	array());
+  'Adopt Animals',
+  array('css/nav.css'),
+  array());
 
 html5_nav();
 ?>
+  <script src="dropzone.js"></script>
+    <link rel="stylesheet" href="dropzone.css">
 <div class="contentborder">
         <p class="titleText">Surrender Animal</p>
-         <form action='resources/lib/surrender_handler.php', method="post">
+         <form action="/surrender_handler.php" method="post">
              
           <p class="formLabel">Name:</p>
           <input type="text" name="name" id="name" class="textInput"><br>
@@ -47,9 +49,12 @@ html5_nav();
           <input type="text" name="species" id="species" class="textInput"><br> 
              
           <p class="formLabel">Picture:</p>
-          <input type="file" name="pic" accept="image/*"><br><br>
-          <input type="submit" value="Submit" class="submitButton">
-        </form> 
+          </form>
+      
+        <form action="upload.php" class="dropzone"></form>
+
+        <center><input type="submit" value="Submit" class="submitButton"></center>
+  
 </div>
 <?php
 html5_footer();

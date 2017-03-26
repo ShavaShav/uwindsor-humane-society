@@ -10,6 +10,20 @@ html5_header(
 	
 html5_nav();
 ?>
+<script src="http://tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+    <script>
+    tinymce.init({
+        selector: '#myTextarea',
+        height: 200,
+        width: 400,
+
+        plugins: [
+           ' wordcount  ',
+         ],
+
+        image_advtab: true
+    });
+    </script>
 <form action='resources/lib/contact_handler.php', method="post">
 
 <p class = "formLabel"><b><u> Name</u></b> </p>
@@ -28,7 +42,7 @@ html5_nav();
 </select>
 
 <p class = "formLabel"><b><u> Please Clarify</u></b> </p>
-<textarea name="elaborate" maxlength="500"></textarea> </p>
+<textarea name="myTextarea" id="myTextarea"></textarea>
 
 <input type = "submit" value = "Submit" class = "submitButton">
 
