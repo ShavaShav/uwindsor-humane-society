@@ -63,11 +63,9 @@ class UserDB
                 if ($i < 1) continue;
                 $sql = $sql." AND ".$where;
             }
-        }
-        
+        }  
         
         $sql = $sql.';'; //
-        echo "<h2>".$sql."</h2>";
         
         // execute the query
         $stmt = $this->conn->prepare($sql);
