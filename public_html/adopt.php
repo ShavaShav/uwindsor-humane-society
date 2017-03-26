@@ -41,7 +41,7 @@ if (!isset($_SESSION['wishlist'])){
                 <h2 class="title">Filters</h2>
             <!-- AJAX idea: autosuggest pet names when they search!
                 will use the same form handler as the filter, but get specific animals -->
-                <form>
+                <form id="filter" action="resources/lib/filter_handler.php" method="post">
                     <div class="filterOption">
                         Species:
                         <select name="species" id="species">
@@ -49,38 +49,45 @@ if (!isset($_SESSION['wishlist'])){
                           <option value="dog">Dog</option>
                           <option value="cat">Cat</option>
                           <option value="rabbit">Rabbit</option>
-                          <option value="smallMammal">Small Mammal</option>
+                          <option value="small_mammal">Small Mammal</option>
                           <option value="reptile">Reptile</option>
                           <option value="bird">Bird</option>
                         </select>
                     </div>
                     <div class="filterOption">
-                        Min Age: <input type="text" name="minAge" id="minAge" value="0" size="3">
-                        Max Age: <input type="text" name="maxAge" id="maxAge" value="100" size="3">
+                        Min Age: <input type="text" name="min_age" id="min_age" value="0" size="3"> <br>
+                        Max Age: <input type="text" name="max_age" id="max_age" value="100" size="3">
                     </div>
                     <div class="filterOption">
                         <!-- can select one, or both genders. (not a group) -->
-                        Gender: <br>
-                            <input type="checkbox" name="male" id="male" value="male" selected> Male <br>
-                            <input type="checkbox" name="female" id="female" value="female" selected> Female
+                        Gender: 
+                        <select name="gender" id="gender">
+                          <option value="all" selected>All</option>
+                          <option value="male">Male</option>
+                          <option value="female">Female</option>
+                        </select>
+
                     </div>
                     <div class="filterOption">
-                        Altered: <br>
-                            <input type="checkbox" name="altered" id="altered" value="altered" selected> Yes <br>
-                            <input type="checkbox" name="unaltered" id="unaltered" value="unaltered" selected> No
+                        Altered: 
+                        <select name="altered" id="altered">
+                          <option value="all" selected>All</option>
+                          <option value="yes">Yes</option>
+                          <option value="no">No</option>
+                        </select>
                     </div>
                     <div class="filterOption">
                         Size:
                         <select name="size" id="size">
                           <option value="all" selected>All</option>
                           <option value="small">Small</option>
-                          <option value="meedium">Medium</option>
+                          <option value="medium">Medium</option>
                           <option value="large">Large</option>
                         </select>
                     </div>
                     <div class="filterOption">
                         Primary Color: 
-                        <select name="primaryColor" id="primaryColor">
+                        <select name="primary_color" id="primary_color">
                             <option value="all" selected>All</option> 
                             <option value="tan">Tan</option>
                             <option value="brown">Brown</option>
@@ -95,7 +102,7 @@ if (!isset($_SESSION['wishlist'])){
                     </div>
                     <div class="filterOption">
                         Secondary Color: 
-                        <select name="secondaryColor" id="secondaryColor">
+                        <select name="secondary_color" id="secondary_color">
                             <option value="all" selected>All</option> 
                             <option value="tan">Tan</option>
                             <option value="brown">Brown</option>
