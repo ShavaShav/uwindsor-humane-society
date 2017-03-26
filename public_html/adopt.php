@@ -5,7 +5,7 @@ session_start();
 
 html5_header(
 	'Adopt Animals',
-	array('css/nav.css', 'css/adopt.css'),
+	array('css/root.css', 'css/adopt.css'),
 	array('js/wishlist.js'));
 	
 html5_nav();
@@ -155,7 +155,6 @@ if (!isset($_SESSION['wishlist'])){
         <div id="animalBox">
             <!-- these are just test animals! will pull from DB later -->
             <?php
-                $imagePath = $PATHS["images"]["animals"];
                 // show first 15 animals
                 for ($i = 1; $i <= 15; $i++){
                     echo <<<ZZEOF
