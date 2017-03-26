@@ -42,7 +42,7 @@ if (!isset($_SESSION['wishlist'])){
             <!-- AJAX idea: autosuggest pet names when they search!
                 will use the same form handler as the filter, but get specific animals -->
                 <form id="filter">
-                    <div class="filterOption">
+                    <div class="formOption">
                         Species:
                         <select name="species" id="species">
                           <option value="all" selected>All</option>
@@ -54,11 +54,11 @@ if (!isset($_SESSION['wishlist'])){
                           <option value="bird">Bird</option>
                         </select>
                     </div>
-                    <div class="filterOption">
+                    <div class="formOption">
                         Min Age: <input type="text" name="min_age" id="min_age" value="0" size="3"> <br>
                         Max Age: <input type="text" name="max_age" id="max_age" value="100" size="3">
                     </div>
-                    <div class="filterOption">
+                    <div class="formOption">
                         <!-- can select one, or both genders. (not a group) -->
                         Gender: 
                         <select name="gender" id="gender">
@@ -68,7 +68,7 @@ if (!isset($_SESSION['wishlist'])){
                         </select>
 
                     </div>
-                    <div class="filterOption">
+                    <div class="formOption">
                         Altered: 
                         <select name="altered" id="altered">
                           <option value="all" selected>All</option>
@@ -76,7 +76,7 @@ if (!isset($_SESSION['wishlist'])){
                           <option value="no">No</option>
                         </select>
                     </div>
-                    <div class="filterOption">
+                    <div class="formOption">
                         Size:
                         <select name="size" id="size">
                           <option value="all" selected>All</option>
@@ -85,7 +85,7 @@ if (!isset($_SESSION['wishlist'])){
                           <option value="large">Large</option>
                         </select>
                     </div>
-                    <div class="filterOption">
+                    <div class="formOption">
                         Primary Color: 
                         <select name="primary_color" id="primary_color">
                             <option value="all" selected>All</option> 
@@ -100,7 +100,7 @@ if (!isset($_SESSION['wishlist'])){
                             <option value="red">Red</option>
                         </select>
                     </div>
-                    <div class="filterOption">
+                    <div class="formOption">
                         Secondary Color: 
                         <select name="secondary_color" id="secondary_color">
                             <option value="all" selected>All</option> 

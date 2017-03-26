@@ -25,7 +25,7 @@ html5_nav();
     });
     </script>
 <div class="contentborder">
-        <p class="titleText">Cruelty Form</p>
+        <h2>Report Cruelty</h2>
         <form action="/resources/lib/cruelty_handler.php" method="post">
         <p class="formLabel">Your name</p>
         <input type="text" name="name" id="name" class="textInput">
@@ -41,7 +41,8 @@ class="textInput">
         <input type="text" name="personAddress" id="personAddress" 
 class="textInput">
         <p class="formLabel">Please describe what you saw (required)</p> 
-        <textarea name="incidentText" id="incidentText"></textarea>      
+        <textarea name="incidentText" id="incidentText"></textarea>   
+        <br>
         <input type="submit" name="submit" id="submit" 
 class="submitButton">
             

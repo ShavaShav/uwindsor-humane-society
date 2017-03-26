@@ -24,25 +24,32 @@ html5_nav();
         image_advtab: true
     });
     </script>
+<h2>Email Us</h2>
 <form action='resources/lib/contact_handler.php', method="post">
+<div class="formOption">
+    <label>Name</label>
+    <input type="text" name="customer_name" required></br>  
+</div>
 
-<p class = "formLabel"><b><u> Name</u></b> </p>
-<input type="text" name="customer_name" required></br>
+<div class="formOption">
+    <label>Email</label>
+    <input type="text" name="email_address" required></br>
+</div>
 
-<p class = "formLabel"><b><u> Email</u></b> </p>
-<input type="text" name="email_address" required></br>
+<div class="formOption">
+    <label>Reason for Contact</label>
+    <select id="contact" name="contact">
+    <option value="selected">Please select one</option>
+    <option value="problem with website" >Problem with website</option>
+    <option value="suggestion" >Suggestion</option>
+    <option value="general enquiry" >General enquiry</option>
+    </select>
+</div>
 
-	
-<p class = "formLabel"><b><u> Reason for Contact</u></b> </p>
-<select id="contact" name="contact">
-<option value="selected">Please select one</option>
-<option value="problem with website" >Problem with website</option>
-<option value="suggestion" >Suggestion</option>
-<option value="general enquiry" >General enquiry</option>
-</select>
-
-<p class = "formLabel"><b><u> Please Clarify</u></b> </p>
-<textarea name="elaborate" id="elaborate"></textarea>
+<div class="formOption">
+    <p class = "formLabel"><b><u> Please Clarify</u></b> </p>
+    <textarea name="elaborate" id="elaborate"></textarea>
+</div>
 
 <input type="submit" value="Submit" id="submitButton">
 

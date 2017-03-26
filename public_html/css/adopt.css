@@ -55,12 +55,6 @@ body {
     padding:10px;
 }
 
-/* each filter form option shares this style */
-.filterOption {
-    padding:10px;
-    font-weight: bold;
-}
-
 .searchOption {
     padding:10px;
     height: 1em;

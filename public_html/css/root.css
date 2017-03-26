@@ -40,3 +40,12 @@ input[type=submit]:hover, button:hover, input[type=button]:hover {
     background-color: #FFF; /* white */
     color: #008CBA; /* blue */
 }
+
+h2 {
+    text-align: center;
+}
+
+/* each form option div shares this style */
+.formOption {
+    padding:10px;
+}
