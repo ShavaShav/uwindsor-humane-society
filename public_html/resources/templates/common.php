@@ -1,8 +1,7 @@
 <?php
 require_once(dirname(__FILE__) . '/../config.php');
 //session_start();
-require_once($LIB_PATH . '/login-tools.php');
-
+require_once(dirname(__FILE__) . '/../lib/database.php');
 function html5_header($title, $css_files = array(), $js_files = array())
 {
     echo "<!DOCTYPE html>\n".
@@ -46,7 +45,7 @@ echo <<<ZZEOF
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.php">Logo</a>
+      <img class="navbar-brand" src="/../../img/logo/1.svg">
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -60,9 +59,9 @@ echo <<<ZZEOF
             <li><a href="contactus.php">Email us</a></li>
           </ul>
         </li>
-        <!-- <li class="active"><a href="adopt.php">Adopt Animals</a></li> -->
-        <li><a href="adopt.php">Adopt Animals</a></li>
+        <li class="active"><a href="adopt.php">Adopt Animals</a></li>
         <li><a href="surrender.php">Surrender Animals</a></li>
+		<li><a href="donate.php">Donate</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right" id="loginAreaID">
         <li><a href="login.php">Sign In</a></li>

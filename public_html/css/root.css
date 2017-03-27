@@ -49,3 +49,7 @@ h2 {
 .formOption {
     padding:10px;
 }
+
+.navbar-brand {
+	padding:0;
+}

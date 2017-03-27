@@ -12,6 +12,11 @@ $DB = array(
     "password" => "ejr6GdqWK",
     "host" => "localhost"
 );
+
+define("DB_HOST", "localhost");
+define("DB_NAME", "laureau_ryan");
+define("DB_USER", "laureau_login");
+define("DB_PASS", "Qwerty123");
  
 // report errors on the page, should make debugging easier
 ini_set("error_reporting", "true");

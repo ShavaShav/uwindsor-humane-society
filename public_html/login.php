@@ -1,7 +1,8 @@
 <?php
 require_once(dirname(__FILE__) . '/resources/config.php');
 require_once($TEMPLATES_PATH . '/common.php');
-session_start();
+require_once('resources/lib/password_functions.php');
+require_once('resources/lib/database.php');
 
 html5_header(
   'Login Page',
@@ -9,18 +10,14 @@ html5_header(
   array());
 
 html5_nav();
-?>
-<div class="contentborder">
- <div id='login'>
-      <form action='check-login.php' method='POST'>
-        Login:    <input type='text' name='login' /><br />
-        Password: <input type='password' name='passwd' /><br />
-        <input type='submit' />
-      </form>
-    </div>
-	<p> Not a member? <a href="/sigup.php"> Click here to sign up!</a>
-</div>
+
+require_once("resources/classes/loginclass.php");
+
+$user = new user_login();
+
+if ($user->login_status() == true) {
+    include('views/login/logged.php');
+} else {
+	include('views/login/notlogged.php');
+}
 	
-<?php
-html5_footer();
-?>
