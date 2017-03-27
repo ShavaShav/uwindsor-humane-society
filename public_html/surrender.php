@@ -22,7 +22,6 @@ html5_nav();
           <div class="formOption"> 
               <label>Species:</label>
                 <select name="species" id="species">
-                  <option value="all" selected>All</option>
                   <option value="dog">Dog</option>
                   <option value="cat">Cat</option>
                   <option value="rabbit">Rabbit</option>
@@ -65,7 +64,6 @@ html5_nav();
           <div class="formOption">
             <label>Primary Color:</label>
             <select name="primary_color" id="primary_color">
-                <option value="all" selected>All</option> 
                 <option value="tan">Tan</option>
                 <option value="brown">Brown</option>
                 <option value="black">Black</option>
@@ -75,12 +73,12 @@ html5_nav();
                 <option value="blue">Blue</option>
                 <option value="yellow">Yellow</option>
                 <option value="red">Red</option>
+                <option value="null">None</option>
             </select>
           </div>
           <div class="formOption">
               <label>Secondary Color:</label>
               <select name="secondary_color" id="secondary_color">
-                <option value="all" selected>All</option> 
                 <option value="tan">Tan</option>
                 <option value="brown">Brown</option>
                 <option value="black">Black</option>
@@ -90,6 +88,7 @@ html5_nav();
                 <option value="blue">Blue</option>
                 <option value="yellow">Yellow</option>
                 <option value="red">Red</option>
+                <option value="null">None</option>
             </select> <br>
           </div>
         </form>
