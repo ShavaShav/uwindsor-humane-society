@@ -32,6 +32,7 @@ class user_login{
             $this->errors[] = "Password field empty.";	
         } elseif (!empty($_POST['user_name']) && !empty($_POST['user_password'])) {
 
+            // we should use my PDO class for this
             //database connection using the constants from config.php
             $this->conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 			

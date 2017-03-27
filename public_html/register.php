@@ -1,8 +1,8 @@
 <?php
 require_once(dirname(__FILE__) . '/resources/config.php');
 require_once($TEMPLATES_PATH . '/common.php');
-require_once('resources/lib/password_functions.php');
-require_once('resources/lib/database.php');
+//require_once('resources/lib/password_functions.php');
+//require_once('resources/lib/database.php');
 
 html5_header(
   'Login Page',
