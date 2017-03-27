@@ -1,7 +1,8 @@
 <?php
 require_once(dirname(__FILE__) . '/../config.php');
 //session_start();
-require_once(dirname(__FILE__) . '/../lib/database.php');
+// why loading the database here?
+// require_once(dirname(__FILE__) . '/../lib/database.php');
 function html5_header($title, $css_files = array(), $js_files = array())
 {
     echo "<!DOCTYPE html>\n".
@@ -33,6 +34,7 @@ function html5_footer()
 
 function html5_nav()
 {
+    global $IMG_PATH;
 // can be NO whitespace after <<<ZZEOF
 echo <<<ZZEOF
 <nav class="navbar navbar-default navbar-fixed-top">
@@ -45,7 +47,11 @@ echo <<<ZZEOF
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <img class="navbar-brand" src="/../../img/logo/1.svg">
+      <a href="index.php"><img class="navbar-brand" src="
+ZZEOF;
+print($IMG_PATH);
+echo <<<ZZEOF
+/content/small_logo.png"></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -58,8 +64,8 @@ echo <<<ZZEOF
             <li><a href="cruelty.php">Report cruelty</a></li>
             <li><a href="contactus.php">Email us</a></li>
           </ul>
-        </li>
-        <li class="active"><a href="adopt.php">Adopt Animals</a></li>
+        </li>	
+        <li><a href="adopt.php">Adopt Animals</a></li>
         <li><a href="surrender.php">Surrender Animals</a></li>
 		<li><a href="donate.php">Donate</a></li>
       </ul>

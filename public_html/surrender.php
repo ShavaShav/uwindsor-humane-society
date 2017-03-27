@@ -73,7 +73,6 @@ html5_nav();
                 <option value="blue">Blue</option>
                 <option value="yellow">Yellow</option>
                 <option value="red">Red</option>
-                <option value="null">None</option>
             </select>
           </div>
           <div class="formOption">

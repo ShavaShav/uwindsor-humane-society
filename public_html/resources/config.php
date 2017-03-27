@@ -4,6 +4,7 @@
 
 $TEMPLATES_PATH = 'resources/templates';
 $LIB_PATH = 'resources/lib';
+$IMG_PATH = 'img';
 
 // database credentials (to be updated)
 $DB = array(
