@@ -13,9 +13,9 @@ foreach($_POST as $filter => $value){
     $filters[$filter] = $value;
 }
 
-$db = new UserDB; // connect to database
+$db = new AnimalDB; // connect to database
 
-$animals = $db->filteredAnimals($filters); // query db to get array of animals
+$animals = $db->getFilteredAnimals($filters); // query db to get array of animals
 
 // create response: animals divs, javascript that calls this will set the innerHTML
 // show animals from database respone

@@ -10,11 +10,6 @@ echo "<h2>Getting the entire Animals table with AdminDB...</h2><br>";
 // running a query from raw SQL statement. (*check logs, print results of query if you are getting errors!)
 $results = $adminDB->runQuery("SELECT * FROM Animals");
 
-$adminDB->close(); // closing connection so we dont have two running simultenously
-
-// Im thinking two different classes of connection - Admin runs anway queries and user is limited
-$userDB = new UserDB;
-
 // print the results of array (array of arrays)
 foreach($results as $row){
    print_r($row);
@@ -25,6 +20,11 @@ foreach($results as $row){
 if (sizeof($results) > 0){
     echo '<br><h1>'.$results[0]['name'].' is a '.$results[0]['species'].' who is '.$results[0]['age'].' years old.</h1>'; 
 }
+// closing connection so we dont have two running simultenously
+$adminDB->close();
+
+// Im thinking two different classes of connection - Admin runs anway queries and user is limited
+$animalDB = new AnimalDB;
 
 // example of adding filters to query for animals
 $filters = array();
@@ -36,7 +36,7 @@ $filters["primary_color"] = "black";
 echo "<h2>Setting some filters to get only black cats with a max age of 10... with UserDB</h2><br>";
 
 // get the filtered animals
-$results = $userDB->filteredAnimals($filters);
+$results = $animalDB->getFilteredAnimals($filters);
 
 // show them
 foreach($results as $row){
@@ -46,7 +46,7 @@ foreach($results as $row){
 
 // testing getNamesStartingWith (takes a partial name and the table)
 // For Animals it gets animal name, for Users it gets the username
-$results = $userDB->getNamesStartingWith("B", "Animals");
+$results = $animalDB->getNamesStartingWith("B");
 
 echo "<h2>Result of search for animal names starting with B: </h2><h3>";
 foreach($results as $row){
@@ -55,7 +55,7 @@ foreach($results as $row){
 }
 echo "</h3>";
 
-$results = $userDB->getNamesStartingWith("Ch", "Animals");
+$results = $animalDB->getNamesStartingWith("Ch");
 
 echo "<h2>Result of search for animal names starting with Ch: </h2><h3>";
 foreach($results as $row){
@@ -64,7 +64,11 @@ foreach($results as $row){
 }
 echo "</h3>";
 
-$results = $userDB->getNamesStartingWith("Sha", "Users");
+$animalDB->close(); // close animalDB
+
+$db = new UserDB; // open userDB
+
+$results = $db->getNamesStartingWith("Sha");
 
 echo "<h2>Result of search for usernames starting with Sha: </h2><h3>";
 foreach($results as $row){
@@ -74,10 +78,8 @@ foreach($results as $row){
 echo "</h3>";
 
 
-$userDB->close();
 
-echo "Connecting to DB...\n";
-$db = new AdminDB();
+$db = new userDB();
 echo "Adding some users...\n";
 $db->insert('john', 'hd834h8irtj9');
 $db->insert('suzy', '284hs8d87432jf');

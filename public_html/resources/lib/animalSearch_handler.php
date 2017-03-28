@@ -5,9 +5,9 @@ require_once('database.php');
 // go through POST fields(filters), building array to make query
 $partialSearch = $_POST[name];
 
-$db = new UserDB; // connect to database
+$db = new AnimalDB; // connect to database
 
- $animals = $db->getNamesStartingWith($partialSearch, "Animals"); // query db to get array of animals
+ $animals = $db->getNamesStartingWith($partialSearch); // query db to get array of animals
  
  
     foreach($animals as $animal) {

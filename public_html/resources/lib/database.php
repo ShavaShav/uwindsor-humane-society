@@ -2,13 +2,12 @@
 require_once('../config.php');
 require_once('php-pre55-password-hash-utils.php');
 
-// Users should have limited set of functions
-class UserDB
-{
-    protected $conn; // UserDB and AdminDB can access the connection
-
+class Database {
+    protected $conn; // Actual connection is inherited by UserDB, AnimalsDB, WishlistDB and AdminDB
+    
     public function __construct() {
         global $DB; // capture global variable from config.php
+        
         // attempt to connect to the database
         try {
             $this->conn = new PDO("mysql:host=".$DB["host"].";dbname=".$DB["dbname"], $DB["username"], $DB["password"]);
@@ -19,10 +18,21 @@ class UserDB
             echo "Error: " . $e->getMessage();
         }
     }
-	
+    
+    // close the connection
+    public function close(){
+        $this->conn = null;
+    }
+}
+
+class AnimalDB extends Database {
+    // call Database constructor
+    public function __construct() {
+        parent::__construct();
+    }
 
     // returns a filtered list of animals (filters MUST use the ids here)
-    public function filteredAnimals($filters) {
+    public function getFilteredAnimals($filters) {
         $sql = "SELECT * FROM Animals";
         $whereClauses = []; // build an array of WHERE clauses
         
@@ -69,20 +79,35 @@ class UserDB
         return $result;
     }
     
-    // gets animals names or usernames, given a partial string and table
-    public function getNamesStartingWith($partialName, $tableName){
+    // gets animals names, given a partial name
+    public function getNamesStartingWith($partialName){
         // search db for names starting with $partialName, return results
-        // can find usernames and pet names, depending on tablename given
-        $sql = "SELECT ";
+        // matches names starting with partialName
+        $sql = "SELECT name, id FROM Animals WHERE name LIKE '" . $partialName . "%';"; // matches names starting with partialName
         
-        if (!strcmp($tableName, 'Animals')){
-            $sql = $sql . "name, id FROM Animals WHERE name "; // attribute of name in Animals
-        } else if (!strcmp($tableName, 'Users')) {
-            $sql = $sql . "username FROM Users WHERE username "; // attribute of username in Users
-        } else {
-            return array(); // invalid, return empty results
-        }
-        $sql = $sql . "LIKE '" . $partialName . "%';"; // matches names starting with partialName
+        // execute the query
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+
+        // set the resulting array to associative
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+}
+
+// UserDB offers functions for accessing and manipulating user table
+class UserDB extends Database {
+
+    // call Database constructor
+    public function __construct() {
+        parent::__construct();
+    }
+    
+    // gets usernames, given a partial username *** might not be used in site
+    public function getNamesStartingWith($partialName){
+        // search db for names starting with $partialName, return results
+        // matches names starting with partialName
+        $sql = "SELECT username FROM Users WHERE username LIKE '" . $partialName . "%';";
         
         // execute the query
         $stmt = $this->conn->prepare($sql);
@@ -93,25 +118,159 @@ class UserDB
         return $result;
     }
     
-    // close the connection
-    public function close(){
-        $this->conn = null;
+    /*
+     * The following are Professor Preneys functions for manipulating 
+     * the Users table, slightly altered to suit our table.
+     */
+    
+    // This method computes a secure password hash. 
+    protected final function compute_password_hash($pass)
+    {
+        global $DB; // caputure config.php var
+
+    // Combine the site-wide salt with $pass...
+    $salted_pass = $DB->site_wide_password_salt . $pass;
+    if (strlen($salted_pass) > 72)
+        throw new Exception('Password + site salt too long to avoid truncation.'); 
+
+        // this function is from php-pree55-password-hash-utils-php!!!
+        return password_hash($salted_pass, PASSWORD_DEFAULT);
+    }
+
+    // function verify_password_hash($plaint_pass, $hashed_pass)
+    protected final function verify_password_hash($plain_pass, $hashed_pass)
+    {
+        global $DB;
+
+        // Combine the site-wide salt with $pass...
+        $salted_pass = $DB->site_wide_password_salt . $plain_pass;
+        if (strlen($salted_pass) > 72)
+            throw new Exception('Password + site salt too long to avoid truncation.'); 
+
+        // this function is from php-pree55-password-hash-utils-php!!!
+        return password_verify($salted_pass, $hashed_pass) === TRUE;
+    }
+
+    // Inserts a new user $user into the DBUser table having password $pass.
+    public function insert($user, $pass)
+    {
+        // Create the entry to add...
+        $entry = array(
+            ':user' => $user,
+            ':pass' => $this->compute_password_hash($pass),
+        );
+
+        // Create the SQL prepared statement and insert the entry... // not sure how :user works but trusting preney on this one
+        $sql = 'INSERT INTO Users (username, password) VALUES (:user, :pass)';
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute($entry);
+    }
+
+    // Erases an existing user $user from the DBUser table.
+    public function erase($user)
+    {
+        $entry = array( ':user' => $user );
+
+        // Create the SQL prepared statement and delete the entry...
+        $sql = 'DELETE FROM Users WHERE username = :user';
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute($entry);
+    }
+
+    // Checks that user $user exists and has password $pass. If
+    // such is true, then TRUE is returned. Otherwise FALSE is returned.
+    public function check_user_pass($user, $pass)
+    {
+        // Create the entry to add...
+        $entry = array( ':user' => $user );
+
+        // Create the SQL prepared statement and insert the entry...
+        try
+        {
+          $sql = 'SELECT password FROM Users WHERE username = :user';
+          $stmt = $this->conn->prepare($sql);
+          $stmt->execute($entry);
+          $result = $stmt->fetchAll();
+          if (count($result) == 1 && array_key_exists('pass', $result[0]))
+          {
+            return $this->verify_password_hash($pass, $result[0]['pass']);
+          }
+          else
+            return FALSE;
+        }
+        catch (PDOException $e)
+        {
+          return FALSE;
+        }
+    }
+
+    // Attempt to look up user $user in the DBUser table. If $user
+    // is not found, then FALSE is returned. Otherwise an array
+    // containing the DBUser entry is returned. The column names
+    // are: "user" and "pass".
+    //
+    // If the user is not found or a DB error occurs FALSE is
+    // returned. Otherwise an associative array for the record is returned.
+    public function lookup($user)
+    {
+        // Create the entry to add...
+        $entry = array( ':user' => $user );
+
+        // Create the SQL prepared statement and insert the entry...
+        try
+        {
+          $sql = 'SELECT * FROM Users WHERE username = :user';
+          $stmt = $this->conn->prepare($sql);
+          $stmt->execute($entry);
+          $result = $stmt->fetchAll();
+          if (count($result) != 1)
+            return FALSE;
+          else
+            return $result[0];
+        }
+        catch (PDOException $e)
+        {
+          return FALSE;
+        }
+    }
+
+    // Look up all users in the users table. This function permits
+    // PDOExceptions to leak.
+    public function lookup_all()
+    {
+        // Create the SQL prepared statement and insert the entry...
+        $sql = 'SELECT * FROM Users';
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    // inserts a new user into the Users table, return true if successful
+    public function insertNewUser($username, $hashed_password, $email){
+        $sql = "INSERT INTO Users (username, password, email) VALUES('" . $username . "', '" . $hashed_password . "', '" . $email . "');";
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute();
+    }
+
+    // returns true if username is found is db
+    public function checkUserExists($username){
+        $sql = "SELECT * FROM Users WHERE username='" . $user_name . "';";
+        $stmt = $this->conn->prepare($sql);
+        $result = $stmt->execute();
+
+        if (sizeof($result) > 0)
+            return true;
+        else
+            return false;
     }
 }
 
-// Admin connection should offer full access through runQuery() and some easy modification querying functions (deleting users, animals, etc)
-class AdminDB extends UserDB
-{
+// Admin connection should offer full access through runQuery()
+class AdminDB extends Database {
 
+    // call Database constructor
     public function __construct() {
-        global $DB; // capture global variable from config.php
-        // attempt to connect to the database
-        try {
-            $this->conn = new PDO("mysql:host=".$DB["host"].";dbname=".$DB["dbname"], $DB["username"], $DB["password"]);
-            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch(PDOException $e) {
-            echo "Error: " . $e->getMessage();
-        }
+        parent::__construct();
     }
 
     // run any SQL query and get any result
@@ -124,172 +283,6 @@ class AdminDB extends UserDB
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
-
-    // This method computes a secure password hash. Some references
-  // including why this is done in this manner are:
-  //
-  protected final function compute_password_hash($pass)
-  {
-    global $DB; // caputure config.php var
-
-    // Combine the site-wide salt with $pass...
-    $salted_pass = $DB->site_wide_password_salt . $pass;
-    if (strlen($salted_pass) > 72)
-      throw new Exception('Password + site salt too long to avoid truncation.'); 
-      
-      // this function is from php-pree55-password-hash-utils-php!!!
-    return password_hash($salted_pass, PASSWORD_DEFAULT);
-  }
-
-  //
-  // function verify_password_hash($plaint_pass, $hashed_pass)
-  //
-  protected final function verify_password_hash($plain_pass, $hashed_pass)
-  {
-    global $CFG;
-
-    // Combine the site-wide salt with $pass...
-    $salted_pass = $DB->site_wide_password_salt . $plain_pass;
-    if (strlen($salted_pass) > 72)
-      throw new Exception('Password + site salt too long to avoid truncation.'); 
-
-      // this function is from php-pree55-password-hash-utils-php!!!
-    return password_verify($salted_pass, $hashed_pass) === TRUE;
-  }
-
-  //
-  // insert($user, $pass)
-  //
-  // Inserts a new user $user into the DBUser table having password $pass.
-  //
-  public function insert($user, $pass)
-  {
-    // Create the entry to add...
-    $entry = array(
-      ':user' => $user,
-      ':pass' => $this->compute_password_hash($pass),
-    );
-
-    // Create the SQL prepared statement and insert the entry... // not sure how :user works but trusting preney on this one
-    $sql = 'INSERT INTO Users (username, password) VALUES (:user, :pass)';
-    $stmt = $this->conn->prepare($sql);
-    return $stmt->execute($entry);
-  }
-
-  //
-  // erase($user)
-  //
-  // Erases an existing user $user from the DBUser table.
-  //
-  public function erase($user)
-  {
-    $entry = array( ':user' => $user );
-
-    // Create the SQL prepared statement and delete the entry...
-    $sql = 'DELETE FROM Users WHERE username = :user';
-    $stmt = $this->conn->prepare($sql);
-    $stmt->execute($entry);
-  }
-
-  //
-  // check_user_pass($user, $pass)
-  //
-  // Checks that user $user exists and has password $pass. If
-  // such is true, then TRUE is returned. Otherwise FALSE is returned.
-  //
-  public function check_user_pass($user, $pass)
-  {
-    // Create the entry to add...
-    $entry = array( ':user' => $user );
-
-    // Create the SQL prepared statement and insert the entry...
-    try
-    {
-      $sql = 'SELECT password FROM Users WHERE username = :user';
-      $stmt = $this->conn->prepare($sql);
-      $stmt->execute($entry);
-      $result = $stmt->fetchAll();
-      if (count($result) == 1 && array_key_exists('pass', $result[0]))
-      {
-        return $this->verify_password_hash($pass, $result[0]['pass']);
-      }
-      else
-        return FALSE;
-    }
-    catch (PDOException $e)
-    {
-      return FALSE;
-    }
-  }
-
-    //
-    // lookup($user)
-    //
-    // Attempt to look up user $user in the DBUser table. If $user
-    // is not found, then FALSE is returned. Otherwise an array
-    // containing the DBUser entry is returned. The column names
-    // are: "user" and "pass".
-    //
-    // If the user is not found or a DB error occurs FALSE is
-    // returned. Otherwise an associative array for the record is returned.
-    //
-    public function lookup($user)
-    {
-    // Create the entry to add...
-    $entry = array( ':user' => $user );
-
-    // Create the SQL prepared statement and insert the entry...
-    try
-    {
-      $sql = 'SELECT * FROM Users WHERE username = :user';
-      $stmt = $this->conn->prepare($sql);
-      $stmt->execute($entry);
-      $result = $stmt->fetchAll();
-      if (count($result) != 1)
-        return FALSE;
-      else
-        return $result[0];
-    }
-    catch (PDOException $e)
-    {
-      return FALSE;
-    }
-    }
-
-    //
-    // lookup_all()
-    //
-    // Look up all users in the users table. This function permits
-    // PDOExceptions to leak.
-    //
-    public function lookup_all()
-    {
-    // Create the SQL prepared statement and insert the entry...
-    $sql = 'SELECT * FROM Users';
-    $stmt = $this->conn->prepare($sql);
-    $stmt->execute();
-    return $stmt->fetchAll();
-    }
-    
-    // inserts a new user into the Users table, return true if successful
-    public function insertNewUser($username, $hashed_password, $email){
-        $sql = "INSERT INTO Users (username, password, email) VALUES('" . $username . "', '" . $hashed_password . "', '" . $email . "');";
-        $stmt = $this->conn->prepare($sql);
-        return $stmt->execute();
-    }
-    
-    // returns true if username is found is db
-    public function checkUserExists($username){
-        $sql = "SELECT * FROM Users WHERE username='" . $user_name . "';";
-        $stmt = $this->conn->prepare($sql);
-        $result = $stmt->execute();
-        
-        if (sizeof($result) > 0)
-            return true;
-        else
-            return false;
-    }
-
 }
 
 ?>
