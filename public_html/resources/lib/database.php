@@ -76,7 +76,7 @@ class UserDB
         $sql = "SELECT ";
         
         if (!strcmp($tableName, 'Animals')){
-            $sql = $sql . "name FROM Animals WHERE name "; // attribute of name in Animals
+            $sql = $sql . "name, id FROM Animals WHERE name "; // attribute of name in Animals
         } else if (!strcmp($tableName, 'Users')) {
             $sql = $sql . "username FROM Users WHERE username "; // attribute of username in Users
         } else {

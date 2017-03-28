@@ -6,7 +6,7 @@ session_start();
 html5_header(
 	'Adopt Animals',
 	array('css/root.css', 'css/adopt.css'),
-	array('js/wishlist.js', 'js/filter.js'));
+	array('js/wishlist.js', 'js/filter.js', 'js/animalSearch.js'));
 	
 html5_nav();
 
@@ -29,7 +29,7 @@ if (!isset($_SESSION['wishlist'])){
                     By Name:
                     <input type="text" name="name" id="name"> 
                     <p id="autoSuggestion">Type for suggestion!</p><br>
-                    <input type="submit" value="Search">
+                    <input type="submit" value="Search" id="animalSearchButton">
                 </form>
                 <!-- use ajax to change this "autoSuggestion".innerHTML to an animal name, unless we can come up with a way to drop down multiple selections? -->
             </div>
