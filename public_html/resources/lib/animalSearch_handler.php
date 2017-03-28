@@ -2,12 +2,11 @@
 
 require_once('database.php');
 
-// go through POST fields(filters), building array to make query
-$partialSearch = $_POST[name];
+$partialSearch = $_POST['name'];
 
 $db = new AnimalDB; // connect to database
 
- $animals = $db->getNamesStartingWith($partialSearch); // query db to get array of animals
+    $animals = $db->getAnimalsWithNamesContaining($partialSearch); // query db to get array of animals
  
  
     foreach($animals as $animal) {
@@ -21,7 +20,7 @@ $db = new AnimalDB; // connect to database
     $primary_color = $animal["primary_color"];
     $secondary_color = $animal["secondary_color"];
     echo <<<ZZEOF
-    <div class="animal" id="$id">
+    <div class="animal" id="$id" draggable="true" ondragstart="animalDragstart($id)">
         <img src="../../img/animals/$id.jpg">
         <p>Name: <span id="animalName_$id">$name</span></p>
         <p>Species: <span id="animalSpecies_$id">$species</span></p>
@@ -33,9 +32,6 @@ $db = new AnimalDB; // connect to database
         <p>Secondary Color: <span id="animalSecondaryColor_$id">$secondary_color</span></p>
     </div>
 ZZEOF;
-
-
-echo "<script>makeAnimalsDraggable()</script>";
- }
+    }
 
 ?>

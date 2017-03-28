@@ -5,10 +5,12 @@ require_once(dirname(__FILE__) . '/../config.php');
 // require_once(dirname(__FILE__) . '/../lib/database.php');
 function html5_header($title, $css_files = array(), $js_files = array())
 {
+    
     echo "<!DOCTYPE html>\n".
         "<html><head><title>".
         htmlspecialchars($title).
         "</title>".
+        "<meta charset='utf-8'>".
         "<!-- Latest compiled and minified JQuery --><script
 			  src='https://code.jquery.com/jquery-3.2.1.min.js'
 			  integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4='
@@ -23,7 +25,6 @@ function html5_header($title, $css_files = array(), $js_files = array())
     foreach ($js_files as $js_file)
         echo "<script src='$js_file' type='application/javascript'></script>";
     
-    echo "<meta charset='utf-8'>";
     echo "</head><body>\n";
 }
 

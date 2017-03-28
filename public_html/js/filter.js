@@ -14,7 +14,7 @@ function init(){
 function filterHandler(){
     /* stop form from submitting normally */
     event.preventDefault(); 
-
+    
     /* get the filter options from the page for POST */
     var params = 'species='+document.getElementById("species").value+
         '&min_age='+document.getElementById("min_age").value+

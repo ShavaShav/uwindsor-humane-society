@@ -33,15 +33,6 @@ body {
     height: inherit;
 }
 
-/* wishlist will also be a flex-container -> holding animals in user's wishlist on db */
-#wishlistBox {
-    display:flex;
-    flex-direction:column;
-    padding: 10px;
-    height: 100%; /* fill the rest of the page */
-    background-color:beige;
-    border-radius: 0.5em;
-}
 
 #filterBox {
     background-color:aliceblue;
@@ -68,6 +59,7 @@ body {
     display: flex;
     flex-direction: row; /* animals appear left to right , wrapping */
     flex-wrap: wrap;
+    padding: 10px;
 }
 
 /* the actual animal divs in the animalBox */
@@ -83,4 +75,27 @@ body {
 
 .title {
     text-align: center;
+}
+
+/* wishlist will also be a flex-container -> holding animals in user's wishlist on db */
+#wishlistBox {
+    display:flex;
+    flex-direction:column;
+    padding: 10px;
+    height: 100%; /* fill the rest of the page */
+    background-color:beige;
+    border-radius: 0.5em;
+    padding:10px;
+}
+
+.wishlistAnimals {
+    background-color: white;
+    border-radius: 0.5em;
+    border-width: 1px;
+    border-color: cornflowerblue;
+    border-style: dotted;
+    text-align:center;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }

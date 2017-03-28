@@ -30,7 +30,7 @@ class AnimalDB extends Database {
     public function __construct() {
         parent::__construct();
     }
-
+    
     // returns a filtered list of animals (filters MUST use the ids here)
     public function getFilteredAnimals($filters) {
         $sql = "SELECT * FROM Animals";
@@ -41,7 +41,7 @@ class AnimalDB extends Database {
             array_push($whereClauses, 'species="'.$filters["species"].'"');
         }
         if (isset($filters["min_age"]) && isset($filters["max_age"])){
-            array_push($whereClauses, 'age BETWEEN '.$filters["min_age"].' AND '.$filters["max_age"]);
+            array_push($whereClauses, 'age BETWEEN :min_age AND :max_age');
         }
         if (isset($filters["gender"])){
             array_push($whereClauses, 'gender="'.$filters["gender"].'"');
@@ -72,6 +72,31 @@ class AnimalDB extends Database {
         
         // execute the query
         $stmt = $this->conn->prepare($sql);
+        
+        // will just check these because they are open to user input, should be integer
+        $stmt->bindParam(':min_age', $filters["min_age"], PDO::PARAM_INT);
+        $stmt->bindParam(':max_age', $filters["max_age"], PDO::PARAM_INT);
+        
+        $stmt->execute();
+
+        // set the resulting array to associative
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+    
+    // gets animals with full attributs, given a partial name
+    public function getAnimalsWithNamesContaining($partialName){
+        
+        $partialName = "%$partialName%"; // match characters before or after
+        
+        // prepare statement
+        $sql = "SELECT * FROM Animals WHERE name LIKE :partial_name";
+        $stmt = $this->conn->prepare($sql);
+        
+        // binad params (safety measure)
+        $stmt->bindValue(':partial_name', $partialName, PDO::PARAM_STR);
+        
+        // execute the query
         $stmt->execute();
 
         // set the resulting array to associative
@@ -81,12 +106,18 @@ class AnimalDB extends Database {
     
     // gets animals names, given a partial name
     public function getNamesStartingWith($partialName){
-        // search db for names starting with $partialName, return results
-        // matches names starting with partialName
-        $sql = "SELECT name, id FROM Animals WHERE name LIKE '" . $partialName . "%';"; // matches names starting with partialName
+        // match names starting with
+        $partialName = "$partialName%";
+       
+        $sql = "SELECT name FROM Animals WHERE name LIKE :partial_name";
+        
+        // prepare statement
+        $stmt = $this->conn->prepare($sql);
+        
+        // binad params (safety measure)
+        $stmt->bindValue(':partial_name', $partialName, PDO::PARAM_STR);
         
         // execute the query
-        $stmt = $this->conn->prepare($sql);
         $stmt->execute();
 
         // set the resulting array to associative
@@ -107,10 +138,15 @@ class UserDB extends Database {
     public function getNamesStartingWith($partialName){
         // search db for names starting with $partialName, return results
         // matches names starting with partialName
-        $sql = "SELECT username FROM Users WHERE username LIKE '" . $partialName . "%';";
+        $sql = "SELECT username FROM Users WHERE username LIKE :partial_name";
+        
+        // prepare statement
+        $stmt = $this->conn->prepare($sql);
+        
+        // binad params (safety measure)
+        $stmt->bindValue(':partial_name', $partialName, PDO::PARAM_STR);
         
         // execute the query
-        $stmt = $this->conn->prepare($sql);
         $stmt->execute();
 
         // set the resulting array to associative
