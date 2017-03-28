@@ -2,16 +2,15 @@
 
 :root {
 	box-sizing: border-box;
-	background-image: url("../img/layout/background.jpg"); /* I put the bg up here so body could be the white square */
+	background-image: url("../img/layout/background.jpg"); 
 	background-repeat: repeat;
-
 }
 
 body {
-    font-family: Verdana, Geneva, sans-serif;
+	font-family: Verdana, Geneva, sans-serif;
 	background-color: #FFF;
-    border-radius: 25px;
-    border: 2px solid #008CBA;
+	border-radius: 25px;
+	border: 2px solid #008CBA;
 	margin: 100px;
 	padding: 10px;
 }
