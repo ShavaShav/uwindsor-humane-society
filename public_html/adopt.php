@@ -138,8 +138,8 @@ if (!isset($_SESSION['wishlist'])){
         <div class="sidePanel" id="wishlistBox">
             <h2 class="title">Wish List</h2>
             <!-- check cookie, show the count of animals -->
-            <div id="wishlistCount">
-                <p id="wishListCount" onclick="showWishlist();"><?php echo count($_SESSION['wishlist']);?> Animal on your Wishlist</p>
+            <div id="wishlistCount_div">
+                <p id="wishlistCount" onclick="showWishlist();"><?php echo count($_SESSION['wishlist']);?> Animal(s) on your Wishlist</p>
             </div>
             <div id="wishlistPopulation">
                 <?php
@@ -149,16 +149,15 @@ if (!isset($_SESSION['wishlist'])){
                             $animal_val = explode("+",$_SESSION['wishlist'][$i]);
                 ?>
                         <div class='wishlistAnimals'>
-                        <img src='<?php echo $animal_val[2];?>'>
+                        <img src='<?php echo $animal_val[1];?>'>
                         <p><?php echo $animal_val[0];?></p>
-                        <p><?php echo $animal_val[1];?></p>
                         <input type='button' value='Remove Animal' onclick='removeAnimal("<?php echo $_SESSION['wishlist'][$i];?>");'>
                        </div>
                 <?php
                         } // end for loop
                     } else { 
                         // no session history
-                        echo "<p>Drop Animals Here!</p>";
+                        echo "<p style='text-align:center'>Drag Animals Here!</p>";
                     }
                 ?>
             </div>

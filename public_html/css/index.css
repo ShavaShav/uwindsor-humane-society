@@ -1,133 +1,45 @@
-:root {
-	box-sizing: border-box;
-	
-}
-
-body {
-	width: 100%;
-	background-image: url("../img/layout/background.jpg"); 
-	background-repeat: repeat;
-}
-
 #signin {
 	position: fixed;
+	border-radius: 1em;
 	z-index: 5;
-	padding-right: 5px;
+	width: 150px;
+	height: 75px;
 	top: 0;
 	right: 0;
+	background-color: blue;
 	padding-top: 0.5em;
 }
 
-
-
-.dog:hover{
-	fill: white;
+#signin > p {
+	text-align: center;
 }
 
 .buttons {
-	display: flex;
-	flex-wrap: wrap;
-	flex-direction: row;
-	padding-left: 5em;
-	padding-right: 1em;
-	padding-top: 3em;
-	padding-bottom: 2em;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  padding-left: 5em;
+  padding-right: 1em;
+  padding-top: 3em;
+  padding-bottom: 2em;
  
 }
 .buttons > div {
-	display: flex; 
-	flex-basis: calc(50% - 40px);  
-	justify-content: center;
-	flex-direction: column;
-	height: 250px;
-	border-radius: 0.5em;
-	font-size: 30px;
+  display: flex; 
+  flex-basis: calc(50% - 40px);  
+  justify-content: center;
+  flex-direction: column;
+  height: 250px;
+  border-radius: 0.5em;
+  font-size: 30px;
 }
 .buttons > div > div {
-	display: flex;
-	justify-content: center;
-	flex-direction: row;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
 }
 
-#About { 
-	background-color: #CD0000;
-	margin-bottom: 1em;
-	border-style: outset;
-	border-radius: 1em;
-	border-color: black;
-}
-
-#About:hover{
-	border-style: inset;
-	border-radius: 1em;
-	border-color: black;
-	background-color: #B22222;
-}
-
-#Animals {
-	background-color: #488214;
-	margin-left: 1em;
-	border-style: outset;
-	border-radius: 1em;
-	border-color: black;
-}
-
-#Animals:hover{
-	border-style: inset;
-	border-radius: 1em;
-	border-color: black;
-	background-color: #659D32;
-}
-
-#Surrender { 
-	background-color: #FFB90F;
-	margin-right: 1em;
-	border-style: outset;
-	border-radius: 1em;
-	border-color: black;
-}
-
-#Surrender:hover{
-	border-style: inset;
-	border-radius: 1em;
-	border-color: black;
-	background-color: #EDCB62;
-}
-
-#Cruelty { 
-	background-color: #009ACD;
-	border-style: outset;
-	border-radius: 1em;
-	border-color: black;
-}
-
-#Cruelty:hover{
-	border-style: inset;
-	border-radius: 1em;
-	border-color: black;
-	background-color: #5D92B1;
-}
-
-.buttonborder {
-	font-family: Verdana, Geneva, sans-serif;
-	background-color: #FFF;
-	border-radius: 25px;
-	border: 2px solid #008CBA;
-	margin: 100px;
-	margin-top: 10px;
-	padding: 10px;
-}
-
-.logoborder {
-	font-family: Verdana, Geneva, sans-serif;
-	background-color: #FFF;
-	border-radius: 25px;
-	border: 2px solid #008CBA;
-	padding-left: 10px;
-	width: 855px;
-	margin-top: 0px;
-	margin-left: auto;
-	margin-right: auto;
-	margin-bottom: 10px;
-	
-}
+#About { background-color: red; margin-bottom: 1em;}
+#Animals { background-color: orange; margin-left: 1em;}
+#Surrender { background-color: purple; margin-right: 1em;}
+#Cruelty { background-color: grey; }

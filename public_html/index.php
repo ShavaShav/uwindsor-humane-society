@@ -5,50 +5,34 @@ session_start();
 
 html5_header(
 	'University of Windsor Humane Society',
-	array('css/index.css'),
+	array('css/root.css', 'css/index.css'),
 	array());
 ?>
-
 <div id="signin" style="cursor:pointer;" 
 	onclick="document.location='login.php'">
-	
-	<img src='img/svg/signin.svg'>
-
+<p>Sign In</p>
 </div>
-
-<div class="logoborder">
-	<img src="img/logo/frontpagelogo.svg">
-</div>
-
 <div class="buttonborder">
 	<div class="buttons">
 		
 		<div id="About" style="cursor:pointer;" 
 		onclick="document.location='contactus.php'"> 
-			
-		<img src='img/svg/contact.svg'>
-		
+			<div><p>Contact Us</p></div>
 		</div>
 				
 		<div id="Animals" style="cursor:pointer;" 
 		onclick="document.location='adopt.php'">
-		
-		<img src='img/svg/adopt.svg'>
-		
+			<div><p>Adopt Animals</p></div>
 		</div>
 				
 		<div id="Surrender" style="cursor:pointer;" 
 		onclick="document.location='surrender.php'">
-		
-		<img src='img/svg/surrender.svg'>
-		
+			<div><p>Surrender Animals</p></div>
 		</div>
-		
+				
 		<div id="Cruelty" style="cursor:pointer;" 
 		onclick="document.location='cruelty.php'">
-		
-		<img src='img/svg/report.svg'>
-		
+			<div><p>Report Cruelty</p><div>
 		</div>
 	</div>
 </div>

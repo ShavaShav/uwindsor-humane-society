@@ -30,7 +30,7 @@ foreach($animals as $animal) {
     $primary_color = $animal["primary_color"];
     $secondary_color = $animal["secondary_color"];
     echo <<<ZZEOF
-    <div class="animal" id="$id">
+    <div class="animal" id="$id" draggable="true" ondragstart="animalDragstart($id)">
         <img src="../../img/animals/$id.jpg">
         <p>Name: <span id="animalName_$id">$name</span></p>
         <p>Species: <span id="animalSpecies_$id">$species</span></p>
@@ -43,7 +43,5 @@ foreach($animals as $animal) {
     </div>
 ZZEOF;
 }
-
-echo "<script>makeAnimalsDraggable()</script>"; // insert function to make the animals draggable again
 
 ?>
