@@ -11,16 +11,22 @@ $DB = array(
     "dbname" => "shaverz_hs",
     "username" => "shaverz_hs",
     "password" => "ejr6GdqWK",
-    "host" => "localhost"
+    "host" => "localhost",
+    "site_wide_password_salt" => '238ydfshurt4r89dsjier3__=424!&*#'
 );
 
-define("DB_HOST", "localhost");
-define("DB_NAME", "laureau_ryan");
-define("DB_USER", "laureau_login");
-define("DB_PASS", "Qwerty123");
- 
+// Plan for checking admininstration
+$ADMIN = array(
+    "shaverz",
+    "learuantr"
+);
+
+// if (arraykey_exists($ADMIN, "shaverz"))
+
 // report errors on the page, should make debugging easier
 ini_set("error_reporting", "true");
 error_reporting(E_ALL|E_STRCT);
+
+
 
 ?>

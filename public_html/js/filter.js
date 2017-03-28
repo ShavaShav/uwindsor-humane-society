@@ -3,9 +3,12 @@ window.addEventListener("load", init);
 
 // on window load
 function init(){
+   document.getElementById("name").value="HELLOWOOW+";
+    
     // make request to filter_handler.php with default args -> get all animals
     filterHandler();
     // add filter handler
+    
     document.getElementById("filterButton").addEventListener("click", filterHandler);   
 }
 
