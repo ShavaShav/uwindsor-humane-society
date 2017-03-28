@@ -88,7 +88,7 @@ echo <<<ZZEOF
 											 <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
 										</div>
 										<div class="form-group">
-											 <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+											 <button type="submit">Sign in</button>
 										</div>
 								 </form>
 							</div>

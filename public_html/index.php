@@ -17,7 +17,7 @@ html5_header(
 </div>
 
 <div class="logoborder">
-	<img src="img/logo/frontpagelogo.svg">
+	<img src="img/svg/frontpagelogo.svg">
 </div>
 
 <div class="buttonborder">
