@@ -69,8 +69,35 @@ echo <<<ZZEOF
         <li><a href="surrender.php">Surrender Animals</a></li>
 		<li><a href="donate.php">Donate</a></li>
       </ul>
-      <ul class="nav navbar-nav navbar-right" id="loginAreaID">
-        <li><a href="login.php">Sign In</a></li>
+      <ul class="nav navbar-nav navbar-right">
+        <li><p class="navbar-text">Already have an account?</p></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+			<ul id="login-dp" class="dropdown-menu">
+				<li>
+					 <div class="row">
+							<div class="col-md-12">
+								 <form class="form" role="form" method="post" action="resources/lib/login_handler.php" accept-charset="UTF-8" id="login-nav">
+										<div class="form-group">
+											 <label class="sr-only" for="exampleInputEmail2">Username</label>
+											 <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Username" required>
+										</div>
+										<div class="form-group">
+											 <label class="sr-only" for="exampleInputPassword2">Password</label>
+											 <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
+										</div>
+										<div class="form-group">
+											 <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+										</div>
+								 </form>
+							</div>
+							<div class="bottom text-center">
+								To Sign Up, Click <a href="resources/lib/registration_handler"><b>Here</b></a>
+							</div>
+					 </div>
+				</li>
+			</ul>
+        </li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
