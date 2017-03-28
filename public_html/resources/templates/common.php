@@ -71,7 +71,6 @@ echo <<<ZZEOF
 		<li><a href="donate.php">Donate</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><p class="navbar-text">Already have an account?</p></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
 			<ul id="login-dp" class="dropdown-menu">

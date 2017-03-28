@@ -25,6 +25,7 @@ class Database {
     }
 }
 
+// for animals table
 class AnimalDB extends Database {
     // call Database constructor
     public function __construct() {
@@ -154,39 +155,38 @@ class UserDB extends Database {
         return $result;
     }
     
-    /*
-     * The following are Professor Preneys functions for manipulating 
-     * the Users table, slightly altered to suit our table.
-     */
+    public final function compute_password_hash($password){
+        return md5($password);
+    }
+
+    public final function verify_password_hash($plain, $hashed_pass){
+         // check if plain passwords md5 form is equal to
+        return (strcmp(md5($plain), $hashed_pass) == 0);
+    }
     
-    // This method computes a secure password hash. 
-    protected final function compute_password_hash($pass)
-    {
-        global $DB; // caputure config.php var
+    public final function check_user_password($user, $plain_password){
+        $sql = "SELECT password FROM Users WHERE username = :user"; // get hashed password
+        
+        // execute the query
+        $stmt = $this->conn->prepare($sql);
+        
+        // will just check these because they are open to user input, should be integer
+        $stmt->bindValue(':user', $user, PDO::PARAM_STR);
+        
+        $stmt->execute();
 
-    // Combine the site-wide salt with $pass...
-    $salted_pass = $DB->site_wide_password_salt . $pass;
-    if (strlen($salted_pass) > 72)
-        throw new Exception('Password + site salt too long to avoid truncation.'); 
-
-        // this function is from php-pree55-password-hash-utils-php!!!
-        return password_hash($salted_pass, PASSWORD_DEFAULT);
+        // set the resulting array to associative
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        // user has a password in table
+        if (sizeof(results > 0)){
+            $hashed_password = $results[0]['password']; // get pw
+            return verify_password_hash($plain_password, $hashed_password);
+        } else {
+            return false;
+        }
     }
-
-    // function verify_password_hash($plaint_pass, $hashed_pass)
-    protected final function verify_password_hash($plain_pass, $hashed_pass)
-    {
-        global $DB;
-
-        // Combine the site-wide salt with $pass...
-        $salted_pass = $DB->site_wide_password_salt . $plain_pass;
-        if (strlen($salted_pass) > 72)
-            throw new Exception('Password + site salt too long to avoid truncation.'); 
-
-        // this function is from php-pree55-password-hash-utils-php!!!
-        return password_verify($salted_pass, $hashed_pass) === TRUE;
-    }
-
+    
     // Inserts a new user $user into the DBUser table having password $pass.
     public function insert($user, $pass)
     {

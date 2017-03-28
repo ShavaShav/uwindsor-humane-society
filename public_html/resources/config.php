@@ -21,11 +21,9 @@ $ADMIN = array(
     "learuantr"
 );
 
-// if (arraykey_exists($ADMIN, "shaverz"))
-
 // report errors on the page, should make debugging easier
 ini_set("error_reporting", "true");
-error_reporting(E_ALL|E_STRCT);
+error_reporting(E_ALL|E_STRICT);
 
 
 

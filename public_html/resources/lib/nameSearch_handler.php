@@ -3,7 +3,7 @@
 require_once('database.php');
 
 // go through POST fields(filters), building array to make query
-$partialSearch = $_POST[name];
+$partialSearch = $_POST['name'];
 
 $db = new AnimalDB; // connect to database
 

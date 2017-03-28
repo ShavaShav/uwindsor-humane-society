@@ -68,46 +68,51 @@ $animalDB->close(); // close animalDB
 
 $db = new UserDB; // open userDB
 
-$results = $db->getNamesStartingWith("Sha");
+//$results = $db->getNamesStartingWith("Sha");
+//
+//echo "<h2>Result of search for usernames starting with Sha: </h2><h3>";
+//foreach($results as $row){
+//   echo $row['username'];
+//   echo "<br>";
+//}
+//echo "</h3>";
 
-echo "<h2>Result of search for usernames starting with Sha: </h2><h3>";
-foreach($results as $row){
-   echo $row['username'];
-   echo "<br>";
-}
-echo "</h3>";
+echo $db->compute_password_hash("Hello");
 
+if ($db->verify_password_hash("Hello", "8b1a9953c4611296a827abf8c47804d7"))
+    echo "Password and hash verified!";
+else
+    echo "Password and hash do not match";
 
-
-$db = new userDB();
-echo "Adding some users...\n";
-$db->insert('john', 'hd834h8irtj9');
-$db->insert('suzy', '284hs8d87432jf');
-echo "<br>";
-echo "1. Checking john with incorrect password... ";
-echo $db->check_user_pass('john','abc123') ? 'FAIL' : 'PASS';
-echo "<br>";
-echo "\n2. Checking john with correct password... ";
-echo $db->check_user_pass('john','hd834h8irtj9') ? 'PASS' : 'FAIL';
-echo "\nLookup All...\n";
-print_r($db->lookup_all());
-echo "Lookup...\n";
-print_r($db->lookup('john'));
-echo "<br>";
-echo "3. Erasing john...\n";
-$db->erase('john');
-echo "Lookup All...\n";
-print_r($db->lookup_all());
-echo "<br>";
-echo "4. Checking john with incorrect password... ";
-echo $db->check_user_pass('john','abc123') ? 'FAIL' : 'PASS';
-echo "<br>";
-echo "\n5. Checking john with old correct password... ";
-echo $db->check_user_pass('john','hd834h8irtj9') ? 'FAIL' : 'PASS';
-echo "<br>";
-echo "\n6. Erasing suzy...\n";
-$db->erase('suzy');
-echo "Done.\n";
+//$db = new userDB();
+//echo "Adding some users...\n";
+//$db->insert('john', 'hd834h8irtj9');
+//$db->insert('suzy', '284hs8d87432jf');
+//echo "<br>";
+//echo "1. Checking john with incorrect password... ";
+//echo $db->check_user_pass('john','abc123') ? 'FAIL' : 'PASS';
+//echo "<br>";
+//echo "\n2. Checking john with correct password... ";
+//echo $db->check_user_pass('john','hd834h8irtj9') ? 'PASS' : 'FAIL';
+//echo "\nLookup All...\n";
+//print_r($db->lookup_all());
+//echo "Lookup...\n";
+//print_r($db->lookup('john'));
+//echo "<br>";
+//echo "3. Erasing john...\n";
+//$db->erase('john');
+//echo "Lookup All...\n";
+//print_r($db->lookup_all());
+//echo "<br>";
+//echo "4. Checking john with incorrect password... ";
+//echo $db->check_user_pass('john','abc123') ? 'FAIL' : 'PASS';
+//echo "<br>";
+//echo "\n5. Checking john with old correct password... ";
+//echo $db->check_user_pass('john','hd834h8irtj9') ? 'FAIL' : 'PASS';
+//echo "<br>";
+//echo "\n6. Erasing suzy...\n";
+//$db->erase('suzy');
+//echo "Done.\n";
 
 
 ?>

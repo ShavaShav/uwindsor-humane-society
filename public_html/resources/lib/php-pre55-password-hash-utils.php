@@ -32,7 +32,12 @@ namespace {
          *
          * @return string|false The hashed password, or false on error.
          */
+        
+
+        
         function password_hash($password, $algo, array $options = array()) {
+            echo "Salted pass @ start of password_hash(): ".$password."<br>";
+            
             if (!function_exists('crypt')) {
                 trigger_error("Crypt must be loaded for password_hash to function", E_USER_WARNING);
                 return null;
@@ -152,8 +157,13 @@ namespace {
                 $salt = strtr(rtrim($base64_string, '='), $base64_digits, $bcrypt64_digits);
             }
             $salt = PasswordCompat\binary\_substr($salt, 0, $required_salt_len);
-
+            
+            echo "\$salt (inside password_hash) : ".$salt."<br>";
+            
             $hash = $hash_format . $salt;
+            
+            echo "\$hash (inside password_hash) after salt : ".$hash."<br>";
+
 
             $ret = crypt($password, $hash);
 
@@ -300,7 +310,6 @@ namespace PasswordCompat\binary {
          */
         function check() {
             static $pass = NULL;
-
             if (is_null($pass)) {
                 if (function_exists('crypt')) {
                     $hash = '$2y$04$usesomesillystringfore7hnbRJHxXVLeakoG8K30oukPsA.ztMG';
