@@ -159,31 +159,33 @@ class UserDB extends Database {
         return md5($password);
     }
 
-    public final function verify_password_hash($plain, $hashed_pass){
+    public final function verify_password_hash($plain_pass, $hashed_pass){
          // check if plain passwords md5 form is equal to
-        return (strcmp(md5($plain), $hashed_pass) == 0);
+        $new_hash = $this->compute_password_hash($plain_pass);
+        $compare = strcmp($new_hash, $hashed_pass);
+        return ($compare == 0);
     }
     
     public final function check_user_password($user, $plain_password){
-        $sql = "SELECT password FROM Users WHERE username = :user"; // get hashed password
-        
-        // execute the query
-        $stmt = $this->conn->prepare($sql);
-        
-        // will just check these because they are open to user input, should be integer
-        $stmt->bindValue(':user', $user, PDO::PARAM_STR);
-        
-        $stmt->execute();
-
-        // set the resulting array to associative
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
-        // user has a password in table
-        if (sizeof(results > 0)){
-            $hashed_password = $results[0]['password']; // get pw
-            return verify_password_hash($plain_password, $hashed_password);
-        } else {
-            return false;
+        try {
+            // prepare statement
+            $sql = "SELECT password FROM Users WHERE username = :user"; // get hashed password
+            $stmt = $this->conn->prepare($sql);
+            // will just check these because they are open to user input, should be integer
+            $stmt->bindValue(':user', $user, PDO::PARAM_STR);
+            // execute the query
+            $stmt->execute();
+            // set the resulting array to associative
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            // user has a password in table
+            if (!empty($result)) {
+                $hashed_password = $result[0]['password']; // get pw
+                return $this->verify_password_hash($plain_password, $hashed_password);
+            } else {
+                return FALSE;
+            }
+        } catch (PDOException $e) {
+            return FALSE;
         }
     }
     
@@ -213,34 +215,7 @@ class UserDB extends Database {
         $stmt->execute($entry);
     }
 
-    // Checks that user $user exists and has password $pass. If
-    // such is true, then TRUE is returned. Otherwise FALSE is returned.
-    public function check_user_pass($user, $pass)
-    {
-        // Create the entry to add...
-        $entry = array( ':user' => $user );
-
-        // Create the SQL prepared statement and insert the entry...
-        try
-        {
-          $sql = 'SELECT password FROM Users WHERE username = :user';
-          $stmt = $this->conn->prepare($sql);
-          $stmt->execute($entry);
-          $result = $stmt->fetchAll();
-          if (count($result) == 1 && array_key_exists('pass', $result[0]))
-          {
-            return $this->verify_password_hash($pass, $result[0]['pass']);
-          }
-          else
-            return FALSE;
-        }
-        catch (PDOException $e)
-        {
-          return FALSE;
-        }
-    }
-
-    // Attempt to look up user $user in the DBUser table. If $user
+    // Attempt to look up user $user in the Users table. If $user
     // is not found, then FALSE is returned. Otherwise an array
     // containing the DBUser entry is returned. The column names
     // are: "user" and "pass".

@@ -11,7 +11,7 @@ $db = new AnimalDB; // connect to database
  
  if (sizeof($animals) != 0)
  {
- 	echo $animals[0][name];
+ 	echo $animals[0]['name'];
  }
  
  else
