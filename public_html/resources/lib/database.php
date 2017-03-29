@@ -1,5 +1,5 @@
 <?php
-require_once('../config.php');
+require_once(dirname(__FILE__) . '/../config.php');
 require_once('php-pre55-password-hash-utils.php');
 
 class Database {
@@ -256,23 +256,15 @@ class UserDB extends Database {
         return $stmt->fetchAll();
     }
 
-    // inserts a new user into the Users table, return true if successful
-    public function insertNewUser($username, $hashed_password, $email){
-        $sql = "INSERT INTO Users (username, password, email) VALUES('" . $username . "', '" . $hashed_password . "', '" . $email . "');";
-        $stmt = $this->conn->prepare($sql);
-        return $stmt->execute();
-    }
 
     // returns true if username is found is db
     public function checkUserExists($username){
-        $sql = "SELECT * FROM Users WHERE username='" . $user_name . "';";
-        $stmt = $this->conn->prepare($sql);
-        $result = $stmt->execute();
-
-        if (sizeof($result) > 0)
-            return true;
-        else
-            return false;
+        $result = $this->lookup($username);
+        if($result == FALSE){
+			return FALSE;
+		} else {
+			return TRUE;
+		}
     }
 }
 

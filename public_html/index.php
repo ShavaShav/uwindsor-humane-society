@@ -1,20 +1,35 @@
 <?php
 require_once(dirname(__FILE__) . '/resources/config.php');
 require_once($TEMPLATES_PATH . '/common.php');
+require_once('resources/lib/login-tools.php');
+require_once('resources/lib/database.php');
 session_start();
+
+$db = new UserDB;
 
 html5_header(
 	'University of Windsor Humane Society',
 	array('css/index.css'),
 	array());
-?>
 
-<div id="signin" style="cursor:pointer;" 
+if (is_logged_in()){
+	echo <<<ZZEOF
+	<div id="signin" style="cursor:pointer;" 
 	onclick="document.location='login.php'">
 	
+	<img src='img/svg/logout.svg'>
+	</div>
+ZZEOF;
+} else {
+	echo <<<ZZEOF
+	<div id="signin" style="cursor:pointer;" >
+	
 	<img src='img/svg/signin.svg'>
+	</div>
+ZZEOF;
+}
+?>
 
-</div>
 
 <div class="logoborder">
 	<img src="img/svg/frontpagelogo.svg">
