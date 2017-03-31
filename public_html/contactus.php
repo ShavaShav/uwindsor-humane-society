@@ -39,7 +39,7 @@ html5_nav();
 <div class="formOption">
     <label>Reason for Contact</label>
     <select id="contact" name="contact">
-    <option value="selected">Please select one</option>
+    <option value="no reason selected">Please select one</option>
     <option value="problem with website" >Problem with website</option>
     <option value="suggestion" >Suggestion</option>
     <option value="general enquiry" >General enquiry</option>
