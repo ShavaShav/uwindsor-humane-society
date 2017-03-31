@@ -1,8 +1,19 @@
 <?php
 require_once(dirname(__FILE__) . '/../config.php');
-//session_start();
-// why loading the database here?
-// require_once(dirname(__FILE__) . '/../lib/database.php');
+require_once(dirname(__FILE__) . '/../lib/login-tools.php');
+require_once(dirname(__FILE__) . '/../lib/login_handler.php');
+
+session_start();
+
+if (isset($_GET['logout'])){
+	log_out_user();
+	unset($_GET);
+}
+
+if(isset($_POST['user_name']) && isset($_POST['user_password_new'])){
+	loginUser();
+}
+
 function html5_header($title, $css_files = array(), $js_files = array())
 {
     
@@ -35,7 +46,8 @@ function html5_footer()
 
 function html5_nav()
 {
-    global $IMG_PATH;
+
+global $IMG_PATH;
 // can be NO whitespace after <<<ZZEOF
 echo <<<ZZEOF
 <nav class="navbar navbar-default navbar-fixed-top">
@@ -70,6 +82,21 @@ echo <<<ZZEOF
         <li><a href="surrender.php">Surrender Animals</a></li>
 		<li><a href="donate.php">Donate</a></li>
       </ul>
+ZZEOF;
+if (is_logged_in()){
+echo '<ul class="nav navbar-nav navbar-right"><li><p class="navbar-text"> Logged In As: ';
+echo $_SESSION['logged_in_user'] . "</p></li>";
+echo <<<ZZEOF
+<li><form id="logoutbutton" method="get">
+    <input type="hidden" name="logout">
+    <a href="#" onclick="document.getElementById('logoutbutton').submit()">Logout?</a>
+</form></li></ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+ZZEOF;
+} else {
+	echo <<<ZZEOF
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
@@ -77,7 +104,7 @@ echo <<<ZZEOF
 				<li>
 					 <div>
 							<div>
-								 <form class="form" role="form" method="post" action="login_confirmation.php" accept-charset="UTF-8" id="login-nav">
+								 <form class="form" role="form" method="post" action="#" accept-charset="UTF-8" id="login-nav">
 										<div class="form-group">
 											 <label class="sr-only" for="user_name">Username</label>
 											 <input id="user_name" placeholder="Username" name="user_name" required>
@@ -103,6 +130,7 @@ echo <<<ZZEOF
   </div><!-- /.container-fluid -->
 </nav>
 ZZEOF;
+}
 }
 
 ?>

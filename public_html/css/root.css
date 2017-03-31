@@ -11,6 +11,10 @@
     font-size: 12pt;
 }
 
+#logoutbutton {
+	padding-top: 10px;
+}
+
 /* bootstrap menu style */
 .navbar-fixed-top {
     min-height: 60px;
