@@ -127,6 +127,37 @@ class AnimalDB extends Database {
     }
 }
 
+//SurrenderDB offers functions for accessing and manipulating surrender table
+class SurrenderDB extends Database {
+	
+	//call Database constructor
+	public function __construct() {
+		parent::__construct();
+	}
+	
+	//inserts a new animal in the surrender table and returns the surrender id
+	public function insert($name, $species, $age, $gender, $altered, $size, $primary_color, $secondary_color, $username) {
+		// Create the entry to add...
+        $entry = array(
+            ':name' => $name,
+            ':species' => $species,
+            ':age' => $age,
+            ':gender' => $gender,
+            ':altered' => $altered,
+            ':size' => $size,
+            ':primary_color' => $primary_color,
+            ':secondary_color' => $secondary_color,
+            ':username' => $username
+            
+        );
+
+        // Create the SQL prepared statement and insert the entry... // not sure how :user works but trusting preney on this one OUTPUT Inserted.id
+        $sql = 'INSERT INTO Surrenders (name, species, age, gender, altered, size, primary_color, secondary_color, username) VALUES (:name, :species, :age, :gender, :altered, :size, :primary_color, :secondary_color, :username)';
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute($entry);
+	}
+}
+
 // UserDB offers functions for accessing and manipulating user table
 class UserDB extends Database {
 

@@ -39,7 +39,7 @@ html5_nav();
 <div class="formOption">
     <label>Reason for Contact</label>
     <select id="contact" name="contact">
-    <option value="selected">Please select one</option>
+    <option value="no reason selected">Please select one</option>
     <option value="problem with website" >Problem with website</option>
     <option value="suggestion" >Suggestion</option>
     <option value="general enquiry" >General enquiry</option>
@@ -56,7 +56,7 @@ html5_nav();
 </form>
 
 <p>
-You may also contact us at 1800-519-5119 or visit us at 33 LULZ Street, Windsor, Ontario.
+You may also contact us at 1-800-519-5119 or visit us at 33 LULZ Street, Windsor, Ontario.
 </p>
 
 <?php

@@ -133,6 +133,12 @@ echo $db->check_user_password('john','hd834h8irtj9') ? 'PASS' : 'FAIL';
 echo "<br><br>6. Erasing suzy...<br><br>";
 $db->erase('suzy');
 echo "Done.";
+$db->close();
+
+$db = new SurrenderDB;
+echo "<br><br><h2>Inserting animals into surrender....</h2><br>";
+echo $db->insert('Kim', 'dog', 4, 'female', 'yes', 'large', 'white', 'black', 'kimficara');
+$db->close();
 
 
 ?>

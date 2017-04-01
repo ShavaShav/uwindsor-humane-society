@@ -28,18 +28,18 @@ html5_nav();
         <h2>Report Cruelty</h2>
         <form action="/resources/lib/cruelty_handler.php" method="post">
         <p class="formLabel">Your name</p>
-        <input type="text" name="name" id="name" class="textInput">
+        <input type="text" name="name" id="name" class="textInput" required>
         <p class="formLabel">Your phone number</p>
         <input type="text" name="phoneNumber" id="phoneNumber" 
-class="textInput">
+class="textInput" required>
         <p class="formLabel">Your e-mail</p>
-        <input type="text" name="e-mail" id="e-mail" class="textInput">
+        <input type="text" name="e-mail" id="e-mail" class="textInput" required>
         <p class="formLabel">Name of person involved (if known)</p>
         <input type="text" name="personName" id="personName" 
 class="textInput">
-        <p class="formLabel">Address of location (if known)</p>
+        <p class="formLabel">Address of person</p>
         <input type="text" name="personAddress" id="personAddress" 
-class="textInput">
+class="textInput" required>
         <p class="formLabel">Please describe what you saw (required)</p> 
         <textarea name="incidentText" id="incidentText"></textarea>   
         <br>
