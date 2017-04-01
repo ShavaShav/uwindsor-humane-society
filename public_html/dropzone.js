@@ -130,7 +130,7 @@
       params: {},
       clickable: true,
       ignoreHiddenFiles: true,
-      acceptedFiles: null,
+      acceptedFiles: "image/jpeg,image/png,image/gif",
       acceptedMimeTypes: null,
       autoProcessQueue: true,
       autoQueue: true,
@@ -1427,6 +1427,7 @@
   Dropzone.version = "4.3.0";
 
   Dropzone.options = {};
+
 
   Dropzone.optionsForElement = function(element) {
     if (element.getAttribute("id")) {
