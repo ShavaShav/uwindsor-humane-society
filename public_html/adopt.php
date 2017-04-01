@@ -163,7 +163,7 @@ if (!isset($_SESSION['wishlist'])){
                             echo '<input type="button" value="Request Adoption" onclick="requestAdoption(\'';
                             echo $_SESSION['wishlist'][$i];
                             echo "')\">";
-                        } else {
+                        } else if ($hasRequested) {
                             echo '<p>Adoption requested!</p>';
                         }
                         echo "</div>";

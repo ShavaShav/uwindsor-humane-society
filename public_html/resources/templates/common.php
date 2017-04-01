@@ -104,7 +104,7 @@ echo <<<ZZEOF
 </li>
 <li><a href="#" onclick="document.getElementById('logoutbutton').submit()">Logout?</a></li>
 </form></li>
-<li> <a href="#">User Details</a></li>
+<li> <a href="user_details.php">User Details</a></li>
 </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
