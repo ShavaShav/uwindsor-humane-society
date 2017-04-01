@@ -32,6 +32,89 @@ class AnimalDB extends Database {
         parent::__construct();
     }
     
+    //inserts a new animal in the Animals table and returns their assigned unique id
+	public function insert($name, $species, $age, $gender, $altered, $size, $primary_color, $secondary_color) {
+        
+        // Create the SQL prepared statement and insert the entry...
+        $sql = 'INSERT INTO Animals (name, species, age, gender, altered, size, primary_color, secondary_color) VALUES (:name, :species, :age, :gender, :altered, :size, :primary_color, :secondary_color)';
+        
+        // prepare the statement
+        $stmt = $this->conn->prepare($sql);
+        
+        // bind parameters
+        $stmt->bindValue(':name', $name, PDO::PARAM_STR);
+        $stmt->bindValue(':species', $species, PDO::PARAM_STR);
+        $stmt->bindValue(':age', $age, PDO::PARAM_INT);
+        $stmt->bindValue(':gender', $gender, PDO::PARAM_STR);
+        $stmt->bindValue(':altered', $altered, PDO::PARAM_STR);
+        $stmt->bindValue(':size', $size, PDO::PARAM_STR);
+        $stmt->bindValue(':primary_color', $primary_color, PDO::PARAM_STR);
+        $stmt->bindValue(':secondary_color', $secondary_color, PDO::PARAM_STR);
+        
+        $stmt->execute();
+    
+        return $this->getMaxID();
+	}
+    
+    // deletes animal from database, which cascade delete entries in adoption table
+    // so when an admin confirms adoption, just call this method and send them an email
+    public function remove($id){
+        try {
+            // Create the SQL prepared statement and delete the entry...
+            $sql = 'DELETE FROM Animals WHERE id = :id';
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            
+            $stmt->execute();
+                    
+            return TRUE;
+        } catch (PDOException $e) {
+            return FALSE;
+        }
+    }
+    
+    // this removes the entry in the Adoption table, admin uses to deny adoption before emailing
+    public function denyAdoption($username, $animal_id) {
+        try {
+            // Create the SQL prepared statement and delete the entry...
+            $sql = 'DELETE FROM Adoptions WHERE username = :username AND animal_id = :animal_id';
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindValue(':animal_id', $animal_id, PDO::PARAM_INT);
+            $stmt->bindValue(':username', $username, PDO::PARAM_STR);
+            
+            $stmt->execute();
+                    
+            return TRUE;
+        } catch (PDOException $e) {
+            return FALSE;
+        }
+    }
+    
+    
+    // this will place the username and animal's id in the Adoptions table,
+    // so that the admin can either confirm or deny them. User uses this function
+    public function requestAdoption($username, $animal_id) {
+        try {
+            $sql = 'INSERT INTO Adoptions (username, animal_id) VALUES (:username, :animal_id)';
+
+            // prepare the statement
+            $stmt = $this->conn->prepare($sql);
+
+            // bind parameters
+            $stmt->bindValue(':username', $username, PDO::PARAM_STR);
+            $stmt->bindValue(':animal_id', $animal_id, PDO::PARAM_INT);
+
+            $stmt->execute();
+            
+            return TRUE;
+        } catch (PDOException $e) {
+            return FALSE;
+        }
+    }
+    
+    
     // returns a filtered list of animals (filters MUST use the ids here)
     public function getFilteredAnimals($filters) {
         $sql = "SELECT * FROM Animals";
@@ -85,7 +168,7 @@ class AnimalDB extends Database {
         return $result;
     }
     
-    // gets animals with full attributs, given a partial name
+    // gets animals with full attributes, given a partial name
     public function getAnimalsWithNamesContaining($partialName){
         
         $partialName = "%$partialName%"; // match characters before or after
@@ -125,9 +208,36 @@ class AnimalDB extends Database {
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+    
+    public function getMaxID(){
+         // get the last id generated, which is the max
+        $sql = "SELECT MAX(id) FROM Animals";
+        // prepare the statement
+        $stmt = $this->conn->prepare($sql);
+        // execute
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_NUM);
+        return $result[0][0];
+    }
+    
+    // call this function to reset the auto-incrementing id
+    public function resetAutoID(){
+        $nextId = $this->getMaxID();
+        $nextId = $nextId + 1;
+        
+        // prepare the statement
+        $sql = "ALTER TABLE Animals AUTO_INCREMENT=:id";
+        
+        $stmt = $this->conn->prepare($sql);
+        
+        $stmt->bindValue(':id', $nextId, PDO::PARAM_INT);
+        
+        // execute
+        $stmt->execute();
+    }
 }
 
-//SurrenderDB offers functions for accessing and manipulating surrender table
+//SurrenderDB offers functions for accessing and manipulating surrender table _ This table is a short-term holding area until admin either approves to be put into Animals table or denies them and deletes animal
 class SurrenderDB extends Database {
 	
 	//call Database constructor
@@ -136,6 +246,7 @@ class SurrenderDB extends Database {
 	}
 	
 	//inserts a new animal in the surrender table and returns the surrender id
+    // Make sure that whoever uses this functions saves an img in /img/surrender with the returned id.jpg!
 	public function insert($name, $species, $age, $gender, $altered, $size, $primary_color, $secondary_color, $username) {
 		// Create the entry to add...
         $entry = array(
@@ -154,9 +265,98 @@ class SurrenderDB extends Database {
         // Create the SQL prepared statement and insert the entry... // not sure how :user works but trusting preney on this one OUTPUT Inserted.id
         $sql = 'INSERT INTO Surrenders (name, species, age, gender, altered, size, primary_color, secondary_color, username) VALUES (:name, :species, :age, :gender, :altered, :size, :primary_color, :secondary_color, :username)';
         $stmt = $this->conn->prepare($sql);
-        return $stmt->execute($entry);
+        $stmt->execute($entry);
+        
+        return $this->getMaxID();
 	}
+    
+    // moves animal from surrenders to animals table, given their surrender id
+    // used by admin when approving a surrender.
+    // return the animals ID in the animals table
+    public function moveToAnimalsTable($id){
+        try {
+            // copy values from surrender to animals table
+            $sql = "INSERT INTO Animals (name, species, age, gender, altered, size, primary_color, secondary_color)
+                    SELECT name, species, age, gender, altered, size, primary_color, secondary_color
+                    FROM Surrenders
+                    WHERE id = :id";
+            // prepare statement
+            $stmt = $this->conn->prepare($sql);
+            // bind params
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            // execute the query
+            $stmt->execute();
+
+            // get the animals new id from the animalsTable
+            $sql = "SELECT MAX(id) FROM Animals";
+            // prepare the statement
+            $stmt = $this->conn->prepare($sql);
+            // execute
+            $stmt->execute();
+            $newId = $stmt->fetchAll(PDO::FETCH_NUM);
+            
+            // delete animal from surrender table
+            $sql = "DELETE FROM Surrenders WHERE id = :id";
+            // prepare statement
+            $stmt = $this->conn->prepare($sql);
+            // bind params
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            // execute the query
+            $stmt->execute();
+            
+            return $newId[0][0];
+        } catch (PDOException $e) {
+            return FALSE;
+        }
+    }   
+    
+    // deletes animal from surrenders to animals table, given their surrender id
+    // used by admin when denying a surrender
+    public function remove($id){
+        try {
+            // delete animal from surrender table
+            $sql = "DELETE FROM Surrenders WHERE id = :id";
+            // prepare statement
+            $stmt = $this->conn->prepare($sql);
+            // bind params
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            // execute the query
+            $stmt->execute();
+            
+            return TRUE;
+        } catch (PDOException $e) {
+            return FALSE;
+        }
+    }  
+    
+        public function getMaxID(){
+         // get the last id generated, which is the max
+        $sql = "SELECT MAX(id) FROM Surrenders";
+        // prepare the statement
+        $stmt = $this->conn->prepare($sql);
+        // execute
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_NUM);
+        return $result[0][0];
+    }
+    
+    // call this function to reset the auto-incrementing id to the next max id (for testing)
+    public function resetAutoID(){
+        $nextId = $this->getMaxID();
+        $nextId = $nextId + 1;
+        
+        // prepare the statement
+        $sql = "ALTER TABLE Surrenders AUTO_INCREMENT=:id";
+        
+        $stmt = $this->conn->prepare($sql);
+        
+        $stmt->bindValue(':id', $nextId, PDO::PARAM_INT);
+        
+        // execute
+        $stmt->execute();
+    }
 }
+
 
 // UserDB offers functions for accessing and manipulating user table
 class UserDB extends Database {
@@ -164,6 +364,51 @@ class UserDB extends Database {
     // call Database constructor
     public function __construct() {
         parent::__construct();
+    }
+    
+    public function modifyEmail($username, $email){
+        try {
+            $sql = "UPDATE Users SET email=:email WHERE username=:username";
+
+            // prepare statement
+            $stmt = $this->conn->prepare($sql);
+
+            // bind params (safety measure)
+            $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+            $stmt->bindValue(':username', $username, PDO::PARAM_STR);
+
+            // execute the query
+            $stmt->execute();
+
+            return TRUE;
+        } catch (PDOException $e) {
+            return FALSE;
+        }
+    }
+    
+    // this function takes an unhashed password! assumes that check_user_password already called
+    // to verify old password
+    public function modifyPassword($username, $password){
+        
+        $hashed = $this->compute_password_hash($password);
+        
+        try {
+            $sql = "UPDATE Users SET password=:password WHERE username=:username";
+
+            // prepare statement
+            $stmt = $this->conn->prepare($sql);
+
+            // bind params (safety measure)
+            $stmt->bindValue(':password', $hashed, PDO::PARAM_STR);
+            $stmt->bindValue(':username', $username, PDO::PARAM_STR);
+
+            // execute the query
+            $stmt->execute();
+
+            return TRUE;
+        } catch (PDOException $e) {
+            return FALSE;
+        }
     }
     
     // gets usernames, given a partial username *** might not be used in site
@@ -221,16 +466,17 @@ class UserDB extends Database {
     }
     
     // Inserts a new user $user into the DBUser table having password $pass.
-    public function insert($user, $pass)
+    public function insert($user, $pass, $email)
     {
         // Create the entry to add...
         $entry = array(
             ':user' => $user,
             ':pass' => $this->compute_password_hash($pass),
+            ':email' => $email,
         );
 
         // Create the SQL prepared statement and insert the entry... // not sure how :user works but trusting preney on this one
-        $sql = 'INSERT INTO Users (username, password) VALUES (:user, :pass)';
+        $sql = 'INSERT INTO Users (username, password, email) VALUES (:user, :pass, :email)';
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute($entry);
     }
