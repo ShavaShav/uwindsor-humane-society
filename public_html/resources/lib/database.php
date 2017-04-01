@@ -97,6 +97,7 @@ class AnimalDB extends Database {
     // so that the admin can either confirm or deny them. User uses this function
     public function requestAdoption($username, $animal_id) {
         try {
+      
             $sql = 'INSERT INTO Adoptions (username, animal_id) VALUES (:username, :animal_id)';
 
             // prepare the statement
@@ -114,6 +115,15 @@ class AnimalDB extends Database {
         }
     }
     
+    // this returns the username, with animals details for every requested adoption
+    // This function permits PDOExceptions to leak.
+    public function getAllAdoptions() {
+        // Create the SQL prepared statement and insert the entry...
+        $sql = 'SELECT * FROM Adoptions';
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
     
     // returns a filtered list of animals (filters MUST use the ids here)
     public function getFilteredAnimals($filters) {
@@ -207,6 +217,54 @@ class AnimalDB extends Database {
         // set the resulting array to associative
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
+    }
+    
+    public function lookup($id)
+    {
+        // Create the entry to add...
+        $entry = array( ':id' => $id );
+
+        // Create the SQL prepared statement and insert the entry...
+        try
+        {
+          $sql = 'SELECT * FROM Animals WHERE id = :id';
+          $stmt = $this->conn->prepare($sql);
+          $stmt->execute($entry);
+          $result = $stmt->fetchAll();
+          if (count($result) != 1)
+            return FALSE;
+          else
+            return $result[0];
+        }
+        catch (PDOException $e)
+        {
+          return FALSE;
+        }
+    }
+    
+    public function hasRequestedAdoption($username, $id)
+    {
+        // Create the SQL prepared statement and insert the entry...
+        try
+        {
+          $sql = 'SELECT * FROM Adoptions WHERE animal_id = :id AND username = :username';
+          $stmt = $this->conn->prepare($sql);
+            
+          // binad params (safety measure)
+          $stmt->bindValue(':username', $username, PDO::PARAM_STR);  
+          $stmt->bindValue(':id', $id, PDO::PARAM_INT);        
+
+          $stmt->execute();
+          $result = $stmt->fetchAll();
+          if (count($result) != 1)
+            return FALSE;
+          else
+            return TRUE;
+        }
+        catch (PDOException $e)
+        {
+          return FALSE;
+        }
     }
     
     public function getMaxID(){
@@ -328,8 +386,18 @@ class SurrenderDB extends Database {
             return FALSE;
         }
     }  
+
+    // Look up all animals in the Surrenders table. This function permits
+    // PDOExceptions to leak.
+    public function lookup_all() {
+        // Create the SQL prepared statement and insert the entry...
+        $sql = 'SELECT * FROM Surrenders';
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
     
-        public function getMaxID(){
+    public function getMaxID() {
          // get the last id generated, which is the max
         $sql = "SELECT MAX(id) FROM Surrenders";
         // prepare the statement

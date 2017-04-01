@@ -43,7 +43,7 @@ function wishlist(id)
     // this will be call when response is received
     xhttp.onreadystatechange = function(){
         // if request finished, and everything OK
-        if (this.readyState == 4 && this.status == 200){
+        if (this.readyState == 4 && this.status == 200) {
             // update count
             document.getElementById("wishlistCount").innerHTML=this.responseText;
             // show wishlist
@@ -69,6 +69,27 @@ function removeAnimal(animal_val){
             // update count
             document.getElementById("wishlistCount").innerHTML=this.responseText;
             // show wishlist
+            showWishlist();
+        }
+    }
+    
+    xhttp.open("POST", store_wishlist_URL, true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(params); // send request to store_wishlist
+}
+
+// requesting adoption of a wishlist animal
+function requestAdoption(animal_val){
+    var params = "request_adoption='request_adoption'&animal_val='"+encodeURIComponent(animal_val); // for POST request (+s to spaces)
+    var xhttp = new XMLHttpRequest(); // make http request obj
+        
+    // this will be call when response is received
+    xhttp.onreadystatechange = function(){
+        // if request finished, and everything OK
+        if (this.readyState == 4 && this.status == 200){
+            // update count
+            document.getElementById("wishlistCount").innerHTML=this.responseText;
+            // show wishlist (removal of buttons for adopted animal)
             showWishlist();
         }
     }

@@ -1,7 +1,7 @@
 <?php
 require_once(dirname(__FILE__) . '/resources/config.php');
+require_once(dirname(__FILE__) . '/resources/lib/database.php');
 require_once($TEMPLATES_PATH . '/common.php');
-session_start();
 
 html5_header(
 	'Adopt Animals',
@@ -152,8 +152,21 @@ if (!isset($_SESSION['wishlist'])){
                         <img src='<?php echo $animal_val[1];?>'>
                         <p><?php echo $animal_val[0];?></p>
                         <input type='button' value='Remove Animal' onclick='removeAnimal("<?php echo $_SESSION['wishlist'][$i];?>");'>
-                       </div>
+                        <br>
+                
                 <?php
+                        // adopt button
+                        $db = new AnimalDB;
+                        $hasRequested = $db->hasRequestedAdoption($_SESSION['logged_in_user'], $animal_val['2']);
+                        // only show if they haven't already requested adoption
+                        if (is_logged_in() && !$hasRequested){
+                            echo '<input type="button" value="Request Adoption" onclick="requestAdoption(\'';
+                            echo $_SESSION['wishlist'][$i];
+                            echo "')\">";
+                        } else {
+                            echo '<p>Adoption requested!</p>';
+                        }
+                        echo "</div>";
                         } // end for loop
                     } else { 
                         // no session history
