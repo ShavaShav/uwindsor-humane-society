@@ -12,7 +12,7 @@ html5_nav();
 ?>
 <div class="contentborder">
 <p>
-Thank you for reaching out, we will get back to you shortly.
+Thank you, we will get back to you shortly.
 </p>
 </div>
 
