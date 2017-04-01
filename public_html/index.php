@@ -3,7 +3,6 @@ require_once(dirname(__FILE__) . '/resources/config.php');
 require_once($TEMPLATES_PATH . '/common.php');
 require_once('resources/lib/login-tools.php');
 require_once('resources/lib/database.php');
-session_start();
 
 $db = new UserDB;
 

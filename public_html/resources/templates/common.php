@@ -1,17 +1,24 @@
 <?php
 require_once(dirname(__FILE__) . '/../config.php');
 require_once(dirname(__FILE__) . '/../lib/login-tools.php');
-require_once(dirname(__FILE__) . '/../lib/login_handler.php');
-
 session_start();
 
 if (isset($_GET['logout'])){
+	require_once(dirname(__FILE__) . '/../lib/login_handler.php');
 	log_out_user();
 	unset($_GET);
 }
 
 if(isset($_POST['user_name']) && isset($_POST['user_password_new'])){
+	require_once(dirname(__FILE__) . '/../lib/login_handler.php');
 	loginUser();
+	unset($_POST);
+}	
+
+if (isset($_POST['reg_user_name']) && isset($_POST['reg_user_password_new']) && isset($_POST['reg_user_password_repeat'])){
+	require_once(dirname(__FILE__) . '/../lib/register_handler.php');
+	registerUser();
+	unset($_POST);
 }
 
 function html5_header($title, $css_files = array(), $js_files = array())
@@ -36,6 +43,7 @@ function html5_header($title, $css_files = array(), $js_files = array())
     foreach ($js_files as $js_file)
         echo "<script src='$js_file' type='application/javascript'></script>";
     
+	
     echo "</head><body>\n";
 }
 
@@ -80,17 +88,24 @@ echo <<<ZZEOF
         </li>	
         <li><a href="adopt.php">Adopt Animals</a></li>
         <li><a href="surrender.php">Surrender Animals</a></li>
-		<li><a href="donate.php">Donate</a></li>
-      </ul>
 ZZEOF;
+if(isset($_SESSION['admin'])){
+	echo '<li><a href="pending_requests.php">Pending Requests</a></li>';
+}
+echo '</ul>';
+
 if (is_logged_in()){
-echo '<ul class="nav navbar-nav navbar-right"><li><p class="navbar-text"> Logged In As: ';
-echo $_SESSION['logged_in_user'] . "</p></li>";
+echo '<ul class="nav navbar-nav navbar-right"><li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Logged As: ';	
+echo $_SESSION['logged_in_user'];
+echo '</b> <span class="caret"></span></a><ul id="login-dp" class="dropdown-menu">';
 echo <<<ZZEOF
 <li><form id="logoutbutton" method="get">
     <input type="hidden" name="logout">
-    <a href="#" onclick="document.getElementById('logoutbutton').submit()">Logout?</a>
-</form></li></ul>
+</li>
+<li><a href="#" onclick="document.getElementById('logoutbutton').submit()">Logout?</a></li>
+</form></li>
+<li> <a href="#">User Details</a></li>
+</ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
@@ -104,7 +119,7 @@ ZZEOF;
 				<li>
 					 <div>
 							<div>
-								 <form class="form" role="form" method="post" action="#" accept-charset="UTF-8" id="login-nav">
+								 <form class="form" role="form" method="post" name="login" action="#" accept-charset="UTF-8" id="login-nav">
 										<div class="form-group">
 											 <label class="sr-only" for="user_name">Username</label>
 											 <input id="user_name" placeholder="Username" name="user_name" required>
@@ -118,8 +133,34 @@ ZZEOF;
 										</div>
 								 </form>
 							</div>
-							<div class="bottom text-center">
-								No Account? <a href="register.php"><b>Sign Up</b></a>
+					 </div>
+				</li>
+			</ul>
+        </li>
+		
+		 <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Register</b> <span class="caret"></span></a>
+			<ul id="login-dp" class="dropdown-menu">
+				<li>
+					 <div>
+							<div>
+								 <form class="form" role="form" method="post" name="register" onsubmit="return validateRegister()" action="#" accept-charset="UTF-8" id="login-nav">
+										<div class="form-group">
+											 <input id="user_name" placeholder="Username" name="reg_user_name" required>
+										</div>
+										<div class="form-group">
+											<input id="login_input_email" placeholder="Email (name@domain.x)" name="email" required autocomplete="off" /><br>
+										</div>
+										<div class="form-group">
+											<input id="login_input_password_new" placeholder="Password (>6 chars)" type="password" name="reg_user_password_new" pattern=".{6,}" required autocomplete="off" /><br>
+										</div>
+										<div class="form-group">
+											<input id="login_input_password_repeat" placeholder="Repeat Password" type="password" name="reg_user_password_repeat" pattern=".{6,}" required autocomplete="off" /><br>
+										</div>
+										<div>
+											 <button type="submit">Register</button>
+										</div>
+								 </form>
 							</div>
 					 </div>
 				</li>

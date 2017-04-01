@@ -26,21 +26,23 @@ function registerUser() {
     ) {*/
 	
 	
-		$user_name = $_POST['user_name'];
-        $user_password = $_POST['user_password_new'];
+		$user_name = $_POST['reg_user_name'];
+        $user_password = $_POST['reg_user_password_new'];
 
 		$db = new UserDB;
 		
 
         if ($db->checkUserExists($user_name)) {
-            echo "<p>Sorry, that username is already taken.</p><br>";
+			$string = "Sorry, that username is already taken.";
+            
         } else {
             if ($db->insert($user_name, $user_password)) {
-                echo "<p>Your account has been created successfully. You can now log in.</p><br>";
+               $string = "Your account has been created successfully. You can now log in.";
             } else {
-                echo "<p>Sorry, your registration failed. Please go back and try again.</p><br>";
+                $string = "Sorry, your registration failed. Please go back and try again.";
             }
         }
+		echo "<script type='text/javascript'>", "alertUser($string)", "</script>";
 		
 		
 

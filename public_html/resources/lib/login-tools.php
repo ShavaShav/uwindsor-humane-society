@@ -13,11 +13,9 @@ function log_in_user($user)
 {
   $_SESSION['logged_in'] = 1;
   $_SESSION['logged_in_user'] = $user;
-  if (isAdmin){
+  if (isAdmin()){
      $_SESSION['admin'] = 1;
-  } else {
-     $_SESSION['admin'] = 0;
-  }
+}
 }
 
 // checks if current user is admin
@@ -26,7 +24,7 @@ function isAdmin(){
     foreach($ADMIN as $name){
         if ($name == $_SESSION['logged_in_user'])
             return TRUE;
-    }
+		}
     return FALSE;
 }
 

@@ -18,7 +18,7 @@ $DB = array(
 // Plan for checking admininstration
 $ADMIN = array(
     "shaverz",
-    "learuantr"
+    "GIJoe"
 );
 
 // report errors on the page, should make debugging easier
