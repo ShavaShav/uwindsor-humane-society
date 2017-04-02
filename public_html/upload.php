@@ -1,7 +1,7 @@
 <?php
 $i = 1;
 $ds          = DIRECTORY_SEPARATOR;  //1
-$target = 'img/animals/'; 
+$target = 'img/surrenders/'; 
 //$target_file = $target . basename($_FILES["file"]["tmp_name"]);
  
      if ($handle = opendir($target)){
