@@ -26,7 +26,7 @@
     line-height: 60px;
 }
 
-@media (max-width: 850px) {
+@media (max-width: 1000px) {
   .navbar-header {
       float: none;
   }

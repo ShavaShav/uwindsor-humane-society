@@ -1,0 +1,44 @@
+body {
+    display: flex;
+    flex-direction: row; /* holding two pending boxes */
+    margin: 0; /* override root.css */
+    border: 0;
+    margin-top: 75px;
+    padding: 0;
+    background: transparent;
+}
+
+.pendingBox {
+    display:flex;
+    flex-direction: column;
+    background-color:aliceblue;
+    flex-grow: 1;
+    border: 2px solid #008CBA;
+	border-radius: 0.5em;
+	color: #000;
+    margin: 25px;
+    padding:10px;
+    border-radius: 0.5em;
+}
+
+.pendingEntryBox{
+    display:flex;
+    flex-direction: row; /* holds entries */
+    flex-wrap:wrap;
+}
+
+.pendingEntry {
+    flex-shrink: 1;
+    background-color: #FFF;
+    border: 1px solid #444;
+	border-radius: 0.5em;
+	color: #000;
+    margin: 3px;
+    padding:5px;
+    border-radius: 0.5em;
+}
+
+.title {
+    
+    text-align: center;
+}
