@@ -115,14 +115,17 @@ class AnimalDB extends Database {
         }
     }
     
-    // this returns the username, with animals details for every requested adoption
+    // this returns the username, with animals id and name for all pending adoptions
     // This function permits PDOExceptions to leak.
-    public function getAllAdoptions() {
+    public function getAllPendingAdoptions() {
         // Create the SQL prepared statement and insert the entry...
-        $sql = 'SELECT * FROM Adoptions';
+        $sql = 'SELECT u.username, a.id, a.name 
+        FROM Users u 
+        INNER JOIN Adoptions ad ON ad.username = u.username 
+        INNER JOIN Animals a ON ad.animal_id = a.id';
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
-        return $stmt->fetchAll();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     
     // returns a filtered list of animals (filters MUST use the ids here)
@@ -394,7 +397,7 @@ class SurrenderDB extends Database {
         $sql = 'SELECT * FROM Surrenders';
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
-        return $stmt->fetchAll();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     
     public function getMaxID() {

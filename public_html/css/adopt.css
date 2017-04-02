@@ -56,15 +56,22 @@ body {
 
 /* flex container, holds animals */
 #animalBox {
+ /* animals appear left to right , wrapping */
     display: flex;
-    flex-direction: row; /* animals appear left to right , wrapping */
+    align-items: center;
     flex-wrap: wrap;
-    padding: 10px;
+    justify-content: center;
+    margin: 10px;
+}
+
+#animalBox > * { /* vertical spacing */
+  margin: 10px;
 }
 
 /* the actual animal divs in the animalBox */
 .animal {
-    margin: 10px;
+    flex-shrink: 0;
+    margin: auto;
     padding: 10px;
     border-radius: 0.5em;
     border-width: 1px;
