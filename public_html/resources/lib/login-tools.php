@@ -1,5 +1,5 @@
 <?php
-require_once(dirname(__FILE__).'/../config.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/../config.php');
 
 function is_logged_in()
 {

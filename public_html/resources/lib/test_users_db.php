@@ -1,5 +1,5 @@
 <?php
-require_once('../config.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/../config.php');
 require_once('database.php'); // must include, relative to current location, to get UserDB class
 
 $db = new UserDB; // open userDB

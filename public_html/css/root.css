@@ -26,6 +26,12 @@
     line-height: 60px;
 }
 
+#doubleform form,
+#doubleform form div {
+	display: inline;
+}
+
+
 @media (max-width: 1000px) {
   .navbar-header {
       float: none;
@@ -117,4 +123,10 @@ h2 {
 
 .dropdown-menu{
 	margin: 10px;
+}
+
+.animalImage{
+    /* reisizing images if they are over 200px wide or high */
+    max-width: 200px;
+    max-height: 200px;
 }
