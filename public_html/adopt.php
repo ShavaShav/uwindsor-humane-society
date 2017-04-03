@@ -149,7 +149,7 @@ if (!isset($_SESSION['wishlist'])){
                             $animal_val = explode("+",$_SESSION['wishlist'][$i]);
                 ?>
                         <div class='wishlistAnimals'>
-                        <img src='<?php echo $animal_val[1];?>'>
+                        <img src='<?php echo $animal_val[1];?>' class='animalImage'>
                         <p><?php echo $animal_val[0];?></p>
                         <input type='button' value='Remove Animal' onclick='removeAnimal("<?php echo $_SESSION['wishlist'][$i];?>");'>
                         <br>
