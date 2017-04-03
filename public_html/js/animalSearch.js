@@ -3,16 +3,18 @@ window.addEventListener("load", init);
 // on window load
 function init(){
     // add animalSearch handler
-    document.getElementById("animalSearchButton").addEventListener("click", animalSearchHandler);
-    document.getElementById("name").addEventListener("keyup", nameSearchHandler);
-    
+    document.getElementById("animalSearchButton").addEventListener("click", function(event){
+        event.preventDefault(); 
+        animalSearchHandler();
+    });
+    document.getElementById("name").addEventListener("keyup", function(event){
+        event.preventDefault(); 
+        nameSearchHandler();
+    });
 }
 
 // handler for search button
 function animalSearchHandler(){
-    /* stop form from submitting normally */
-    event.preventDefault(); 
-
     /* get the filter options from the page for POST */
     var param = 'name='+document.getElementById("name").value;
     	
@@ -37,8 +39,6 @@ function animalSearchHandler(){
 
 // handler for names starting with
 function nameSearchHandler(){
-    /* stop form from submitting normally */
-    event.preventDefault(); 
     
     var input = document.getElementById("name").value;
 
