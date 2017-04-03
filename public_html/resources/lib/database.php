@@ -270,6 +270,19 @@ class AnimalDB extends Database {
         }
     }
     
+    // returns all user details of those who want given animal id
+    public function getUsersWhoRequestAdoption($id){
+        // Create the SQL prepared statement and insert the entry...
+        $sql = 'SELECT u.*
+        FROM Users u 
+        INNER JOIN Adoptions a ON a.username = u.username 
+        WHERE a.animal_id = :id';
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
     public function getMaxID(){
          // get the last id generated, which is the max
         $sql = "SELECT MAX(id) FROM Animals";
@@ -389,6 +402,29 @@ class SurrenderDB extends Database {
             return FALSE;
         }
     }  
+    
+    public function lookup($id)
+    {
+        // Create the entry to add...
+        $entry = array( ':id' => $id );
+
+        // Create the SQL prepared statement and insert the entry...
+        try
+        {
+          $sql = 'SELECT * FROM Surrenders WHERE id = :id';
+          $stmt = $this->conn->prepare($sql);
+          $stmt->execute($entry);
+          $result = $stmt->fetchAll();
+          if (count($result) != 1)
+            return FALSE;
+          else
+            return $result[0];
+        }
+        catch (PDOException $e)
+        {
+          return FALSE;
+        }
+    }
 
     // Look up all animals in the Surrenders table. This function permits
     // PDOExceptions to leak.
