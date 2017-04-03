@@ -17,7 +17,8 @@ $DB = array(
 // List of admin usernames
 $ADMIN = array(
     "shaverz",
-    "GIJoe"
+    "GIJoe",
+    "admin" // for use by the graders. Password: "Preney334"
 );
 
 // report errors on the page, should make debugging easier
