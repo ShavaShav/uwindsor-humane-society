@@ -1,5 +1,5 @@
 <?php
-require_once(dirname(__FILE__) . '/resources/config.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/../config.php');
 require_once(dirname(__FILE__) . '/resources/lib/database.php');
 require_once($TEMPLATES_PATH . '/common.php');
 
@@ -116,7 +116,7 @@ if (!isset($_SESSION['wishlist'])){
                         </select>
                     </div>
                     <br>
-                    <button type="button" value="Filter" id="filterButton">
+                    <input type="button" value="Filter" id="filterButton">
                 </form>
             </div>
         </div> 

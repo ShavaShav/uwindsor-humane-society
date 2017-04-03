@@ -1,5 +1,5 @@
 <?php 
-require_once(dirname(__FILE__) . '/../config.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/../config.php');
 
 function generateAnimalHTML($id, $name, $species, $age, $gender, $altered, $size, $primary_color, $secondary_color){
     echo '<img src="../../img/animals/'.$id.'.jpg">';

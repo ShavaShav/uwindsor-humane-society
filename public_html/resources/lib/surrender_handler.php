@@ -2,7 +2,7 @@
     
 require_once('database.php');
 require_once('login-tools.php');
-require_once(dirname(__FILE__).'/../config.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/../config.php');
 require_once(dirname(__FILE__) . '/../templates/common.php');
 
 // insert animal details into Surrenders table
