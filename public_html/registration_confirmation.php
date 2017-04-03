@@ -1,6 +1,6 @@
 <?php
 require_once('resources/templates/common.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/../config.php');
+require_once('resources/config.php');
 require_once('resources/lib/database.php');
 require_once('resources/lib/register_handler.php');
 
