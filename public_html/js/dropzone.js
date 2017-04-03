@@ -126,11 +126,11 @@
       thumbnailWidth: 120,
       thumbnailHeight: 120,
       filesizeBase: 1000,
-      maxFiles: 1,
+      maxFiles: null,
       params: {},
       clickable: true,
       ignoreHiddenFiles: true,
-      acceptedFiles: "image/jpeg,image/png,image/gif",
+      acceptedFiles: null,
       acceptedMimeTypes: null,
       autoProcessQueue: true,
       autoQueue: true,
@@ -1427,7 +1427,6 @@
   Dropzone.version = "4.3.0";
 
   Dropzone.options = {};
-
 
   Dropzone.optionsForElement = function(element) {
     if (element.getAttribute("id")) {

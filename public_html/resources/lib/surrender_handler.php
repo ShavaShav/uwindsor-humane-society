@@ -6,6 +6,7 @@ require_once(dirname(__FILE__).'/../config.php');
 require_once(dirname(__FILE__) . '/../templates/common.php');
 
 // insert animal details into Surrenders table
+
 $name = $_POST['name'];
 $species = $_POST['species'];
 $age = $_POST['age'];
@@ -20,51 +21,34 @@ $db = new SurrenderDB;
 
 $return_id = $db->insert($name, $species, $age, $gender, $altered, $size, $primary_color, $secondary_color, $username);
 
-$ds = DIRECTORY_SEPARATOR;
- 
-$storeFolder = 'img/surrenders';
- 
-if (!empty($_FILES)) {
-     
-    $tempFile = $_FILES['file']['tmp_name'];          //3             
-      
-    $targetPath = dirname( __FILE__ ) . $ds. $storeFolder . $ds;  //4
-     
-    $targetFile =  $targetPath. $_FILES['file']['name'];  //5
- 
-    move_uploaded_file($tempFile,$targetFile); //6
-     
+// upload image to temp img/surrenders/ folder
+if (!empty($_FILES)) { // image uploaded
+    
+    if ($_FILES['animalImage']['size'] < 16000){ // max 16 kb (approx. max of a 200px by 200px jpg)
+
+        $tempFile = $_FILES['animalImage']['tmp_name']; // uploaded file
+        $targetPath = $_SERVER['DOCUMENT_ROOT'].'/img/surrenders/'; // surrenders folder path
+        $targetFile =  $targetPath . $return_id . '.jpg';   //attach id from db
+
+        if (!move_uploaded_file($tempFile,$targetFile)){
+            // failure to upload
+            copyDefaultImage($return_id);
+        } 
+    }     
+} else {
+    // no image uploaded
+    copyDefaultImage($return_id);
 }
 
-
-//// upload image from 'dropzone' to temp img/surrenders/ folder
-//$i = 1;
-//$ds          = DIRECTORY_SEPARATOR;  //1
-//$target = 'img/surrenders/'; 
-// 
-//if ($handle = opendir($target)){
-//    while (($file = readdir($handle)) !== false){
-//        if (!in_array($file, array('.', '..')) && !is_dir($target.$file))
-//            $i++;
-//    }
-//}
-//
-//function findexts ($filename){
-//    $filename = strtolower($filename);
-//    $exts = split("[/\\.]", $filename);
-//    $n = count($exts)-1;
-//    $exts = $exts[$n];
-//    return $exts;
-//}
-//
-//$ext = findexts ($_FILES['file']['name']) ;
-//$targetPath = dirname( __FILE__ ) . $ds. $target . $ds;
-//$targetFile = $targetPath.$i.'.'.$ext;
-//
-//move_uploaded_file($_FILES['file']['tmp_name'], $targetFile);
-
-
 // redirect user to confirmation page notifying submission worked
-// header('Location: ../../confirmation.php');
+header('Location: ../../confirmation.php');
+
+
+function copyDefaultImage($surrenderId){
+    // copys the default animal image as placeholder
+    $targetImg = $_SERVER['DOCUMENT_ROOT'].'/img/surrenders/'.$surrenderId.'.jpg';
+    $defaultImg = $_SERVER['DOCUMENT_ROOT'].'/img/animals/default.jpg';
+    copy($defaultImg, $targetImg);
+}
 
 ?>

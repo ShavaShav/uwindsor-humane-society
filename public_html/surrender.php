@@ -6,7 +6,7 @@ require_once($TEMPLATES_PATH . '/common.php');
 html5_header(
   'Surrender Animal',
   array('css/root.css', 'css/surrender.css', 'css/dropzone.css'),
-  array('js/dropzone.js'));
+  array());
 
 html5_nav();
 ?>
@@ -17,7 +17,7 @@ html5_nav();
        
 <div class="contentborder">
     <h2>Surrender Animal</h2>
-     <form action="resources/lib/surrender_handler.php" method="post" id="surrenderForm">
+     <form action="resources/lib/surrender_handler.php" method="post" id="surrenderForm" enctype="multipart/form-data">
           <div class="formOption"> 
               <label>Name:</label>
               <input type="text" name="name" id="name" class="textInput" required><br>
@@ -97,10 +97,27 @@ html5_nav();
 
         <div class="formOption">
             <label>Picture: </label>
-            <div class="dropzone dropzone-preview"></div> 
-     <!--     <form action="resources/lib/upload.php" class="dropzone"></form>   -->
-            <br>
-            <input type="submit" value="Submit" class="submitButton">
+            <input type="file" name="animalImage" id="animalImage" accept="image/jpeg">
+            <p id='prompt' style='color:red'></p>
+        </div>
+         
+         <script>
+             // jquery for this
+            $('#animalImage').bind('change', function() {
+                if (this.files[0].size > 16000){
+                    // display prompt
+                    document.getElementById('prompt').innerHTML="Too large! (max 16 kb)";
+                    // dont save image
+                    document.getElementById('animalImage').value=null;
+                }
+                else // clear prompt
+                  document.getElementById('prompt').innerHTML="";
+
+            });
+         </script>
+         
+        <div class="formOption">
+            <button type="submit" value="Submit" class="submitButton" id="submitButton">Submit</button>
         </div>
     </form>
     

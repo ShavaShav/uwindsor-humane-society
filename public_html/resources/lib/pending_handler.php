@@ -45,9 +45,9 @@ else if (isset($_POST['reload_surrenders']))
             $message .= "Your request for surrender of ".$surrenderName." to the uWindsor Humane Society has been approved. Please stop by soon to drop them off and fill out some paperwork. Feel free to contact us if you would like more information.";
         } else if (!strcmp($option, 'deny_surrender')){
             // denying surrender
-            $db->remove($surrenderId); // remove from surrender table
+            $db->remove($surrenderID); // remove from surrender table
             // delete image
-            unlink('../../img/surrenders/' . $id . '.jpg');
+            unlink('../../img/surrenders/' . $surrenderID . '.jpg');
             
              // send email to user
             $subject = 'Denial of '.$surrenderName.'\'s surrender to the uWindsor Humane Society.';
@@ -171,7 +171,6 @@ foreach($entries as $entry) {
     
     echo '<div class="pendingEntry">';
     echo '<div>';
-    echo '<b>Animal ID: '.$animal_id.'</b>';
     echo generateSurrenderHTML($username, $animal_id, $name, $species, $age, $gender, $altered, $size, $primary_color, $secondary_color);
     
 echo <<<ZZEOF

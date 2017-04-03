@@ -13,7 +13,7 @@ function generateAnimalShortHTML($id, $name){
 
 // generate surrender details with image and header
 function generateSurrenderHTML($username, $id, $name, $species, $age, $gender, $altered, $size, $primary_color, $secondary_color){
-    echo '<p style="style=font-weight:bold">'.$username.' wishes to surrender:</p>';
+    echo '<p><b>'.$username.'</b> wishes to surrender:</p>';
     echo '<img src="../../img/surrenders/'.$id.'.jpg">';
     generateAnimalDetails($id, $name, $species, $age, $gender, $altered, $size, $primary_color, $secondary_color);
 }

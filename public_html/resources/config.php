@@ -1,7 +1,6 @@
 <?php 
 // An array of globals variables (other arrays that contain constants), just require config.php and use them
 // If we use these variables, then we only have to keep them up to date here
-
 $TEMPLATES_PATH = 'resources/templates';
 $LIB_PATH = 'resources/lib';
 $IMG_PATH = 'img';
