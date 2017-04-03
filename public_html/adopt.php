@@ -116,7 +116,7 @@ if (!isset($_SESSION['wishlist'])){
                         </select>
                     </div>
                     <br>
-                    <input type="button" value="Filter" id="filterButton">
+                    <button type="button" value="Filter" id="filterButton">
                 </form>
             </div>
         </div> 

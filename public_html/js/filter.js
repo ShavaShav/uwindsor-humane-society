@@ -7,14 +7,15 @@ function init(){
     // make request to filter_handler.php with default args -> get all animals
     filterHandler();
     // add filter handler
-    document.getElementById("filterButton").addEventListener("click", filterHandler);   
+    document.getElementById("filterButton").addEventListener("click", function(event){
+        /* stop form from submitting normally */
+        event.preventDefault(); 
+        filterHandler(); // filter animals
+    });
 }
 
 // handler for filter button
-function filterHandler(){
-    /* stop form from submitting normally */
-    event.preventDefault(); 
-    
+function filterHandler(event){   
     /* get the filter options from the page for POST */
     var params = 'species='+document.getElementById("species").value+
         '&min_age='+document.getElementById("min_age").value+

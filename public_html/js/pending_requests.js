@@ -38,10 +38,7 @@ function confirmOrDeny(username, id, option){
     xhttp.send(params); // send request to store_wishlist
 }
 
-function reloadPendingAdoptions(){
-    /* stop form from submitting normally */
-    event.preventDefault(); 
-    
+function reloadPendingAdoptions(){   
     /* get the filter options from the page for POST */
     var params = 'reload_adoptions=TRUE';
 
@@ -63,10 +60,7 @@ function reloadPendingAdoptions(){
     xhttp.send(params); // send request to store_wishlist
 }
 
-function reloadPendingSurrenders(){
-    /* stop form from submitting normally */
-    event.preventDefault(); 
-    
+function reloadPendingSurrenders(){   
     /* get the filter options from the page for POST */
     var params = 'reload_surrenders=TRUE';
 
