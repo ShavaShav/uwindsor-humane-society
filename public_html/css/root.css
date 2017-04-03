@@ -26,6 +26,12 @@
     line-height: 60px;
 }
 
+#doubleform form,
+#doubleform form div {
+	display: inline;
+}
+
+
 @media (max-width: 1000px) {
   .navbar-header {
       float: none;
