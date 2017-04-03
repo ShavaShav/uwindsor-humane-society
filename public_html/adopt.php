@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/../config.php');
+require_once(dirname(__FILE__) . '/resources/config.php');
 require_once(dirname(__FILE__) . '/resources/lib/database.php');
 require_once($TEMPLATES_PATH . '/common.php');
 
@@ -149,7 +149,7 @@ if (!isset($_SESSION['wishlist'])){
                             $animal_val = explode("+",$_SESSION['wishlist'][$i]);
                 ?>
                         <div class='wishlistAnimals'>
-                        <img src='<?php echo $animal_val[1];?>' class='animalImage'>
+                        <img src='<?php echo $animal_val[1];?>'>
                         <p><?php echo $animal_val[0];?></p>
                         <input type='button' value='Remove Animal' onclick='removeAnimal("<?php echo $_SESSION['wishlist'][$i];?>");'>
                         <br>
