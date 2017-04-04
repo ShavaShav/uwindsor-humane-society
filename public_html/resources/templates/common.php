@@ -9,7 +9,7 @@ if (isset($_GET['logout'])){
 	unset($_GET);
 }
 
-if(isset($_POST['user_name']) && isset($_POST['user_password_new'])){
+/*if(isset($_POST['user_name']) && isset($_POST['user_password_new'])){
 	require_once(dirname(__FILE__) . '/../lib/login_handler.php');
 	loginUser();
 	unset($_POST);
@@ -19,7 +19,7 @@ if (isset($_POST['reg_user_name']) && isset($_POST['reg_user_password_new']) && 
 	require_once(dirname(__FILE__) . '/../lib/register_handler.php');
 	registerUser();
 	unset($_POST);
-}
+}*/
 
 function html5_header($title, $css_files = array(), $js_files = array())
 {
@@ -62,7 +62,8 @@ echo <<<ZZEOF
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+		data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -80,7 +81,8 @@ echo <<<ZZEOF
       <ul class="nav navbar-nav">
         <li><a href="index.php">Home <span class="sr-only">Home</span></a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contact Us <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+			aria-haspopup="true" aria-expanded="false">Contact Us <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="cruelty.php">Report cruelty</a></li>
             <li><a href="contactus.php">Email us</a></li>
@@ -119,7 +121,7 @@ ZZEOF;
 				<li>
 					 <div>
 							<div>
-								 <form class="form" role="form" method="post" name="login" action="#" accept-charset="UTF-8" id="login-nav">
+								 <form class="form" role="form" method="post" name="login" action="login_confirmation.php" accept-charset="UTF-8" id="login-nav">
 										<div class="form-group">
 											 <label class="sr-only" for="user_name">Username</label>
 											 <input id="user_name" placeholder="Username" name="user_name" required>
@@ -144,9 +146,9 @@ ZZEOF;
 				<li>
 					 <div>
 							<div>
-								 <form class="form" role="form" method="post" name="register" onsubmit="return validateRegister()" action="#" accept-charset="UTF-8" id="login-nav">
+								 <form class="form" role="form" method="post" name="register" action="registration_confirmation.php" accept-charset="UTF-8" id="login-nav">
 										<div class="form-group">
-											 <input id="user_name" placeholder="Username" name="reg_user_name" required>
+											 <input id="user_name" placeholder="Username (2-64 chars)" pattern=".{2,}" name="reg_user_name" required>
 										</div>
 										<div class="form-group">
 											<input id="login_input_email" placeholder="Email (name@domain.x)" name="email" required autocomplete="off" /><br>

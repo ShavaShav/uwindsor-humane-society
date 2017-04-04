@@ -74,9 +74,12 @@ body {
 	background-color: #FFF;
     border-radius: 25px;
     border: 2px solid #008CBA;
-	margin: 100px;
-	padding: 10px;
+	margin: auto;
+	padding: 20px;
+    text-align:center;
 }
+
+
 
 /* all buttons use this css */
 input[type=submit], button, input[type=button] {

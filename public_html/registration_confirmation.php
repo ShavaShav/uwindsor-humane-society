@@ -6,11 +6,11 @@ require_once('resources/lib/register_handler.php');
 
 html5_header(
 	'Register Confirmation',
-	array('css/root.css',),
+	array('css/root.css'),
 	array());
 html5_nav();
 
-registerUser();
-
+$message = registerUser();
+echo "<p>" . $message . "</p></div>";
 html5_footer();
 ?>
