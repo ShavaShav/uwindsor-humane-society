@@ -104,9 +104,9 @@ html5_nav();
          <script>
              // jquery for this
             $('#animalImage').bind('change', function() {
-                if (this.files[0].size > 250000){
+                if (this.files[0].size > 1000000){ //1MB
                     // display prompt
-                    document.getElementById('prompt').innerHTML="Too large! (max 250 kb)";
+                    document.getElementById('prompt').innerHTML="Too large! (max 1MB)";
                     // dont save image
                     document.getElementById('animalImage').value=null;
                 }

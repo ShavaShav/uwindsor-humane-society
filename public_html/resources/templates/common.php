@@ -102,7 +102,7 @@ echo <<<ZZEOF
 <li><form id="logoutbutton" method="get">
     <input type="hidden" name="logout">
 </li>
-<li><a href="#" onclick="document.getElementById('logoutbutton').submit()">Logout?</a></li>
+<li><a href="#" onclick="document.getElementById('logoutbutton').submit()">Logout</a></li>
 </form></li>
 <li> <a href="user_details.php">User Details</a></li>
 </ul>

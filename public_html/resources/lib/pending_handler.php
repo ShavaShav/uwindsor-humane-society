@@ -76,11 +76,10 @@ else if (isset($_POST['reload_surrenders']))
                     adoptDenyEmail($user_entry, $animalName, $header);
                 }
             }
- // COMMENTING OUT FOR NOW UNTIL WE GET SURRENDER UP SO WE CAN REINSERT THEM!!!    
             // now safe to remove the animal from our tables
-//            $db->remove($id);
+            $db->remove($id);
             // delete image
-//            unlink('../../img/animals/' . $id . '.jpg');
+            unlink('../../img/animals/' . $id . '.jpg');
         } else if (!strcmp($option, 'deny_adoption')){
             // denying adoption
             // remove from adoption table
@@ -99,9 +98,9 @@ else if (isset($_POST['reload_surrenders']))
     
     // show the admin whether operations were successful via JS window alert
     if ($success){
-        echo '<script>alert("Users have been notified by email!")</script>';
+        echo '<script>window.alert("Users have been notified by email!")</script>';
     } else {
-        echo '<script>alert("Postmaster was unable to send emails!")</script>';
+        echo '<script>window.alert("Postmaster was unable to send emails!")</script>';
     }
     
 }

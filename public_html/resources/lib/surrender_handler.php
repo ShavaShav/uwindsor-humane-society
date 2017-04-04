@@ -24,7 +24,7 @@ $return_id = $db->insert($name, $species, $age, $gender, $altered, $size, $prima
 // upload image to temp img/surrenders/ folder
 if (!empty($_FILES)) { // image uploaded
     
-    if ($_FILES['animalImage']['size'] < 250000){ // limit to 250 kb jpgs
+    if ($_FILES['animalImage']['size'] < 1000000){ // limit to 1MB jpgs
 
         $tempFile = $_FILES['animalImage']['tmp_name']; // uploaded file
         $targetPath = $_SERVER['DOCUMENT_ROOT'].'/img/surrenders/'; // surrenders folder path
