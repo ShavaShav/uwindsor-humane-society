@@ -1,9 +1,9 @@
 <?php
 
-$name = $_POST['customer_name'];
-$email = $_POST['email_address'];
-$reason = $_POST['contact'];
-$elaborate = $_POST['elaborate'];
+$name = htmlspecialchars($_POST['customer_name']);
+$email = htmlspecialchars($_POST['email_address']);
+$reason = htmlspecialchars($_POST['contact']);
+$elaborate = htmlspecialchars($_POST['elaborate']);
 $textelaborate = strip_tags($elaborate);
 $subject = "Contact Us Regarding " . $reason;
 

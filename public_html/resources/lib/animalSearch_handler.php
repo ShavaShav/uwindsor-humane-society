@@ -2,7 +2,7 @@
 
 require_once('database.php');
 
-$partialSearch = $_POST['name'];
+$partialSearch = htmlspecialchars($_POST['name']);
 
 $db = new AnimalDB; // connect to database
 

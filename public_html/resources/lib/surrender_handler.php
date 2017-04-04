@@ -7,14 +7,14 @@ require_once(dirname(__FILE__) . '/../templates/common.php');
 
 // insert animal details into Surrenders table
 
-$name = $_POST['name'];
-$species = $_POST['species'];
-$age = $_POST['age'];
-$gender = $_POST['gender'];
-$altered = $_POST['altered'];
-$size = $_POST['size'];
-$primary_color = $_POST['primary_color'];
-$secondary_color = $_POST['secondary_color'];
+$name = htmlspecialchars($_POST['name']);
+$species = htmlspecialchars($_POST['species']);
+$age = htmlspecialchars($_POST['age']);
+$gender = htmlspecialchars($_POST['gender']);
+$altered = htmlspecialchars($_POST['altered']);
+$size = htmlspecialchars($_POST['size']);
+$primary_color = htmlspecialchars($_POST['primary_color']);
+$secondary_color = htmlspecialchars($_POST['secondary_color']);
 $username = $_SESSION['logged_in_user'];
 
 $db = new SurrenderDB; 

@@ -20,6 +20,7 @@ $animals = $db->getFilteredAnimals($filters); // query db to get array of animal
 
 // create response: animals divs, javascript that calls this will set the innerHTML
 // show animals from database respone
+// filters are drop boxes, so dont need to check
 foreach($animals as $animal) {
     $id = $animal["id"];
     $name = $animal["name"];

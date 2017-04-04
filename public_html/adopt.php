@@ -6,7 +6,7 @@ require_once($TEMPLATES_PATH . '/common.php');
 html5_header(
 	'Adopt Animals',
 	array('css/root.css', 'css/adopt.css'),
-	array('js/wishlist.js', 'js/filter.js', 'js/animalSearch.js', 'js/form_check.js'));
+	array('js/wishlist.js', 'js/filter.js', 'js/animalSearch.js'));
 	
 html5_nav();
 

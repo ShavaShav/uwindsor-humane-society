@@ -11,22 +11,6 @@ html5_header(
 	array('css/index.css'),
 	array());
 
-if (is_logged_in()){
-	echo <<<ZZEOF
-	<div id="signin" style="cursor:pointer;" 
-	onclick="document.location='login.php'">
-	
-	<img src='img/svg/logout.svg'>
-	</div>
-ZZEOF;
-} else {
-	echo <<<ZZEOF
-	<div id="signin" style="cursor:pointer;" >
-	
-	<img src='img/svg/signin.svg'>
-	</div>
-ZZEOF;
-}
 ?>
 
 

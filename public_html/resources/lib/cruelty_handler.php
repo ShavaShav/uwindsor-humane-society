@@ -1,11 +1,11 @@
 <?php
 
-$name = $_POST['name'];
-$email = $_POST['e-mail'];
-$number = $_POST['phoneNumber'];
-$personName = $_POST['personName'];
-$personAddress = $_POST['personAddress'];
-$incident = $_POST['incidentText'];
+$name = htmlspecialchars($_POST['name']);
+$email = htmlspecialchars($_POST['e-mail']);
+$number = htmlspecialchars($_POST['phoneNumber']);
+$personName = htmlspecialchars($_POST['personName']);
+$personAddress = htmlspecialchars($_POST['personAddress']);
+$incident = htmlspecialchars($_POST['incidentText']);
 $textIncident = strip_tags($incident);
 $subject = "Cruelty Complaint From " . $name;
 

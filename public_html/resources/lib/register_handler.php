@@ -26,8 +26,9 @@ function registerUser() {
     ) {*/
 	
 	
-		$user_name = $_POST['reg_user_name'];
-        $user_password = $_POST['reg_user_password_new'];
+		$user_name = htmlspecialchars($_POST['reg_user_name']);
+        $user_password = htmlspecialchars($_POST['reg_user_password_new']);
+		$email = htmlspecialchars($_POST['email']);
 
 		$db = new UserDB;
 		
@@ -36,13 +37,12 @@ function registerUser() {
 			$string = "Sorry, that username is already taken.";
             
         } else {
-            if ($db->insert($user_name, $user_password)) {
+            if ($db->insert($user_name, $user_password, $email)) {
                $string = "Your account has been created successfully. You can now log in.";
             } else {
                 $string = "Sorry, your registration failed. Please go back and try again.";
             }
         }
-		echo "<script type='text/javascript'>", "alertUser($string)", "</script>";
 		
 		
 
