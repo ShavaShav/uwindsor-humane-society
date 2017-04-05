@@ -3,7 +3,7 @@
 
 $TEMPLATES_PATH = 'resources/templates';
 $LIB_PATH = 'resources/lib';
-$IMG_PATH = 'img';
+$IMG_PATH = $_SERVER['DOCUMENT_ROOT'] . '/../private_html/img';
 
 // database credentials
 $DB = array(
