@@ -1,5 +1,5 @@
 <?php
-require_once(dirname(__FILE__) . '/resources/config.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/../config.php');
 require_once(dirname(__FILE__) . '/resources/lib/login-tools.php');
 require_once(dirname(__FILE__) . '/resources/lib/database.php');
 require_once($TEMPLATES_PATH . '/common.php');
@@ -7,7 +7,7 @@ session_start();
 
 html5_header(
 	'User Details',
-	array('css/user_details.css'),
+	array('css/root.css', 'css/user_details.css'),
 	array());
 	
 html5_nav();
