@@ -4,13 +4,13 @@ require_once($TEMPLATES_PATH . '/common.php');
 
 html5_header(
 	'Contact Us',
-	array('css/root.css', 'css/confirmation.css'),
+	array('css/root.css'),
 	array());
 	
 html5_nav();
 ?>
-<div class="contentborder" id="confirmationText">
-<p>
+<div class="contentborder">
+<p id="prompt">
 Thank you, we will review your submission and get back to you shortly!
 </p>
 </div>

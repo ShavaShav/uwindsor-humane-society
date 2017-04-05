@@ -9,9 +9,9 @@ function loginUser($user_name, $user_password) {
 		
         if ($db->check_user_password($user_name, $user_password)){
 			log_in_user($user_name);
-			$string = "<p>Successfully logged in!</p>";
+			$string = "<p id='prompt'>Successfully logged in!</p>";
 		} else {
-			$string = "<p>Password did not match our logs</p>";
+			$string = "<p id='prompt'>Password did not match our logs</p>";
 		}
 	return $string;
 }

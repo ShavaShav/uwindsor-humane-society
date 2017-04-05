@@ -55,7 +55,7 @@ html5_nav();
 
 </form>
 
-<br><p>
+<br><p id="disclaimer">
 You may also contact us at 1-800-519-5119 or visit us at 33 LULZ Street, Windsor, Ontario.
 </p>
 

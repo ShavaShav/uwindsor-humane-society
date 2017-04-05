@@ -18,12 +18,12 @@ if (isset($_POST['user_email'])){
 	if ($_POST['user_password'] == $_POST['user_password_repeat']){
 		if ($db->check_user_password($_SESSION['logged_in_user'], $_POST['user_password'])){
 			$db->modifyEmail($_SESSION['logged_in_user'], $_POST['user_email']);
-			echo "<p>Email successfully changed!</p>";
+			echo "<p id='prompt'>Email successfully changed!</p>";
 		} else {
-			echo "<p>Password did not match our records</p>";
+			echo "<p id='prompt'>Password did not match our records</p>";
 		}
 	} else {
-		echo "<p>Typed passwords did not match</p>";
+		echo "<p id='prompt'>Typed passwords did not match</p>";
 	}
 }
 
@@ -33,12 +33,12 @@ if (isset($_POST['user_password_new'])){
 		if ($db->check_user_password($_SESSION['logged_in_user'], $_POST['user_password'])){
 			
 			$db->modifyPassword($_SESSION['logged_in_user'], $_POST['user_password_new']);
-			echo "<p>Password successfully changed!</p>";
+			echo "<p id='prompt'>Password successfully changed!</p>";
 		} else {
-			echo "<p>Password did not match our records</p>";
+			echo "<p id='prompt'>Password did not match our records</p>";
 		}
 	} else {
-		echo "<p>Typed passwords did not match</p>";
+		echo "<p id='prompt'>Typed passwords did not match</p>";
 	}
 }
 
