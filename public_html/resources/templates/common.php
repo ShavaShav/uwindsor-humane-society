@@ -7,10 +7,10 @@ session_start();
 
 
 
-if (isset($_GET['logout'])){
+if (isset($_POST['logout'])){
 	require_once(dirname(__FILE__) . '/../lib/login_handler.php');
 	log_out_user();
-	unset($_GET);
+	unset($_POST['logout']);
 }
 
 /*if(isset($_POST['user_name']) && isset($_POST['user_password_new'])){
@@ -111,9 +111,10 @@ echo '</b> <span class="caret"></span></a><ul id="login-dp" class="dropdown-menu
 echo <<<ZZEOF
 <li><form id="logoutbutton" method="get">
     <input type="hidden" name="logout">
+</form>
 </li>
-<li><a href="#" onclick="document.getElementById('logoutbutton').submit()">Logout</a></li>
-</form></li>
+<li><a href="../message_page.php" onclick="document.getElementById('logoutbutton').submit()">Logout</a></li>
+</li>
 <li> <a href="user_details.php">User Details</a></li>
 </ul>
     </div><!-- /.navbar-collapse -->
