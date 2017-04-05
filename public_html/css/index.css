@@ -18,8 +18,6 @@ body {
 	padding-top: 0.5em;
 }
 
-
-
 .dog:hover{
 	fill: white;
 }
@@ -62,7 +60,7 @@ body {
 	border-radius: 1em;
 	border-color: black;
 	background-color: rgba(205, 0, 0, 0.7);
-	transform: scale(1.1);
+	transform: scale(1.05);
 }
 
 #Animals {
@@ -78,7 +76,7 @@ body {
 	border-radius: 1em;
 	border-color: black;
 	background-color: rgba(72, 130, 20, 0.7);
-	transform: scale(1.1);
+	transform: scale(1.05);
 }
 
 #Surrender { 
@@ -94,7 +92,7 @@ body {
 	border-radius: 1em;
 	border-color: black;
 	background-color: rgba(255, 185, 15, 0.7);
-	transform: scale(1.1);
+	transform: scale(1.05);
 }
 
 #Cruelty { 
@@ -109,7 +107,7 @@ body {
 	border-radius: 1em;
 	border-color: black;
 	background-color: rgba(0, 154, 205, 0.7);
-	transform: scale(1.1);
+	transform: scale(1.05);
 }
 
 .buttonborder {

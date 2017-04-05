@@ -36,3 +36,7 @@ h2 {
 #disclaimer {
 	font-style: italic;
 }
+
+label {
+	text-align: left;
+}
