@@ -28,7 +28,7 @@ if (!isset($_SESSION['wishlist'])){
                 <!-- ajax here for the autosuggest -->
                 <form>
                     By Name:
-                    <input type="text" name="name" id="name"> 
+                    <input type="text" name="name" id="name" autocomplete="off"> 
                     <p id="autoSuggestion">Type for suggestion!</p><br>
                     <input type="submit" value="Search" id="animalSearchButton">
                 </form>
