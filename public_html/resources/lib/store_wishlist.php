@@ -25,7 +25,7 @@ if(isset($_POST['show_wishlist'])) {
         // show animal info with a button to remove
         echo <<<ZZEOF
         <div class='wishlistAnimals'>
-            <img src='$animal_val[1]'>
+            <img src='$animal_val[1]' class="animalImage">
             <p>$animal_val[0]</p>
             <input type="button" value="Remove Animal" onclick="removeAnimal('
 ZZEOF;
