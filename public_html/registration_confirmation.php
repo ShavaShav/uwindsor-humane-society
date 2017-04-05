@@ -1,8 +1,9 @@
 <?php
 require_once('resources/templates/common.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/../config.php');
-require_once('resources/lib/database.php');
 require_once('resources/lib/register_handler.php');
+require_once('resources/lib/form_fill.php');
+
+regformdata();
 
 html5_header(
 	'Register Confirmation',

@@ -1,7 +1,11 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/../config.php');
 require_once(dirname(__FILE__) . '/../lib/login-tools.php');
+require_once(dirname(__FILE__) . '/../lib/form_fill.php');
 session_start();
+
+
+
 
 if (isset($_GET['logout'])){
 	require_once(dirname(__FILE__) . '/../lib/login_handler.php');
@@ -56,6 +60,10 @@ function html5_nav()
 {
 
 global $TEMPLATES_PATH;
+
+$log_name = session_field('user_name');
+$reg_name = session_field('reg_user_name');
+$email = session_field('email');
 // can be NO whitespace after <<<ZZEOF
 echo <<<ZZEOF
 <nav class="navbar navbar-default navbar-fixed-top">
@@ -123,12 +131,12 @@ ZZEOF;
 							<div>
 								 <form class="form" role="form" method="post" name="login" action="login_confirmation.php" accept-charset="UTF-8" id="login-nav">
 										<div class="form-group">
-											 <label class="sr-only" for="user_name">Username</label>
-											 <input id="user_name" placeholder="Username" name="user_name" required>
+											 <label>Username</label>
+											 <input id="user_name" name="user_name" value="{$log_name}" required>
 										</div>
 										<div class="form-group">
-											 <label class="sr-only" for="user_password_new">Password</label>
-											 <input type="password" id="user_password_new" name="user_password_new" placeholder="Password" required>
+											 <label>Password</label>
+											 <input type="password" id="user_password_new" name="user_password_new" required>
 										</div>
 										<div>
 											 <button type="submit">Sign in</button>
@@ -148,10 +156,12 @@ ZZEOF;
 							<div>
 								 <form class="form" role="form" method="post" name="register" action="registration_confirmation.php" accept-charset="UTF-8" id="login-nav">
 										<div class="form-group">
-											 <input id="user_name" placeholder="Username (2-64 chars)" pattern=".{2,}" name="reg_user_name" required>
+											 <label>Username (2-64 chars)</label>
+											 <input id="user_name"  pattern=".{2,}" name="reg_user_name" value="{$reg_name}" required />
 										</div>
 										<div class="form-group">
-											<input id="login_input_email" placeholder="Email (name@domain.x)" name="email" required autocomplete="off" /><br>
+											<label>Email (name@domain.x)</label>
+											<input id="login_input_email" name="email" value="{$email}" required  /><br>
 										</div>
 										<div class="form-group">
 											<input id="login_input_password_new" placeholder="Password (>6 chars)" type="password" name="reg_user_password_new" pattern=".{6,}" required autocomplete="off" /><br>
