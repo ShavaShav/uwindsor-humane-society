@@ -9,7 +9,7 @@ $db = new UserDB;
 html5_header(
 	'University of Windsor Humane Society',
 	array('css/root.css', 'css/index.css'),
-	array());
+	array('js/index.js'));
 
 global $TEMPLATES_PATH;
 ?>
@@ -17,6 +17,12 @@ global $TEMPLATES_PATH;
 
 <div class="logoborder">
 	<img src="resources/templates/img.php?type=svg&filename=frontpagelogo.svg">
+</div>
+
+<div id="greetingBox">
+    <div id="greetingMsg">
+        <!-- generated via index.js -->
+    </div>
 </div>
 
 <div class="buttonborder">

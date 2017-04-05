@@ -1,6 +1,7 @@
 body {
 	background: transparent;
     margin:100px;
+    border:none;
 }
 .contentborder {
 	display: flex;
