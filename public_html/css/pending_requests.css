@@ -41,6 +41,10 @@ body {
     text-align:center;
 }
 
+.pendingEntry:hover {
+	transform: scale(1.1);
+}
+
 .buttonBox {
     display: flex;
     flex-direction: row;
