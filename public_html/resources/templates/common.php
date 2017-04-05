@@ -164,10 +164,12 @@ ZZEOF;
 											<input id="login_input_email" name="email" value="{$email}" required  /><br>
 										</div>
 										<div class="form-group">
-											<input id="login_input_password_new" placeholder="Password (>6 chars)" type="password" name="reg_user_password_new" pattern=".{6,}" required autocomplete="off" /><br>
+											<label>Password (>6 chars)</label>
+											<input id="login_input_password_new" type="password" name="reg_user_password_new" pattern=".{6,}" required autocomplete="off" /><br>
 										</div>
 										<div class="form-group">
-											<input id="login_input_password_repeat" placeholder="Repeat Password" type="password" name="reg_user_password_repeat" pattern=".{6,}" required autocomplete="off" /><br>
+										<label>Repeat Password</label>
+											<input id="login_input_password_repeat" type="password" name="reg_user_password_repeat" pattern=".{6,}" required autocomplete="off" /><br>
 										</div>
 										<div>
 											 <button type="submit">Register</button>
