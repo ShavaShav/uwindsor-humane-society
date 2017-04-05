@@ -1,7 +1,7 @@
 body {
 	width: 100%;
     background-color: transparent;
-    border-radius: 0;
+    border: none;
     margin: 0;
 }
 

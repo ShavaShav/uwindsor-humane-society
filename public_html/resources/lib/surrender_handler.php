@@ -21,34 +21,24 @@ $db = new SurrenderDB;
 
 $return_id = $db->insert($name, $species, $age, $gender, $altered, $size, $primary_color, $secondary_color, $username);
 
-// upload image to temp img/surrenders/ folder
+// upload image to temp img/surrenders/ folder, if there is an upload (client side only allows jpgs)
 if (!empty($_FILES)) { // image uploaded
     
-    if ($_FILES['animalImage']['size'] < 1000000){ // limit to 1MB jpgs
+    if ($_FILES['animalImage']['size'] < 1000000){ // limit to 1MB jpgs (server side check)
 
         $tempFile = $_FILES['animalImage']['tmp_name']; // uploaded file
-        $targetPath = $_SERVER['DOCUMENT_ROOT'].'/img/surrenders/'; // surrenders folder path
+        $targetPath = $IMG_PATH. '/surrenders/'; // surrenders folder path
         $targetFile =  $targetPath . $return_id . '.jpg';   //attach id from db
-
-        if (!move_uploaded_file($tempFile,$targetFile)){
-            // failure to upload
-            copyDefaultImage($return_id);
-        } 
+        
+        // checking server side that the image in a jpg
+        if (strcmp(mime_content_type($targetPath), "image/jpeg"))
+            move_uploaded_file($tempFile,$targetFile); // move the temp upload to surrenders folder
     }     
-} else {
-    // no image uploaded
-    copyDefaultImage($return_id);
 }
+
+// if no image is uploaded, or bad image, img.php will just return the default cat silouette image wherever it should appear on the site
 
 // redirect user to confirmation page notifying submission worked
 header('Location: ../../confirmation.php');
-
-
-function copyDefaultImage($surrenderId){
-    // copys the default animal image as placeholder
-    $targetImg = $_SERVER['DOCUMENT_ROOT'].'/img/surrenders/'.$surrenderId.'.jpg';
-    $defaultImg = $_SERVER['DOCUMENT_ROOT'].'/img/animals/default.jpg';
-    copy($defaultImg, $targetImg);
-}
 
 ?>

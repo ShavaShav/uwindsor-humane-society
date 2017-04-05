@@ -38,7 +38,7 @@ else if (isset($_POST['reload_surrenders']))
             $surrenderID = $_POST['id'];
             $animalID = $db->moveToAnimalsTable($surrenderID);
             // Move image from img/surrenders/ to img/animals/ with new id
-            rename('../../img/surrenders/'.$surrenderID.'.jpg', '../../img/animals/'.$animalID.'.jpg');
+            rename($IMG_PATH . '/surrenders/'.$surrenderID.'.jpg', $IMG_PATH . '/animals/'.$animalID.'.jpg');
             
             // send email to user
             $subject = 'Approval of '.$surrenderName.'\'s surrender to the uWindsor Humane Society.';
@@ -47,7 +47,7 @@ else if (isset($_POST['reload_surrenders']))
             // denying surrender
             $db->remove($surrenderID); // remove from surrender table
             // delete image
-            unlink('../../img/surrenders/' . $surrenderID . '.jpg');
+            unlink($IMG_PATH . '/surrenders/' . $surrenderID . '.jpg');
             
              // send email to user
             $subject = 'Denial of '.$surrenderName.'\'s surrender to the uWindsor Humane Society.';
@@ -79,7 +79,7 @@ else if (isset($_POST['reload_surrenders']))
             // now safe to remove the animal from our tables
             $db->remove($id);
             // delete image
-            unlink('../../img/animals/' . $id . '.jpg');
+            unlink($IMG_PATH . '/animals/' . $id . '.jpg');
         } else if (!strcmp($option, 'deny_adoption')){
             // denying adoption
             // remove from adoption table
