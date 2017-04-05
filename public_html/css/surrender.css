@@ -5,30 +5,22 @@ body {
     margin-top: 130px;
     padding: 30px;
     width: 600px;
+    text-align: left;
 }
 
 .contentBorder {
 	display:flex;
 }
 
-.surrenderOption {
+.surrenderOption { /* create space between different fields */
     padding:10px;
 }
 
 .formContent {
     -webkit-column-count: 2; /* Chrome, Safari, Opera */
     -moz-column-count: 2; /* Firefox */
-    column-count: 2;
+    column-count: 2; /* divide content in two columns */
 	width: 600px;
 	padding-top: 30px;
-}
-
-.submitButton {
-	margin-left: auto;
-	margin-right: auto;
-}
-
-h2 {
-	margin-left: auto;
-	margin-right: auto;
+	text-align: left;
 }

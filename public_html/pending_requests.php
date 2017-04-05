@@ -36,7 +36,7 @@ if ( is_logged_in() && isAdmin() ){
 
 <!-- this is just a safety precaution in case a user manually types in url to this page -->
     <div id="unauthorized">
-        <p>Sorry, you are not authorized to view this page!</p>
+        <p id="prompt">Sorry, you are not authorized to view this page!</p>
     </div>
 
 <?php

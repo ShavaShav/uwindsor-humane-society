@@ -11,6 +11,6 @@ html5_header(
 html5_nav();
 
 $message = registerUser();
-echo "<p>" . $message . "</p></div>";
+echo "<p id='prompt'>" . $message . "</p></div>";
 html5_footer();
 ?>

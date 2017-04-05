@@ -8,35 +8,21 @@ body {
 
 .contentBorder {
 	display:flex;
-	margin: 15px;
 }
 
 .formOption {
-    padding:10px;
+    padding:10px; /* create space between different fields */
 }
 
 .formContent {
     -webkit-column-count: 2; /* Chrome, Safari, Opera */
     -moz-column-count: 2; /* Firefox */
-    column-count: 2;
+    column-count: 2; /* divide content in two columns */
 	padding-bottom: 15px;
 	padding-top: 30px;
-}
-
-.submitButton {
-	margin-left: auto;
-	margin-right: auto;
-}
-
-h2 {
-	margin-left: auto;
-	margin-right: auto;
+	text-align: left;
 }
 
 #disclaimer {
 	font-style: italic;
-}
-
-label {
-	text-align: left;
 }

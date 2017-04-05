@@ -128,7 +128,7 @@ html5_nav();
     
     	<?php } else { ?>
 
-		<p style="text-align:center;"> Please log in or visit us in person at visit us at 33 LULZ Street, Windsor, Ontario to surrender your pet </p>
+		<p id="prompt"> Please log in or visit us in person at visit us at 33 LULZ Street, Windsor, Ontario to surrender your pet </p>
 		
 	<?php
 	}

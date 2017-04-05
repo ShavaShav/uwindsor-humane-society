@@ -47,7 +47,7 @@ if ( is_logged_in() ){
 } else { // end if logged in
 ?>
     <!-- this is just a safety precaution in case a user manually types in url to this page -->
-    <p style="text-align:center">Sorry, you must be signed in to view this page!</p>
+    <p id="prompt">Sorry, you must be signed in to view this page!</p>
 
 <?php
 } // end else (not logged in)
