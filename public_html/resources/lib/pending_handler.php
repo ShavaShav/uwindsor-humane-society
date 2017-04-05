@@ -11,11 +11,11 @@ else if (isset($_POST['reload_surrenders']))
     reloadSurrenders();
 } else if (isset($_POST['option'])) {
     // storing some post variables and common stuff that will be in every email
-    $option = $_POST['option'];
+    $option = htmlspecialchars($_POST['option']);
     $admin_email = 'uwindsorhs@gmail.com';
     // set up mail header   
     $db = new UserDB;
-    $username = $_POST['username'];
+    $username = htmlspecialchars($_POST['username']);
     $user = $db->lookup($username); // get the user details
     $user_email = $user['email']; // get their email address
     $db->close();
@@ -30,12 +30,11 @@ else if (isset($_POST['reload_surrenders']))
     if (strpos($option, 'surrender') !== false){
         // surrender change
         $db = new SurrenderDB;
-        $surrenderID = $_POST['id'];
+        $surrenderID = htmlspecialchars($_POST['id']);
         $surrenderAnimal = $db->lookup($surrenderID);
         $surrenderName = $surrenderAnimal['name'];
         if (!strcmp($option, 'confirm_surrender')){
             // confirming surrender
-            $surrenderID = $_POST['id'];
             $animalID = $db->moveToAnimalsTable($surrenderID);
             // Move image from img/surrenders/ to img/animals/ with new id
             rename($IMG_PATH . '/surrenders/'.$surrenderID.'.jpg', $IMG_PATH . '/animals/'.$animalID.'.jpg');
@@ -58,7 +57,7 @@ else if (isset($_POST['reload_surrenders']))
     } else {
         // adoption change
         $db = new AnimalDB;
-        $id = $_POST['id'];
+        $id = htmlspecialchars($_POST['id']);
         $animal = $db->lookup($id);
         $animalName = $animal['name'];
         if (!strcmp($option, 'confirm_adoption')){
@@ -156,6 +155,7 @@ $entries = $db->lookup_all(); // query db to get array of animals
 
 // create response: animals divs, javascript that calls this will set the innerHTML
 foreach($entries as $entry) {
+    // need to santize these inputs
     $animal_id = $entry["id"];
     $name = $entry["name"]; // animal name
     $species = $entry["species"];

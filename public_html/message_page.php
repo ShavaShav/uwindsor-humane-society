@@ -16,8 +16,8 @@ $db = new UserDB;
 
 if (isset($_POST['user_email'])){
 	if ($_POST['user_password'] == $_POST['user_password_repeat']){
-		if ($db->check_user_password($_SESSION['logged_in_user'], $_POST['user_password'])){
-			$db->modifyEmail($_SESSION['logged_in_user'], $_POST['user_email']);
+		if ($db->check_user_password($_SESSION['logged_in_user'], htmlspecialchars($_POST['user_password'])){
+			$db->modifyEmail($_SESSION['logged_in_user'], htmlspecialchars($_POST['user_email']));
 			echo "<p id='prompt'>Email successfully changed!</p>";
 		} else {
 			echo "<p id='prompt'>Password did not match our records</p>";
@@ -30,9 +30,9 @@ if (isset($_POST['user_email'])){
 //Have to use regular expression to check password
 if (isset($_POST['user_password_new'])){
 	if ($_POST['user_password'] == $_POST['user_password_repeat']){
-		if ($db->check_user_password($_SESSION['logged_in_user'], $_POST['user_password'])){
+		if ($db->check_user_password($_SESSION['logged_in_user'], htmlspecialchars($_POST['user_password']))){
 			
-			$db->modifyPassword($_SESSION['logged_in_user'], $_POST['user_password_new']);
+			$db->modifyPassword($_SESSION['logged_in_user'], htmlspecialchars($_POST['user_password_new']));
 			echo "<p id='prompt'>Password successfully changed!</p>";
 		} else {
 			echo "<p id='prompt'>Password did not match our records</p>";

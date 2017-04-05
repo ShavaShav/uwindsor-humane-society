@@ -3,7 +3,7 @@
 require_once('database.php');
 
 // go through POST fields(filters), building array to make query
-$partialSearch = $_POST['name'];
+$partialSearch = htmlspecialchars($_POST['name']);
 
 $db = new AnimalDB; // connect to database
 
@@ -13,7 +13,6 @@ $db = new AnimalDB; // connect to database
  {
  	echo $animals[0]['name'];
  }
- 
  else
  {
  	echo "No animals found!";

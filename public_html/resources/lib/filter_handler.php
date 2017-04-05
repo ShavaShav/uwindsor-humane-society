@@ -11,7 +11,7 @@ foreach($_POST as $filter => $value){
     if (!strcmp($value, "all")) // don't add a filter, if selection's value is all
         continue;
     // else add the filter to the array
-    $filters[$filter] = $value;
+    $filters[$filter] = htmlspecialchars($value);
 }
 
 $db = new AnimalDB; // connect to database
