@@ -12,7 +12,7 @@ $subject = "Cruelty Complaint From " . $name;
 $message = "Message from: \n\n" . $name . "\n" . $number . "\n" . $email . "\n\n\n Message concerning: \n\n" .
 $personName . "\n" . $personAddress . "\n\n\n Description of cruelty:\n\n" . $textIncident;
 
-mail('kim.ficara@gmail.com', $subject, $message);
+mail('uwindsorhs@gmail.com ', $subject, $message);
 
 header('Location: http://hs.myweb.cs.uwindsor.ca/confirmation.php');
 

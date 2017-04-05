@@ -53,6 +53,28 @@ html5_nav();
             }
          </script>
 
+		   <div class="formOption">
+            <label>Picture: </label>
+            <input type="file" name="animalImage" id="animalImage" accept="image/jpeg">
+            <p id='prompt' style='color:red'></p>
+        </div>
+         
+         <script>
+             // jquery for this
+            $('#animalImage').bind('change', function() {
+                if (this.files[0].size > 1000000){ //1MB
+                    // display prompt
+                    document.getElementById('prompt').innerHTML="Too large! (max 1MB)";
+                    // dont save image
+                    document.getElementById('animalImage').value=null;
+                }
+                else // clear prompt
+                  document.getElementById('prompt').innerHTML="";
+
+            });
+         </script>
+
+
           <div class="formOption"> <!-- need to keep age slide and display on same line -->
               <label>Age:</label>
               <input type="text" name="age" id="age" value="1" style="width: 3em" readonly>
@@ -96,28 +118,6 @@ html5_nav();
             </select> 
           </div>
         </div>
-
-
-        <div class="formOption">
-            <label>Picture: </label>
-            <input type="file" name="animalImage" id="animalImage" accept="image/jpeg">
-            <p id='prompt' style='color:red'></p>
-        </div>
-         
-         <script>
-             // jquery for this
-            $('#animalImage').bind('change', function() {
-                if (this.files[0].size > 1000000){ //1MB
-                    // display prompt
-                    document.getElementById('prompt').innerHTML="Too large! (max 1MB)";
-                    // dont save image
-                    document.getElementById('animalImage').value=null;
-                }
-                else // clear prompt
-                  document.getElementById('prompt').innerHTML="";
-
-            });
-         </script>
          
         <div class="formOption">
             <button type="submit" value="Submit" class="submitButton" id="submitButton">Submit</button>

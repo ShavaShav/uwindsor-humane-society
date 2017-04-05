@@ -1,0 +1,28 @@
+body {
+    background: #FFF;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 130px;
+    width: 900px;
+}
+
+.contentBorder {
+	display:flex;
+}
+
+.formOption {
+    padding:10px; /* create space between different fields */
+}
+
+.formContent {
+    -webkit-column-count: 2; /* Chrome, Safari, Opera */
+    -moz-column-count: 2; /* Firefox */
+    column-count: 2; /* divide content in two columns */
+	padding-bottom: 15px;
+	padding-top: 30px;
+	text-align: left;
+}
+
+#disclaimer {
+	font-style: italic;
+}

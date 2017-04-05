@@ -5,7 +5,7 @@ session_start();
 
 html5_header(
 	'Contact Us',
-	array('css/root.css'),
+	array('css/root.css', 'css/contactus.css'),
 	array());
 	
 html5_nav();
@@ -14,7 +14,7 @@ html5_nav();
     <script>
     tinymce.init({
         selector: '#elaborate',
-        height: 200,
+        height: 150,
         width: 400,
 
         plugins: [
@@ -24,9 +24,11 @@ html5_nav();
         image_advtab: true
     });
     </script>
+<div class="contentborder">
 <h2>Email Us</h2>
+<div class="formContent">
 <form action='resources/lib/contact_handler.php', method="post">
-<div class="formOption">
+<br><div class="formOption">
     <label>Name:</label>
     <input type="text" name="customer_name" required></br>  
 </div>
@@ -44,20 +46,24 @@ html5_nav();
     <option value="suggestion" >Suggestion</option>
     <option value="general enquiry" >General enquiry</option>
     </select>
-</div>
+</div><br><br><br><br>
+
+<label id="disclaimer">
+*You may also contact us at 1-800-519-5119 or visit us at 33 LULZ Street, Windsor, Ontario*
+</label><br><br><br>
 
 <div class="formOption">
     <p class = "formLabel"><b>Please Clarify:</b> </p>
     <textarea name="elaborate" id="elaborate"></textarea>
 </div>
+</div>
 
-<input type="submit" value="Submit" id="submitButton">
+<div class="formOption">
+	<input type="submit" value="Submit" id="submitButton">
+</div>
 
 </form>
-
-<br><p id="disclaimer">
-You may also contact us at 1-800-519-5119 or visit us at 33 LULZ Street, Windsor, Ontario.
-</p>
+</div>
 
 <?php
 html5_footer();

@@ -4,7 +4,7 @@ body {
     margin-right: auto;
     margin-top: 130px;
     padding: 30px;
-    width: 600px;
+    width: 900px;
     text-align: left;
 }
 
@@ -20,7 +20,9 @@ body {
     -webkit-column-count: 2; /* Chrome, Safari, Opera */
     -moz-column-count: 2; /* Firefox */
     column-count: 2; /* divide content in two columns */
-	width: 600px;
+	width: 900px;
 	padding-top: 30px;
+	padding-left: 80px;
+	padding-bottom: 20px;
 	text-align: left;
 }
