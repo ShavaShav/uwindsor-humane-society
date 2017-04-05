@@ -2,7 +2,7 @@
 
 :root {
 	box-sizing: border-box;
-	background-image: url("../img/layout/background.jpg"); /* I put the bg up here so body could be the white square */
+	background-image: url("../resources/templates/img.php?type=layout&filename=background.jpg"); /* I put the bg up here so body could be the white square */
 	background-repeat: repeat;
 
 }
@@ -78,6 +78,7 @@ p, div {
   }
   .collapse.in{
       display:block !important;
+      overflow-y: auto;
   }
 }
 

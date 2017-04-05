@@ -8,14 +8,15 @@ $db = new UserDB;
 
 html5_header(
 	'University of Windsor Humane Society',
-	array('css/index.css'),
+	array('css/root.css', 'css/index.css'),
 	array());
 
+global $TEMPLATES_PATH;
 ?>
 
 
 <div class="logoborder">
-	<img src="img/svg/frontpagelogo.svg">
+	<img src="resources/templates/img.php?type=svg&filename=frontpagelogo.svg">
 </div>
 
 <div class="buttonborder">
@@ -24,28 +25,28 @@ html5_header(
 		<div id="About" style="cursor:pointer;" 
 		onclick="document.location='contactus.php'"> 
 			
-		<img src='img/svg/contact.svg'>
+		<img src='resources/templates/img.php?type=svg&filename=contact.svg'>
 		
 		</div>
 				
 		<div id="Animals" style="cursor:pointer;" 
 		onclick="document.location='adopt.php'">
 		
-		<img src='img/svg/adopt.svg'>
+		<img src='resources/templates/img.php?type=svg&filename=adopt.svg'>
 		
 		</div>
 				
 		<div id="Surrender" style="cursor:pointer;" 
 		onclick="document.location='surrender.php'">
 		
-		<img src='img/svg/surrender.svg'>
+		<img src='resources/templates/img.php?type=svg&filename=surrender.svg'>
 		
 		</div>
 		
 		<div id="Cruelty" style="cursor:pointer;" 
 		onclick="document.location='cruelty.php'">
 		
-		<img src='img/svg/report.svg'>
+		<img src='resources/templates/img.php?type=svg&filename=report.svg'>
 		
 		</div>
 	</div>

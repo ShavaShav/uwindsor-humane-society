@@ -55,7 +55,7 @@ function html5_footer()
 function html5_nav()
 {
 
-global $IMG_PATH;
+global $TEMPLATES_PATH;
 // can be NO whitespace after <<<ZZEOF
 echo <<<ZZEOF
 <nav class="navbar navbar-default navbar-fixed-top">
@@ -71,9 +71,9 @@ echo <<<ZZEOF
       </button>
       <a href="index.php"><img class="navbar-brand" src="
 ZZEOF;
-print($IMG_PATH);
+print($TEMPLATES_PATH . '/img.php?type=content&filename=small_logo.png');
 echo <<<ZZEOF
-/content/small_logo.png"></a>
+"></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->

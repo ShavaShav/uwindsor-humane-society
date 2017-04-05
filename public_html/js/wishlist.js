@@ -32,9 +32,9 @@ function animalDragover(evt){
 function wishlist(id)
 {
     var animalDiv = document.getElementById(id);
-    var img_src = animalDiv.getElementsByTagName('img')[0].src;
+    var img_src = encodeURIComponent("type=animals&filename=" + id + ".jpg"); // post variables for img script
     var name = document.getElementById("animalName_"+id).innerHTML; 
-    
+    console.log(img_src);
     var params = "animal_id="+id+"&animal_img="+img_src+"&animal_name="+name; // for POST request 
 
     // this is where the ajax comes into play -> put animal in wishlist table

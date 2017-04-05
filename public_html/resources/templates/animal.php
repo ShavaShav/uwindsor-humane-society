@@ -1,20 +1,26 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/../config.php');
 
+global $TEMPLATES_PATH;
+$imgScript = $TEMPLATES_PATH . '/img.php?';
+
 function generateAnimalHTML($id, $name, $species, $age, $gender, $altered, $size, $primary_color, $secondary_color){
-    echo '<img src="../../img/animals/'.$id.'.jpg" class="animalImage">';
+    global $TEMPLATES_PATH;
+    echo '<img src="' . $TEMPLATES_PATH . '/img.php?type=animals&filename=' . $id . '.jpg" class="animalImage">';
     generateAnimalDetails($id, $name, $species, $age, $gender, $altered, $size, $primary_color, $secondary_color);
 }
 
 function generateAnimalShortHTML($id, $name){
-    echo '<img src="../../img/animals/'.$id.'.jpg" class="animalImage">';
+    global $TEMPLATES_PATH;
+    echo '<img src="' . $TEMPLATES_PATH . '/img.php?type=animals&filename=' . $id . '.jpg" class="animalImage">';
     echo '<p id="animalName_$id">'.$name.'</p>';
 }
 
 // generate surrender details with image and header
 function generateSurrenderHTML($username, $id, $name, $species, $age, $gender, $altered, $size, $primary_color, $secondary_color){
+    global $TEMPLATES_PATH;
     echo '<p><b>'.$username.'</b> wishes to surrender:</p>';
-    echo '<img src="../../img/surrenders/'.$id.'.jpg" class="animalImage">';
+    echo '<img src="' . $TEMPLATES_PATH . '/img.php?type=surrenders&filename=' . $id . '.jpg" class="animalImage">';
     generateAnimalDetails($id, $name, $species, $age, $gender, $altered, $size, $primary_color, $secondary_color);
 }
 
