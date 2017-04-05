@@ -8,6 +8,7 @@ html5_header(
 	array('css/root.css', 'css/adopt.css'),
 	array('js/wishlist.js', 'js/filter.js', 'js/animalSearch.js'));
 	
+	
 html5_nav();
 
 // setting session variables

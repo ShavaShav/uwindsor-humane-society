@@ -22,14 +22,14 @@ $db = new AnimalDB; // connect to database
     echo <<<ZZEOF
     <div class="animal" id="$id" draggable="true" ondragstart="animalDragstart($id)">
         <img src="../../img/animals/$id.jpg">
-        <p>Name: <span id="animalName_$id">$name</span></p>
-        <p>Species: <span id="animalSpecies_$id">$species</span></p>
-        <p>Age: <span id="animalAge_$id">$age</span></p>
-        <p>Gender: <span id="animalGender_$id">$gender</span></p>
-        <p>Altered: <span id="animalAltered_$id">$altered</span></p>
-        <p>Size: <span id="animalSize_$id">$size</span></p>
-        <p>Primary Color: <span id="animalPrimaryColor_$id">$primary_color</span></p>
-        <p>Secondary Color: <span id="animalSecondaryColor_$id">$secondary_color</span></p>
+        <p><span id="attribute">Name: </span><span id="animalName_$id">$name</span></p>
+        <p><span id="attribute">Species: </span><span id="animalSpecies_$id">$species</span></p>
+        <p><span id="attribute">Age: </span><span id="animalAge_$id">$age</span></p>
+        <p><span id="attribute">Gender: </span><span id="animalGender_$id">$gender</span></p>
+        <p><span id="attribute">Altered: </span><span id="animalAltered_$id">$altered</span></p>
+        <p><span id="attribute">Size: </span><span id="animalSize_$id">$size</span></p>
+        <p><span id="attribute">Primary Color: </span><span id="animalPrimaryColor_$id">$primary_color</span></p>
+        <p><span id="attribute">Secondary Color: </span><span id="animalSecondaryColor_$id">$secondary_color</span></p>
     </div>
 ZZEOF;
     }

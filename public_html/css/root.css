@@ -7,6 +7,18 @@
 
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Corben', Georgia, Times, serif;
+}
+
+h1, h2 {
+	text-shadow: 1px 1px 1px #ccc;
+}
+
+p, div {
+    font-family: 'Nobile', Helvetica, Arial, sans-serif;
+}
+
 .nav {
     font-size: 12pt;
 }
@@ -132,4 +144,8 @@ h2 {
     /* reisizing images if they are over 200px wide or high */
     max-width: 200px;
     max-height: 200px;
+}
+
+#attribute{
+	font-weight: bold;
 }

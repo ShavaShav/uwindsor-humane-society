@@ -1,6 +1,5 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/../config.php');
-require_once('php-pre55-password-hash-utils.php');
 
 class Database {
     protected $conn; // Actual connection is inherited by UserDB, AnimalsDB, WishlistDB and AdminDB

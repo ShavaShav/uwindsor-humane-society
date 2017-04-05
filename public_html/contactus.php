@@ -27,17 +27,17 @@ html5_nav();
 <h2>Email Us</h2>
 <form action='resources/lib/contact_handler.php', method="post">
 <div class="formOption">
-    <label>Name</label>
+    <label>Name:</label>
     <input type="text" name="customer_name" required></br>  
 </div>
 
 <div class="formOption">
-    <label>Email</label>
+    <label>Email:</label>
     <input type="text" name="email_address" required></br>
 </div>
 
 <div class="formOption">
-    <label>Reason for Contact</label>
+    <label>Reason for Contact:</label>
     <select id="contact" name="contact">
     <option value="no reason selected">Please select one</option>
     <option value="problem with website" >Problem with website</option>
@@ -47,7 +47,7 @@ html5_nav();
 </div>
 
 <div class="formOption">
-    <p class = "formLabel"><b><u> Please Clarify</u></b> </p>
+    <p class = "formLabel"><b>Please Clarify:</b> </p>
     <textarea name="elaborate" id="elaborate"></textarea>
 </div>
 
@@ -55,7 +55,7 @@ html5_nav();
 
 </form>
 
-<p>
+<br><p>
 You may also contact us at 1-800-519-5119 or visit us at 33 LULZ Street, Windsor, Ontario.
 </p>
 

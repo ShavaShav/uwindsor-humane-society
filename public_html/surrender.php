@@ -18,6 +18,7 @@ html5_nav();
 <div class="contentborder">
     <h2>Surrender Animal</h2>
      <form action="resources/lib/surrender_handler.php" method="post" id="surrenderForm" enctype="multipart/form-data">
+     	<div class="formContent">
           <div class="formOption"> 
               <label>Name:</label>
               <input type="text" name="name" id="name" class="textInput" required><br>
@@ -34,7 +35,18 @@ html5_nav();
                 </select><br>
           </div>
 
-        <!-- will put this in surrender.js later, updates display of slider value -->
+       
+          <div class="formOption">
+              <label>Gender:</label>
+              <input type="radio" name="gender" id="gender" value="male" required> Male
+              <input type="radio" name="gender" id="gender" value="female"> Female
+          </div>
+          <div class="formOption">
+                <label>Spayed/Neutered:</label>
+              <input type="radio" name="altered" name="altered" value="yes" required> Yes
+              <input type="radio" name="altered" name="altered" value="no"> No
+          </div>
+            <!-- will put this in surrender.js later, updates display of slider value -->
          <script>
             function updateAgeText(val) {
                 document.getElementById("age").value = val;
@@ -45,16 +57,6 @@ html5_nav();
               <label>Age:</label>
               <input type="text" name="age" id="age" value="1" style="width: 3em" readonly>
               <input type="range" name="rangeInput" min="0" max="100" value="1"  oninput="updateAgeText(this.value);" style="width: 200px;">
-          </div>  
-          <div class="formOption">
-              <label>Gender:</label>
-              <input type="radio" name="gender" id="gender" value="male" required> Male
-              <input type="radio" name="gender" id="gender" value="female"> Female
-          </div>
-          <div class="formOption">
-                <label>Spayed/Neutered:</label>
-              <input type="radio" name="altered" name="altered" value="yes" required> Yes
-              <input type="radio" name="altered" name="altered" value="no"> No
           </div>
           <div class="formOption">
               <label>Size:</label>
@@ -91,8 +93,9 @@ html5_nav();
                 <option value="yellow">Yellow</option>
                 <option value="red">Red</option>
                 <option value="null">None</option>
-            </select> <br>
+            </select> 
           </div>
+        </div>
 
 
         <div class="formOption">
