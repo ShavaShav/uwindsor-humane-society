@@ -4,27 +4,6 @@ require_once(dirname(__FILE__) . '/../lib/login-tools.php');
 require_once(dirname(__FILE__) . '/../lib/form_fill.php');
 session_start();
 
-
-
-
-if (isset($_POST['logout'])){
-	require_once(dirname(__FILE__) . '/../lib/login_handler.php');
-	log_out_user();
-	unset($_POST['logout']);
-}
-
-/*if(isset($_POST['user_name']) && isset($_POST['user_password_new'])){
-	require_once(dirname(__FILE__) . '/../lib/login_handler.php');
-	loginUser();
-	unset($_POST);
-}	
-
-if (isset($_POST['reg_user_name']) && isset($_POST['reg_user_password_new']) && isset($_POST['reg_user_password_repeat'])){
-	require_once(dirname(__FILE__) . '/../lib/register_handler.php');
-	registerUser();
-	unset($_POST);
-}*/
-
 function html5_header($title, $css_files = array(), $js_files = array())
 {
     
@@ -109,12 +88,9 @@ echo '<ul class="nav navbar-nav navbar-right"><li class="dropdown"><a href="#" c
 echo $_SESSION['logged_in_user'];
 echo '</b> <span class="caret"></span></a><ul id="login-dp" class="dropdown-menu">';
 echo <<<ZZEOF
-<li><form id="logoutbutton" method="get">
-    <input type="hidden" name="logout">
-</form>
-</li>
-<li><a href="../message_page.php" onclick="document.getElementById('logoutbutton').submit()">Logout</a></li>
-</li>
+<li><form id="logoutbutton" method="post" action="message_page.php">
+    <input type="hidden" name="logout"></form></li>
+<li><a onclick="document.getElementById('logoutbutton').submit()">Logout</a></li>
 <li> <a href="user_details.php">User Details</a></li>
 </ul>
     </div><!-- /.navbar-collapse -->

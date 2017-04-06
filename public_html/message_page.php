@@ -8,6 +8,12 @@ html5_header(
 	'Return Message',
 	array('css/root.css'),
 	array());
+
+if (isset($_POST['logout'])){
+	log_out_user();
+    echo "<p id='prompt'>You have been successfully logged out.</p>";
+    unset($_POST['logout']);
+}
 	
 html5_nav();
 
@@ -41,12 +47,7 @@ if (isset($_POST['user_password_new'])){
 	}
 }
 
-if (isset($_POST['logout'])){
-    echo "<p id='prompt'>You have been successfully logged out.</p>";
-    unset($_POST['logout']);
-}
 
 
-
-
+html5_footer();
 ?>
