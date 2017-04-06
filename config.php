@@ -18,6 +18,7 @@ $DB = array(
 $ADMIN = array(
     "shaverz",
     "GIJoe",
+    "kimficara",
     "admin" // for use by the graders. Password: "Preney334"
 );
 
