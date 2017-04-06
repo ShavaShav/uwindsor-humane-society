@@ -5,7 +5,7 @@ require_once($TEMPLATES_PATH . '/common.php');
 
 html5_header(
   'Surrender Animal',
-  array('css/root.css', 'css/surrender.css', 'css/dropzone.css'),
+  array('css/root.css', 'css/surrender.css'),
   array());
 
 html5_nav();
