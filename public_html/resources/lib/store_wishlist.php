@@ -1,9 +1,8 @@
 <?php
-session_start();
 require_once($_SERVER['DOCUMENT_ROOT'] . '/../config.php');
 require_once(dirname(__FILE__) . '/../lib/login-tools.php');
 require_once(dirname(__FILE__) . '/../lib/database.php');
-
+session_start();
 
 global $TEMPLATES_PATH;
 

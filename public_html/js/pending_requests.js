@@ -9,10 +9,7 @@ function init(){
 }
 
 // option should be a string, like confirm_adoption (see pending_handler.php)
-function confirmOrDeny(username, id, option){
-    /* stop form from submitting normally */
-    event.preventDefault(); 
-    
+function confirmOrDeny(username, id, option){ 
     /* get the filter options from the page for POST */
     var params = 'option='+option+'&username='+username+'&id='+id;
 
