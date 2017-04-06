@@ -22,8 +22,4 @@ $ADMIN = array(
     "admin" // for use by the graders. Password: "Preney334"
 );
 
-// report errors on the page, should make debugging easier
-ini_set("error_reporting", "true");
-error_reporting(E_ALL|E_STRICT);
-
 ?>
